@@ -85,8 +85,8 @@ static int cmd_x(char *args){
            if (arv[i]>='a') sum+=10+arv[i]-'a';
            else sum+=arv[i]-'0';
         }
-       
-       printf("%x\n",swaddr_read(sum,digit));
+       for (i=0;i<digit;++i)
+       printf("%x\n",swaddr_read(sum+i,digit));
          return 1;
 }
 static int cmd_help(char *args);

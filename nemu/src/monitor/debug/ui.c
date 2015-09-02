@@ -2,7 +2,7 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
-
+#include <string.h>
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -31,13 +31,33 @@ static int cmd_c(char *args) {
 	cpu_exec(-1);
 	return 0;
 }
-static int cmd_si(char *cmd)
+static int  cmd_si(char *str)
 {
-      return 0;
+      char * cmd2[2];
+      int j=0;
+      while((cmd2[j]=strtok(str," "))!=NULL)
+      j++;
+      if(cmd2[1])
+      {
+  
+         int length=strlen(cmd2[1]);
+         //string s=cmd2[1];
+         int index=0;
+         int i;
+         for (i=0;i<length;++i)
+          {
+              index+=(cmd2[1][i])-('0');
+              index*=10;
+          }
+         cpu_exec(index);
+      }
+      else cpu_exec(1);
+       return 1;
 }
 static int cmd_q(char *args) {
 	return -1;
 }
+
 
 static int cmd_help(char *args);
 
@@ -103,9 +123,15 @@ void ui_mainloop() {
 
 		int i;
 		for(i = 0; i < NR_CMD; i ++) {
-			if(strcmp(cmd, cmd_table[i].name) == 0) {
-                                                   
-				if(cmd_table[i].handler(args) < 0) { return; }
+		if(strcmp(cmd, cmd_table[i].name) == 0) {
+                                 if(strcmp(cmd,"si"))
+                                 {
+
+                                  if( cmd_si(str)) return;
+                                               
+                                 }	
+
+                     	else if(cmd_table[i].handler(args) < 0) { return; }
 				break;
 			}
 

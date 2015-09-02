@@ -39,7 +39,7 @@ static int cmd_info(char * args){
           {
            printf("%s    %x\n",regsl[i],cpu.gpr[i]._32);
            //printf("%s\n",*(regsl+i-1));
-          }
+	 }
       }
       return 1;
 }
@@ -67,8 +67,11 @@ static int  cmd_si(char *str)
 static int cmd_q(char *args) {
 	return -1;
 }
+static int cmd_x(char *args){
 
-
+         printf("%s\n",args);
+         return 1;
+}
 static int cmd_help(char *args);
 
 static struct {
@@ -81,7 +84,8 @@ static struct {
 	{ "q", "Exit NEMU", cmd_q },
         {"si"," the times",cmd_si},
         {"info","print the state",cmd_info},
-	/* TODO: Add more commands */
+	{"x","visit the memory",cmd_x},
+        /* TODO: Add more commands */
 
 };
 

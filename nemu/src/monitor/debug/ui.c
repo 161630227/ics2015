@@ -33,26 +33,23 @@ static int cmd_c(char *args) {
 }
 static int  cmd_si(char *str)
 {
-      char * cmd2[2];
-      int j=0;
-      while((cmd2[j]=strtok(str," "))!=NULL)
-      j++;
-      if(cmd2[1])
-      {
-  
-         int length=strlen(cmd2[1]);
-         //string s=cmd2[1];
+        if(str)
+        {
+         int length=strlen(str);
          int index=0;
          int i;
          for (i=0;i<length;++i)
           {
-              index+=(cmd2[1][i])-('0');
               index*=10;
+              index+=str[i]-'0';
+              
           }
-          printf("%d\n",index);
+         
          //cpu_exec(index);
+         printf("%d",index);
       }
       else cpu_exec(1);
+    // printf("%d",index);
        return 1;
 }
 static int cmd_q(char *args) {

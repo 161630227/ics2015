@@ -78,22 +78,15 @@ static int cmd_x(char *args){
             digit+=index[i]-'0';
         }
         int sum=0;
-        bool d=true;
-        int len=0;
         char *arv=args+1+strlen(index);
         for (i=2;i<strlen(arv);++i)
         {
            sum*=16;
-           if(d&&arv[i]!='0')
-           {
-              d=false;
-              len=strlen(arv)-i;
-           }
            if (arv[i]>='a') sum+=10+arv[i]-'a';
            else sum+=arv[i]-'0';
         }
        
-       printf("%d\n",swaddr_read(sum,len));
+       printf("%d\n",swaddr_read(sum,digit));
          return 1;
 }
 static int cmd_help(char *args);

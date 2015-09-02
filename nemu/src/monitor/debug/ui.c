@@ -86,7 +86,7 @@ static int cmd_x(char *args){
            else sum+=arv[i]-'0';
         }
        for (i=0;i<digit;++i)
-       printf("%x\n",swaddr_read(sum+i,digit));
+       printf("%x\n",swaddr_read(sum+i,1));
          return 1;
 }
 static int cmd_help(char *args);

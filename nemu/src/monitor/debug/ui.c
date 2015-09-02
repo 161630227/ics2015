@@ -36,7 +36,7 @@ static int cmd_info(char * args){
       {
             int i;
            for (i=R_EAX;i<=R_EDI;i++)
-           printf("%d %d %d\n",reg_l(i),reg_w(i),reg_b(i));
+           printf("%d\n",cpu.gpr[i]._32);
           
       }
       return 1;

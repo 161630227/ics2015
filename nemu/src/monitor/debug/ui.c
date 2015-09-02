@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
+#include"cpu/reg.h"
 void cpu_exec(uint32_t);
 
 /* We use the ``readline'' library to provide more flexibility to read from stdin. */
@@ -30,6 +30,15 @@ char* rl_gets() {
 static int cmd_c(char *args) {
 	cpu_exec(-1);
 	return 0;
+}
+static int cmd_info(char * args){
+      if(strcmp(args,"r"))
+      {
+            int i;
+           for (i=R_EAX;i<=R_EDI;i++)
+           printf("%d\n",i);
+      }
+      return 1;
 }
 static int  cmd_si(char *str)
 {
@@ -68,6 +77,7 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
         {"si"," the times",cmd_si},
+        {"info","print the state",cmd_info},
 	/* TODO: Add more commands */
 
 };

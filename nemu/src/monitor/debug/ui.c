@@ -69,7 +69,18 @@ static int cmd_q(char *args) {
 }
 static int cmd_x(char *args){
 
-         printf("%s\n",args);
+         char * index=strtok(args," ");
+         int digit=0;
+         int i;
+         for( i=0;i<strlen(index);++i)
+        {
+            digit*=10;
+            digit+=index[i]-'0';
+        }
+       // int sum=0;
+        char *arv=args+1+strlen(index);
+       printf("%s\n",arv);
+        
          return 1;
 }
 static int cmd_help(char *args);

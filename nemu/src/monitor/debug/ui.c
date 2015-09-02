@@ -49,7 +49,8 @@ static int  cmd_si(char *str)
               index+=(cmd2[1][i])-('0');
               index*=10;
           }
-         cpu_exec(index);
+          printf("%d\n",index);
+         //cpu_exec(index);
       }
       else cpu_exec(1);
        return 1;

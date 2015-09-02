@@ -107,7 +107,6 @@ void ui_mainloop() {
 		/* extract the first token as the command */
 		char *cmd = strtok(str, " ");
 		if(cmd == NULL) { continue; }
-                printf("%s\n",cmd);
 		/* treat the remaining string as the arguments,
 		 * which may need further parsing
 		 */

@@ -124,14 +124,15 @@ void ui_mainloop() {
 		int i;
 		for(i = 0; i < NR_CMD; i ++) {
 		if(strcmp(cmd, cmd_table[i].name) == 0) {
-                                 if(strcmp(cmd,"si"))
-                                 {
-
-                                  if( cmd_si(str)) return;
+//                                 if(strcmp(cmd,"si"))
+  //                               {
+//
+  //                                if( cmd_si(str)) return;
                                                
-                                 }	
+    //                             }	
 
-                     	else if(cmd_table[i].handler(args) < 0) { return; }
+//                     	else 
+			if(cmd_table[i].handler(args) < 0) { return; }
 				break;
 			}
 

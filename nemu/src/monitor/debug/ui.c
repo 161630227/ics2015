@@ -45,8 +45,8 @@ static int  cmd_si(char *str)
               
           }
          
-         //cpu_exec(index);
-         printf("%d",index);
+         cpu_exec(index);
+       //  printf("%d",index);
       }
       else cpu_exec(1);
     // printf("%d",index);

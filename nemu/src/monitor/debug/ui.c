@@ -77,10 +77,15 @@ static int cmd_x(char *args){
             digit*=10;
             digit+=index[i]-'0';
         }
-       // int sum=0;
+        int sum=0;
         char *arv=args+1+strlen(index);
-       printf("%s\n",arv);
-        
+        for (i=2;i<strlen(arv);++i)
+        {
+           sum*=16;
+           if (arv[i]>='a') sum+=10+arv[i]-'a';
+           else sum+=arv[i]-'0';
+        }
+       printf("%d\n",sum);
          return 1;
 }
 static int cmd_help(char *args);

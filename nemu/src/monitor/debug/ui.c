@@ -32,11 +32,12 @@ static int cmd_c(char *args) {
 	return 0;
 }
 static int cmd_info(char * args){
-      if(strcmp(args,"r"))
+      if(!strcmp(args,"r"))
       {
             int i;
            for (i=R_EAX;i<=R_EDI;i++)
-           printf("%d\n",reg_l(i));
+           printf("%d\n%d\n%d\n",reg_l(i),reg_w(i),reg_b(i));
+          
       }
       return 1;
 }

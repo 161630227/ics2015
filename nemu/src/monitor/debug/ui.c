@@ -79,7 +79,7 @@ static int cmd_x(char *args){
         }
         int sum=0;
         bool d=true;
-        int len;
+        int len=0;
         char *arv=args+1+strlen(index);
         for (i=2;i<strlen(arv);++i)
         {
@@ -93,7 +93,7 @@ static int cmd_x(char *args){
            else sum+=arv[i]-'0';
         }
        
-       printf("%d\n",len);
+       printf("%d\n",swaddr_read(sum,len));
          return 1;
 }
 static int cmd_help(char *args);

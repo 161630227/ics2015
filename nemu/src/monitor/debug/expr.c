@@ -174,7 +174,8 @@ int find(int p,int q)
         else return false;
 }
 uint32_t expr(char *e, bool *success) {
-	if(!make_token(e)) {
+	   printf("expr1");
+           if(!make_token(e)) {
 	       printf("expr");	
                *success = false;
 		return 0;

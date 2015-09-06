@@ -100,7 +100,9 @@ static bool make_token(char *e) {
                                        break;
                                        case W:
                                        tokens[nr_token].type=W;
-                                       tokens[nr_token].str[0]=e[nr_token];
+                                       int kk=0;
+                                       for ( kk=0;kk<substr_len;++kk)
+                                       tokens[nr_token].str[kk]=e[nr_token+kk];
                                        nr_token++;
                                        break;
                                        case '(':
@@ -176,7 +178,7 @@ uint32_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
-       else return (eval(0,nr_token));
+       else return (eval(0,nr_token-1));
        }      
 int eval(int p,int q)
         {
@@ -214,8 +216,8 @@ int eval(int p,int q)
             case'*': return val1*val2;
             case'/': return val1/val2;
             default:{
-                    //assrt(0);
-                    return 0;
+                    assert(0);
+                    //return 0;
                     }
           }
           

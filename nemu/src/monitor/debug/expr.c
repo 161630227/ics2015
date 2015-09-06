@@ -124,6 +124,7 @@ static bool make_token(char *e) {
 
 	return true; 
 }
+//nr_token--;
 int find(int p,int q)
 {
 
@@ -175,7 +176,7 @@ uint32_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
-       else return (eval(0,100));
+       else return (eval(0,nr_token));
        }      
 int eval(int p,int q)
         {
@@ -195,11 +196,11 @@ int eval(int p,int q)
              }
              return sum;
            }
-           else //if(check_parentheses(p,q))
+           else if(check_parentheses(p,q))
           
            return eval(p+1,q-1);
          
-     /*     else
+        else
           {
           int op=find(p,q);
           //if(op!=p)
@@ -212,12 +213,15 @@ int eval(int p,int q)
             case'-': return val1-val2;
             case'*': return val1*val2;
             case'/': return val1/val2;
-            default:{assrt(0);}
+            default:{
+                    //assrt(0);
+                    return 0;
+                    }
           }
           
+       }       
         
-        
-	TODO: Insert codes to evaluate the expression. */
+//	TODO: Insert codes to evaluate the expression. */
       //	panic("please implement me");
      
 }

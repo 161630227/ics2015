@@ -31,6 +31,13 @@ static int cmd_c(char *args) {
 	cpu_exec(-1);
 	return 0;
 }
+static int cmd_p(char *args)
+{
+       // bool *k;
+        //*k=true
+        bool k=true;
+        return (expr(args,&k));
+}
 static int cmd_info(char * args){
       if(!strcmp(args,"r"))
       {
@@ -103,6 +110,8 @@ static struct {
         {"si"," the times",cmd_si},
         {"info","print the state",cmd_info},
 	{"x","visit the memory",cmd_x},
+        {"p","expr",cmd_p}
+
         /* TODO: Add more commands */
 
 };

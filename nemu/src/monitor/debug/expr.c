@@ -124,15 +124,100 @@ static bool make_token(char *e) {
 
 	return true; 
 }
+int find(int p,int q)
+{
 
+      int k=q;
+      int op;
+      bool index=false;//decide whether have found op
+      while(k>p)
+      {
+
+          if((tokens[k].type=='+')||(tokens[k].type=='-'))
+          {
+            op=k;
+            index=true;
+            break;
+          }
+          else if((tokens[k].type==')')&&k>p)
+                {
+                    while((tokens[k].type!='('&&(k>p))) k--;
+                }
+          k--;
+       }
+      if(!index)
+      {
+          k=q;
+          while(k>p)
+          {
+             if(((tokens[k].type=='*')||(tokens[k].type=='/'))&&index)
+             {
+               op=k;
+               index=true;
+               break;
+             }
+             else if((tokens[k].type==')')&&k>p)
+                {
+                    while((tokens[k].type!='('&&(k>p))) k--;
+                }
+            k--;
+          }
+     }
+   if (index) return op;
+   else return p;
+}
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
 	}
-
+      /*
+        bool check_parentheses(int p,int q)
+        if(tokens[p].type=='('&&tokens[q].type==')') return true;
+        else return false;
+        int eval(int p,int q)
+        {
+           if(p>q)
+           {
+            printf("error");
+            return 0;
+           }
+           else if(p==q)
+           {
+             int k=0;
+             int sum=0;
+             for(k=0;k<=str(tokens[p].str)-1;++k)
+             {
+               sum*=10;
+               sum+=tokens[p].str[k]-'0'; 
+             }
+             return sum;
+           }
+           else if(check_parentheses(p,q))
+          
+           return eval(p+1,q-1);
+         
+          else
+          *{
+          int op=find(p,q);
+          //if(op!=p)
+        
+          int  val1=eval(p,op-1);
+          int  val2=eval(op+1,q);
+          switch(tokens[op].type)
+          {
+            case'+': return val1+val2;
+            case'-': return val1-val2;
+            case'*': return val1*val2;
+            case'/': return val1/val2;
+            default:{assrt(0);}
+          }
+          
+        */  
+        
 	/* TODO: Insert codes to evaluate the expression. */
-	panic("please implement me");
-	return 0;
+      //	panic("please implement me");
+      else  return 0;
+     // }
 }
 

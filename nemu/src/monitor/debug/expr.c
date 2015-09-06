@@ -5,14 +5,14 @@
  */
 #include <sys/types.h>
 #include <regex.h>
-
+#include<string.h>
 enum {
 	NOTYPE = 256, EQ,W
 
 	/* TODO: Add more token types */
 
 };
-
+int eval(int p,int q);
 static struct rule {
 	char *regex;
 	int token_type;
@@ -165,17 +165,19 @@ int find(int p,int q)
      }
    if (index) return op;
    else return p;
+} bool check_parentheses(int p,int q)
+{
+        if(tokens[p].type=='('&&tokens[q].type==')') return true;
+        else return false;
 }
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
 	}
-      /*
-        bool check_parentheses(int p,int q)
-        if(tokens[p].type=='('&&tokens[q].type==')') return true;
-        else return false;
-        int eval(int p,int q)
+       else return (eval(0,100));
+       }      
+int eval(int p,int q)
         {
            if(p>q)
            {
@@ -186,19 +188,19 @@ uint32_t expr(char *e, bool *success) {
            {
              int k=0;
              int sum=0;
-             for(k=0;k<=str(tokens[p].str)-1;++k)
+             for(k=0;k<=strlen(tokens[p].str)-1;++k)
              {
                sum*=10;
                sum+=tokens[p].str[k]-'0'; 
              }
              return sum;
            }
-           else if(check_parentheses(p,q))
+           else //if(check_parentheses(p,q))
           
            return eval(p+1,q-1);
          
-          else
-          *{
+     /*     else
+          {
           int op=find(p,q);
           //if(op!=p)
         
@@ -213,11 +215,10 @@ uint32_t expr(char *e, bool *success) {
             default:{assrt(0);}
           }
           
-        */  
         
-	/* TODO: Insert codes to evaluate the expression. */
+        
+	TODO: Insert codes to evaluate the expression. */
       //	panic("please implement me");
-      else  return 0;
-     // }
+     
 }
 

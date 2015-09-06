@@ -35,9 +35,9 @@ static int cmd_p(char *args)
 {
        // bool *k;
         //*k=true
-        bool k=true;
+       // bool k=true;
         printf("%s\n",args);
-        printf("%d",expr(args,&k));
+        printf("%d",expr(args));
         return 0;
 }
 static int cmd_info(char * args){

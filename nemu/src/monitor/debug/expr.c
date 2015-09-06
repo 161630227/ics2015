@@ -173,11 +173,11 @@ int find(int p,int q)
         if(tokens[p].type=='('&&tokens[q].type==')') return true;
         else return false;
 }
-uint32_t expr(char *e, bool *success) {
+uint32_t expr(char *e) {
 	   printf("expr1");
            if(!make_token(e)) {
 	       printf("expr");	
-               *success = false;
+               //*success = false;
 		return 0;
 	}
        else return (eval(0,nr_token-1));

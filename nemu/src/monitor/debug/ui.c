@@ -36,7 +36,8 @@ static int cmd_p(char *args)
        // bool *k;
         //*k=true
         bool k=true;
-        return (expr(args,&k));
+        printf("%d",expr(args,&k));
+        return 0;
 }
 static int cmd_info(char * args){
       if(!strcmp(args,"r"))

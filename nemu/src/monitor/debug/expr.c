@@ -192,14 +192,14 @@ uint32_t expr(char *e,bool *success) {
 		success=&temp;
 		
 	}
-        printf("%d\n",make_token(e));
+        int index=make_token(e);
 	//index=make_token(e);
-	if(make_token(e)==-1) {
+	if(index==-1) {
 		
 		*success = false;
 		return 0;	}
 	else { printf("sds");
-	       	printf("%d",nr_token-1);
+	       	printf("%d",index-1);
 		return eval(0,nr_token-1);
         }
 }      

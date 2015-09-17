@@ -31,12 +31,15 @@ static int cmd_c(char *args) {
 	cpu_exec(-1);
 	return 0;
 }
-static int cmd_p(char *expr)
+static int cmd_p(char *args)
 {
-       // bool k=true;
-       printf("23");
-       // uint32_t rst=expr(args,&k);
-    /* if(!k)  
+       bool k=true;
+       printf("Here is success");
+       uint32_t rst=expr(args,&k);
+      
+       printf("%u",rst);
+/*
+     if(!k)  
    {
      printf("wrong input");
     return;

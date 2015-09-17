@@ -174,15 +174,19 @@ int find(int p,int q)
         else return false;
 }
 
-uint32_t expr(char *e) {
-	   printf("expr1");
+uint32_t expr(char *e,bool *success) {
+	  if(!success)
+          {
+           bool temp=true;
+           success=&temp;
+          }
            if(!make_token(e)) {
 	       printf("expr");	
-               //*success = false;
+               success = false;
 		return 0;
 	}
        else return (eval(0,nr_token-1));
-      return 1;
+      
        }      
 int eval(int p,int q)
         {

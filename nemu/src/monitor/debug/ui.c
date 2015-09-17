@@ -33,15 +33,15 @@ static int cmd_c(char *args) {
 }
 static int cmd_p(char *args)
 {
-       // bool *k;
-        //*k=true
-       // bool k=true;
-      
-     //   printf("%s\n",args);
-      printf("%d",expr(args));
-         
-;
-        return 0;
+        bool k=true;
+        uint32_t rst=expr(args,&k);
+     if(!k)  
+   {
+     printf("wrong input");
+    return 1;
+   }
+   printf("%d",rst);
+   return 1;
 }
 static int cmd_info(char * args){
       if(!strcmp(args,"r"))

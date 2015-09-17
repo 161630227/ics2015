@@ -62,7 +62,7 @@ typedef struct token {
 
 Token tokens[32];
 int nr_token;
-int nr_token2;
+//int nr_token2;
 static bool make_token(char *e) {
 	int position = 0;
 	int i;
@@ -125,7 +125,7 @@ static bool make_token(char *e) {
 	}
 
      { printf("%d\n",nr_token);
-       nr_token2=nr_token;     
+      // nr_token2=nr_token;     
 	     return true;} 
 }
 //nr_token--;
@@ -200,7 +200,7 @@ uint32_t expr(char *e,bool *success) {
 		return 0;	}
 	else { printf("sds");
 	       	printf("%d",nr_token-1);
-		return eval(0,nr_token2);
+		return eval(0,nr_token-1);
         }
 }      
 int eval(int p,int q)

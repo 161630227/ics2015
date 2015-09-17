@@ -36,9 +36,11 @@ static int cmd_p(char *args)
        // bool *k;
         //*k=true
        // bool k=true;
-       printf("%d\n",tiao(args));
-        printf("%s\n",args);
-        printf("%d",expr(args));
+      
+     //   printf("%s\n",args);
+      printf("%d",expr(args));
+         
+;
         return 0;
 }
 static int cmd_info(char * args){

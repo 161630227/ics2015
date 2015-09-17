@@ -173,10 +173,7 @@ int find(int p,int q)
         if(tokens[p].type=='('&&tokens[q].type==')') return true;
         else return false;
 }
-int tiao(char *e)
-{
-return 12;
-}
+
 uint32_t expr(char *e) {
 	   printf("expr1");
            if(!make_token(e)) {
@@ -185,6 +182,7 @@ uint32_t expr(char *e) {
 		return 0;
 	}
        else return (eval(0,nr_token-1));
+      return 1;
        }      
 int eval(int p,int q)
         {

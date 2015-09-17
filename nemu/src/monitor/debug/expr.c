@@ -104,7 +104,7 @@ static int make_token(char *e) {
 						for ( kk=0;kk<substr_len;++kk)
 							tokens[nr_token].str[kk]=e[nr_token+kk];
 						nr_token++;
-                                               printf("kt%d\n",strlen(tokens[nr_token-1].str));
+                              //                 printf("kt%d\n",strlen(tokens[nr_token-1].str));
 						break;
 					case '(':
 						tokens[nr_token++].type='(';
@@ -194,7 +194,7 @@ uint32_t expr(char *e,bool *success) {
 		
 	}
         int index=make_token(e);
-	printf("%d",index);
+//	printf("%d",index);
 	//index=make_token(e);
 	if(index==-1) {
 		
@@ -222,7 +222,7 @@ int eval(int p,int q)
                sum*=10;
                sum+=tokens[p].str[k]-'0'; 
              }
-	     printf("sum%d\n",sum);
+	     printf("sum%d  %d\n",p,sum);
              return sum;
            }
            else if(check_parentheses(p,q))

@@ -63,70 +63,77 @@ typedef struct token {
 Token tokens[32];
 int nr_token;
 
-static bool make_token(char *e) {
-	int position = 0;
-	int i;
-	regmatch_t pmatch;
-	
-	nr_token = 0;
-        printf("make_tken");
-	while(e[position] != '\0') {
-		/* Try all rules one by one. */
-		for(i = 0; i < NR_REGEX; i ++) {
-			if(regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
-				char *substr_start = e + position;
-				int substr_len = pmatch.rm_eo;
-
-				Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
-				position += substr_len;
-                               printf("true");
-				/* TODO: Now a new token is recognized with rules[i]. Add codes
-				 * to record the token in the array ``tokens''. For certain 
-				 * types of tokens, some extra actions should be performed.
-				 */
-
-				switch(rules[i].token_type) {
-                                       case '+':
-                                       tokens[nr_token++].type='+';
-                                       break;
-                                       case '-':
-                                       tokens[nr_token++].type='-';
-                                       break;
-                                       case '*':
-                                       tokens[nr_token++].type='*';
-                                       break;
-                                       case '/':
-                                       tokens[nr_token++].type='/';
-                                       break;
-                                       case W:
-                                       tokens[nr_token].type=W;
-                                       int kk=0;
-                                       for ( kk=0;kk<substr_len;++kk)
-                                       tokens[nr_token].str[kk]=e[nr_token+kk];
-                                       nr_token++;
-                                       break;
-                                       case '(':
-                                       tokens[nr_token++].type='(';
-                                       break;
-                                       case ')':
-                                       tokens[nr_token++].type=')';
-                                       break;
-					default: panic("please implement me");
-				}
-                                printf("%d\n",tokens[nr_token-1].type);
-				break;
-			}
-		}
-
-		if(i == NR_REGEX) {
-			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
-			return false;
-		}
-	}
-
-	return true; 
-}
+//static bool make_token(char *e) {
+//	int position = 0;
+//	int i;
+//	regmatch_t pmatch;
+//	
+//	nr_token = 0;
+//        printf("make_tken");
+//	while(e[position] != '\0') {
+//		/* Try all rules one by one. */
+//		for(i = 0; i < NR_REGEX; i ++) {
+//			if(regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
+//				char *substr_start = e + position;
+//				int substr_len = pmatch.rm_eo;
+//
+//				Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
+//				position += substr_len;
+//                               printf("true");
+//				/* TODO: Now a new token is recognized with rules[i]. Add codes
+//				 * to record the token in the array ``tokens''. For certain 
+//				 * types of tokens, some extra actions should be performed.
+//				 */
+//
+//				switch(rules[i].token_type) {
+//                                       case '+':
+//                                       tokens[nr_token++].type='+';
+//                                       break;
+//                                       case '-':
+//                                       tokens[nr_token++].type='-';
+//                                       break;
+//                                       case '*':
+//                                       tokens[nr_token++].type='*';
+//                                       break;
+//                                       case '/':
+//                                       tokens[nr_token++].type='/';
+//                                       break;
+//                                       case W:
+//                                       tokens[nr_token].type=W;
+//                                       int kk=0;
+//                                       for ( kk=0;kk<substr_len;++kk)
+//                                       tokens[nr_token].str[kk]=e[nr_token+kk];
+//                                       nr_token++;
+//                                       break;
+//                                       case '(':
+//                                       tokens[nr_token++].type='(';
+//                                       break;
+//                                       case ')':
+//                                       tokens[nr_token++].type=')';
+//                                       break;
+//					default: panic("please implement me");
+//				}
+//                                printf("%d\n",tokens[nr_token-1].type);
+//				break;
+//			}
+//		}
+//
+//		if(i == NR_REGEX) {
+//			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
+//			return false;
+//		}
+//	}
+//
+//	return true; 
+//}
 //nr_token--;
+
+static bool make_token(char *e)
+{
+	printf("hello");
+return false;
+}
+
 int find(int p,int q)
 {
 

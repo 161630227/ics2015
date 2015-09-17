@@ -185,14 +185,12 @@ int find(int p,int q)
 
 uint32_t expr(char *e,bool *success) {
 	printf("woolala\n");
-	/*
 	if(!success)
 	{
 		bool temp=true;
 		success=&temp;
 		//  printf("123");
 	}
-	*/
 	printf("124");
 	if(!make_token(e)) {
 		printf("expr");	

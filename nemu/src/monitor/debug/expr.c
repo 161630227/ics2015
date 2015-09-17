@@ -193,6 +193,7 @@ uint32_t expr(char *e,bool *success) {
 		
 	}
         int index=make_token(e);
+	printf("%d",index);
 	//index=make_token(e);
 	if(index==-1) {
 		

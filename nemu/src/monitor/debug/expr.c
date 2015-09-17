@@ -28,7 +28,7 @@
 //	{"==", EQ}						// equal
 //};
 
-//#include<string.h>
+#include<string.h>
 enum {
 	NOTYPE = 256, EQ,W
 
@@ -47,8 +47,8 @@ static struct rule {
 
 	{" +",	NOTYPE},				// spaces
 	{"\\+", '+'},
- /*       {"-", '-'},
-        {"\\*", '*'},
+        {"-", '-'},
+ /*       {"\\*", '*'},
         {"/", '/'},					// plus
 	{"==", EQ},
         {"(",'('},

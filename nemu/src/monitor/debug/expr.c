@@ -201,7 +201,7 @@ uint32_t expr(char *e,bool *success) {
 		*success = false;
 		return 0;	}
 	else { 
-		return eval(0,nr_token);
+		return eval(0,nr_token-1);
         }
 }      
 int eval(int p,int q)
@@ -216,7 +216,7 @@ int eval(int p,int q)
            {
              int k=0;
              int sum=0;
-	     printf("strlen%d  %d\n",p,strlen(tokens[p].str));
+	 //    printf("strlen%d  %d\n",p,strlen(tokens[p].str));
              for(k=0;k<=strlen(tokens[p].str)-1;++k)
              {
                sum*=10;

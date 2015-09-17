@@ -204,6 +204,7 @@ uint32_t expr(char *e,bool *success) {
 }      
 int eval(int p,int q)
         {
+		printf("%d",q);
            if(p>q)
            {
             printf("error");

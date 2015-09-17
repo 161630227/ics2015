@@ -199,14 +199,13 @@ uint32_t expr(char *e,bool *success) {
 		
 		*success = false;
 		return 0;	}
-	else { printf("sds\n");
-	       	printf("%d\n",nr_token);
-		return eval(0,nr_token-1);
+	else { 
+		return eval(0,nr_token);
         }
 }      
 int eval(int p,int q)
         {
-		printf("q:%d\n",q);
+	//	printf("q:%d\n",q);
            if(p>q)
            {
             printf("error");
@@ -221,6 +220,7 @@ int eval(int p,int q)
                sum*=10;
                sum+=tokens[p].str[k]-'0'; 
              }
+	     printf("sum%d\n",sum);
              return sum;
            }
            else if(check_parentheses(p,q))

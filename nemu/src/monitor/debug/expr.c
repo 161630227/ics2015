@@ -96,12 +96,13 @@ static bool make_token(char *e) {
 }
 
 uint32_t expr(char *e, bool *success) {
-	printf("123");
 	printf("woolala");
 	if(!make_token(e)) {
 		*success = false;
+	printf("123");
 		return 0;
 	}
+	printf("123");
 
 	/* TODO: Insert codes to evaluate the expression. */
 	//panic("please implement me");

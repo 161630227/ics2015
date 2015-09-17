@@ -63,7 +63,7 @@ typedef struct token {
 Token tokens[32];
 int nr_token;
 int nr_token2;
-static bool make_token(char *e) {
+static int make_token(char *e) {
 	int position = 0;
 	int i;
 	regmatch_t pmatch;
@@ -120,13 +120,13 @@ static bool make_token(char *e) {
 
 		if(i == NR_REGEX) {
 			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
-			return false;
+            			return -1;
 		}
 	}
 
      { printf("%d\n",nr_token);
           nr_token2=nr_token; 
-	     return true;} 
+	     return nr_token;} 
 }
 //nr_token--; nr_token2=nr_token; 
 /*
@@ -192,14 +192,14 @@ uint32_t expr(char *e,bool *success) {
 		success=&temp;
 		
 	}
-
-	if(!make_token(e)) {
+        int index=make_token(e);
+	if(index!=-1) {
 		
 		*success = false;
 		return 0;	}
 	else { printf("sds");
-	       	printf("%d",nr_token2-1);
-		return eval(0,nr_token-1);
+	       	printf("%d",index-1);
+		return eval(0,index-1);
         }
 }      
 int eval(int p,int q)

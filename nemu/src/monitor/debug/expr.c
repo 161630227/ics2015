@@ -215,6 +215,7 @@ int eval(int p,int q)
            {
              int k=0;
              int sum=0;
+	     printf("strlen%d\n",strlen(tokens[p].str));
              for(k=0;k<=strlen(tokens[p].str)-1;++k)
              {
                sum*=10;

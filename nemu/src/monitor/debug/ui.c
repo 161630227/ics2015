@@ -34,10 +34,12 @@ static int cmd_c(char *args) {
 static int cmd_p(char *args)
 {
        bool k=true;
+       printf("%d",k);
        printf("Here is success");
-       uint32_t rst=expr(args,&k);
       
-       printf("%u",rst);
+      // uint32_t rst=expr(args,&k);
+      
+      // printf("%u",rst);
 /*
      if(!k)  
    {

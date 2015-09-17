@@ -51,10 +51,10 @@ static struct rule {
         {"\\*", '*'},
         {"/", '/'},					// plus
 	{"==", EQ},
-        {"(",'('},
-        /*{")",')'},
+       // {"(",'('},
+        {")",')'},
         {"[0~9]+",W} 
-*/						// equal
+						// equal
 };
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
 

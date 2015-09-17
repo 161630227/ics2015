@@ -179,8 +179,9 @@ uint32_t expr(char *e,bool *success) {
           {
            bool temp=true;
            success=&temp;
-          printf("123");
+        //  printf("123");
           }
+          printf("124");
            if(!make_token(e)) {
 	       printf("expr");	
                success = false;

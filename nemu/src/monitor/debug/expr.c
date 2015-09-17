@@ -175,6 +175,7 @@ int find(int p,int q)
 }
 
 uint32_t expr(char *e,bool *success) {
+printf("hello\n");
 	  if(!success)
           {
            bool temp=true;

@@ -182,22 +182,22 @@ int find(int p,int q)
 }
 
 uint32_t expr(char *e,bool *success) {
-printf("hello\n");
-	  if(!success)
-          {
-           bool temp=true;
-           success=&temp;
-        //  printf("123");
-          }
-          printf("124");
-           if(!make_token(e)) {
-	       printf("expr");	
-               *success = false;
+	printf("hello\n");
+	if(!success)
+	{
+		bool temp=true;
+		success=&temp;
+		//  printf("123");
+	}
+	printf("124");
+	if(!make_token(e)) {
+		printf("expr");	
+		*success = false;
 		return 0;
 	}
-       else return eval(0,nr_token-1);
-      
-       }      
+	else return eval(0,nr_token-1);
+
+}      
 int eval(int p,int q)
         {
            if(p>q)

@@ -200,7 +200,7 @@ uint32_t expr(char *e,bool *success) {
 		*success = false;
 		return 0;	}
 	else { printf("sds\n");
-	       	printf("%d\n",index);
+	       	printf("%d\n",nr_token);
 		return eval(0,nr_token-1);
         }
 }      

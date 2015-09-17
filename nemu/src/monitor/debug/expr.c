@@ -6,13 +6,36 @@
 #include <sys/types.h>
 #include <regex.h>
 
-enum {
-	NOTYPE = 256, EQ
 
-		/* TODO: Add more token types */
+//enum {
+//	NOTYPE = 256, EQ
+//
+//		/* TODO: Add more token types */
+//
+//};
+//
+//static struct rule {
+//	char *regex;
+//	int token_type;
+//} rules[] = {
+//
+//	/* TODO: Add more rules.
+//	 * Pay attention to the precedence level of different rules.
+//	 */
+//
+//	{" +",	NOTYPE},				// spaces
+//	{"\\+", '+'},					// plus
+//	{"==", EQ}						// equal
+//};
+
+#include<string.h>
+enum {
+	NOTYPE = 256, EQ,W
+
+	/* TODO: Add more token types */
 
 };
-
+int eval(int p,int q);
 static struct rule {
 	char *regex;
 	int token_type;
@@ -23,10 +46,16 @@ static struct rule {
 	 */
 
 	{" +",	NOTYPE},				// spaces
-	{"\\+", '+'},					// plus
-	{"==", EQ}						// equal
+	{"\\+", '+'},
+        {"-", '-'},
+        {"*", '*'},
+        {"/", '/'},					// plus
+	{"==", EQ},
+        {"(",'('},
+        {")",')'},
+        {"[0~9]+",W} 
+						// equal
 };
-
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
 
 static regex_t re[NR_REGEX];

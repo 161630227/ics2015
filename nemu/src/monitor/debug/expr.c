@@ -221,7 +221,7 @@ int eval(int p,int q)
              {
                sum*=10;
                sum+=tokens[p].str[k]-'0';
-	      printf("ae%d\n",sum); 
+	      printf("ae%c\n",tokens[p].str[k]); 
              }
 	    printf("sum%d  %d\n",p,sum);
              return sum;

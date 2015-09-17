@@ -198,7 +198,7 @@ uint32_t expr(char *e,bool *success) {
 		
 		*success = false;
 		return 0;	}
-	else {  printf("%d",nr_token2);
+	else {  printf("%d",nr_token);
 		return eval(0,nr_token2);
         }
 }      

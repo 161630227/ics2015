@@ -220,7 +220,8 @@ int eval(int p,int q)
              for(k=0;k<=strlen(tokens[p].str)-1;++k)
              {
                sum*=10;
-               sum+=tokens[p].str[k]-'0'; 
+               sum+=tokens[p].str[k]-'0';
+	      printf("ae%d\n",sum); 
              }
 	    printf("sum%d  %d\n",p,sum);
              return sum;

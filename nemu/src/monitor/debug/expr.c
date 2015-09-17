@@ -1,6 +1,6 @@
 #include "nemu.h"
 
-/* We use the POSIX regex functions to process regular expressions.
+/* We use the POSIX regex functions to iprocess regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <sys/types.h>
@@ -62,7 +62,7 @@ typedef struct token {
 
 Token tokens[32];
 int nr_token;
-//int nr_token2;
+int nr_token2;
 static bool make_token(char *e) {
 	int position = 0;
 	int i;
@@ -125,7 +125,7 @@ static bool make_token(char *e) {
 	}
 
      { printf("%d\n",nr_token);
-      // nr_token2=nr_token;     
+       nr_token2=nr_token;     
 	     return true;} 
 }
 //nr_token--;
@@ -199,7 +199,7 @@ uint32_t expr(char *e,bool *success) {
 		*success = false;
 		return 0;	}
 	else { printf("sds");
-	       	printf("%d",nr_token-1);
+	       	printf("%d",nr_token2-1);
 		return eval(0,nr_token-1);
         }
 }      

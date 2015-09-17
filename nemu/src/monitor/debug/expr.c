@@ -104,6 +104,7 @@ static int make_token(char *e) {
 						for ( kk=0;kk<substr_len;++kk)
 							tokens[nr_token].str[kk]=e[nr_token+kk];
 						nr_token++;
+                                               printf("kt%d\n",strlen(tokens[nr_token-1].str));
 						break;
 					case '(':
 						tokens[nr_token++].type='(';

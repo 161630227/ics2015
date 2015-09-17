@@ -31,18 +31,18 @@ static int cmd_c(char *args) {
 	cpu_exec(-1);
 	return 0;
 }
-static int cmd_p(char *args)
+static int cmd_p(char *expr)
 {
-        bool k=true;
+       // bool k=true;
        printf("23");
-        uint32_t rst=expr(args,&k);
-     if(!k)  
+       // uint32_t rst=expr(args,&k);
+    /* if(!k)  
    {
      printf("wrong input");
-    return 1;
+    return;
    }
-   printf("%d",rst);
-   return 1;
+   printf("%d",rst);*/
+   return 0 ;
 }
 static int cmd_info(char * args){
       if(!strcmp(args,"r"))

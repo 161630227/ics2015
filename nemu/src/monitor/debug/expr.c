@@ -222,7 +222,7 @@ int eval(int p,int q)
                sum*=10;
                sum+=tokens[p].str[k]-'0'; 
              }
-	     printf("sum%d  %d\n",p,sum);
+	  //   printf("sum%d  %d\n",p,sum);
              return sum;
            }
            else if(check_parentheses(p,q))

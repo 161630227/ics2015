@@ -124,7 +124,7 @@ static bool make_token(char *e) {
 		}
 	}
 
-     { printf("%d",nr_token);
+     { printf("%d\n",nr_token);
        nr_token2=nr_token;     
 	     return true;} 
 }
@@ -198,7 +198,7 @@ uint32_t expr(char *e,bool *success) {
 		
 		*success = false;
 		return 0;	}
-	else {  printf("%d",nr_token2);
+	else {//  printf("%d",nr_token2);
 		return eval(0,nr_token-1);
         }
 }      

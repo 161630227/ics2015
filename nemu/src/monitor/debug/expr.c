@@ -125,11 +125,10 @@ static bool make_token(char *e) {
 	}
 
      { printf("%d\n",nr_token);
-       nr_token2=nr_token;     
+          nr_token2=nr_token; 
 	     return true;} 
 }
-//nr_token--;
-
+//nr_token--; nr_token2=nr_token; 
 /*
 static bool make_token(char *e)
 {

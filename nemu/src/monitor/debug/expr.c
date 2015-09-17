@@ -69,7 +69,7 @@ static bool make_token(char *e) {
 	regmatch_t pmatch;
 
 	nr_token = 0;
-	printf("make_tken");
+	//printf("make_tken");
 	while(e[position] != '\0') {
 		/* Try all rules one by one. */
 		for(i = 0; i < NR_REGEX; i ++) {
@@ -184,19 +184,18 @@ int find(int p,int q)
 }
 
 uint32_t expr(char *e,bool *success) {
-	printf("woolala\n");
+      //printf("woolala\n");
 	if(!success)
 	{
 		bool temp=true;
 		success=&temp;
 		//  printf("123");
 	}
-	printf("124");
+//	printf("124");
 	if(!make_token(e)) {
-		printf("expr");	
+		//printf("expr");	
 		*success = false;
-		return 0;
-	}
+		return 0;	}
 	else return eval(0,nr_token-1);
 
 }      

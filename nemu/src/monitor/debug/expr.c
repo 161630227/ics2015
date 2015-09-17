@@ -182,7 +182,7 @@ int find(int p,int q)
 }
 
 uint32_t expr(char *e,bool *success) {
-	printf("124");
+	//printf("124");
 	printf("woolala\n");
 	/*
 	if(!success)

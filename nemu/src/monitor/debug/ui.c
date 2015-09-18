@@ -37,9 +37,9 @@ static int cmd_p(char *args)
      //  printf("%d",k);
       // printf("Here is success");
       
-       uint32_t rst=expr(args,&k);
+       int32_t rst=expr(args,&k);
       
-       printf("%u",rst);
+       printf("%d",rst);
 /*
      if(!k)  
    {

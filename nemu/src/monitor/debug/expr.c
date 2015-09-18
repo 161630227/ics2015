@@ -9,7 +9,7 @@
 //#include<ui.h>
 #include<memory.h>
 enum {
-	NOTYPE = 256, EQ,N,W,YU,HUO,REG
+	NOTYPE = 256, EQ,N,W,YU,HUO,REG,NOT
 
 	/* TODO: Add more token types */
 
@@ -30,6 +30,7 @@ static struct rule {
         {"\\*", '*'},
         {"\\/", '/'},					// plus
 	{"==", EQ},
+	{"\\!\\=",NOT},
         {"\\(",'('},
         {"\\)",')'},
 	{"\\|\\|",HUO},
@@ -137,6 +138,9 @@ static int make_token(char *e) {
 						break;
 					case ')':
 						tokens[nr_token++].type=')';
+						break;
+					case NOT:
+						tokens[nr_token++].type=NOT;
 						break;
 					default: panic("please implement me");
 				}
@@ -277,7 +281,7 @@ int eval(int p,int q)
 	      	{
 		  if(strcmp(tokens[p].str,regsl[k]))
 		  {
-                          printf("%d\n",k);
+                        //  printf("%d\n",k);
 			  sum=cpu.gpr[k]._32;
 			  break;
 	          }		  
@@ -318,7 +322,9 @@ int eval(int p,int q)
 	    case YU:
 		     if(val1&&val2)return 1;
                      else return 0;		     
-            default:{
+            case NOT:
+		     return(val1!=val2);
+	    default:{
                     assert(0);
                     //return 0;
                     }

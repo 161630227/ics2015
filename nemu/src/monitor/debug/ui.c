@@ -134,7 +134,7 @@ static struct {
         {"info","print the state",cmd_info},
 	{"x","visit the memory",cmd_x},
         {"p","expr",cmd_p}
-      //  {"w","watchpoint",cmd_w}
+     //   {"w","watchpoint",cmd_w}
         /* TODO: Add more commands */
 
 };

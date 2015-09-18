@@ -100,6 +100,13 @@ static int make_token(char *e) {
 					case '/':
 						tokens[nr_token++].type='/';
 						break;
+					  case N:
+						tokens[nr_token].type=N;
+					        int kk=0;
+						for ( kk=0;kk<substr_len;++kk)
+			                        tokens[nr_token].str[kk]=e[position-substr_len+kk];
+					        break;
+
 					case W:
 						tokens[nr_token].type=W;
 						int ku=0;
@@ -108,12 +115,12 @@ static int make_token(char *e) {
 						nr_token++;
             
 	                                        break;
-					case N:
+				/*	case N:
 						tokens[nr_token].type=N;
                                                 int kk=0;
 						for ( kk=0;kk<substr_len;++kk)
 		                                tokens[nr_token].str[kk]=e[position-substr_len+kk];
-						break;
+						break;*/
 					case '(':
 						tokens[nr_token++].type='(';
 						break;

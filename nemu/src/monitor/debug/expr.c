@@ -69,17 +69,16 @@ static int make_token(char *e) {
 	regmatch_t pmatch;
 
 	nr_token = 0;
-	//printf("make_tken");
 	while(e[position] != '\0') {
 		/* Try all rules one by one. */
 		for(i = 0; i < NR_REGEX; i ++) {
 			if(regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
-                              //  printf("fuck"); 
+                               
 				Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
 				position += substr_len;
-				//printf("true");
+				
 				/* TODO: Now a new token is recognized with rules[i]. Add codes
 				 * to record the token in the array ``tokens''. For certain 
 				 * types of tokens, some extra actions should be performed.
@@ -105,7 +104,7 @@ static int make_token(char *e) {
 												for ( kk=0;kk<substr_len;++kk)
  							tokens[nr_token].str[kk]=e[position-substr_len+kk];
 						nr_token++;
-              //                                 printf("kt%s\n",tokens[nr_token-1].str);
+            
 	break;
 					case '(':
 						tokens[nr_token++].type='(';
@@ -115,7 +114,7 @@ static int make_token(char *e) {
 						break;
 					default: panic("please implement me");
 				}
-			//	printf("%d\n",tokens[nr_token-1].type);
+			//	pintf("%d\n",tokens[nr_token-1].type);
 				break;
 			}
 		}
@@ -126,15 +125,14 @@ static int make_token(char *e) {
 		}
 	}
 
-     { printf("%d\n",nr_token);
-          nr_token2=nr_token; 
+     {  
 	     return nr_token;} 
 }
 //nr_token--; nr_token2=nr_token; 
 /*
 static bool make_token(char *e)
 {
-	printf("hello");
+	rintf("hello");
 return false;
 }
 */
@@ -195,7 +193,6 @@ uint32_t expr(char *e,bool *success) {
 		
 	}
         int index=make_token(e);
-//	printf("%d",index);
 	//index=make_token(e);
 	if(index==-1) {
 		
@@ -207,24 +204,24 @@ uint32_t expr(char *e,bool *success) {
 }      
 int eval(int p,int q)
         {
-	//	printf("q:%d\n",q);
+	//	rintf("q:%d\n",q);
            if(p>q)
            {
-            printf("error");
+           printf("error");
             return 0;
            }
            else if(p==q)
            {
              int k=0;
              int sum=0;
-	 //    printf("strlen%d  %d\n",p,strlen(tokens[p].str));
+	 //    rintf("strlen%d  %d\n",p,strlen(tokens[p].str));
              for(k=0;k<=strlen(tokens[p].str)-1;++k)
              {
                sum*=10;
                sum+=tokens[p].str[k]-'0';
-	      //printf("ae%s\n",tokens[p].str); 
+	      //rintf("ae%s\n",tokens[p].str); 
              }
-	   // printf("sum%d  %d\n",p,sum);
+	   // rintf("sum%d  %d\n",p,sum);
              return sum;
            }
            else if(check_parentheses(p,q))
@@ -239,9 +236,9 @@ int eval(int p,int q)
 	  {
 		  assert(0);
           }
-          //printf("op=%d\n",op);      
+          //rintf("op=%d\n",op);      
           int  val1=eval(p,op-1);
-        // printf("val1%d\n",val1);
+        //rintf("val1%d\n",val1);
           int  val2=eval(op+1,q);
 	 // printf("val2=%d\n",val2);
           switch(tokens[op].type)

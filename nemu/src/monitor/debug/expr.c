@@ -9,7 +9,7 @@
 //#include<ui.h>
 #include<memory.h>
 enum {
-	NOTYPE = 256, EQ,W,N
+	NOTYPE = 256, EQ,N,W
 
 	/* TODO: Add more token types */
 
@@ -32,6 +32,7 @@ static struct rule {
 	{"==", EQ},
         {"\\(",'('},
         {"\\)",')'},
+//	{"||",YU},
         {"[0-9]+",W}, 
 	{"0x[0-9a-f]+",N},//nei cun					// equal
 };

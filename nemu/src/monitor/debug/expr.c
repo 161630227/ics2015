@@ -88,7 +88,7 @@ static int make_token(char *e) {
 				switch(rules[i].token_type) {
 					case '+':
 						tokens[nr_token].type='+';
-	           printf("nr_token%d\n",nr_token);				nr_token++;	break;
+	          				nr_token++;	break;
 	
 					case '-':
 						tokens[nr_token++].type='-';
@@ -105,7 +105,7 @@ static int make_token(char *e) {
 												for ( kk=0;kk<substr_len;++kk)
  							tokens[nr_token].str[kk]=e[position-substr_len+kk];
 						nr_token++;
-                                               printf("kt%s\n",tokens[nr_token-1].str);
+              //                                 printf("kt%s\n",tokens[nr_token-1].str);
 	break;
 					case '(':
 						tokens[nr_token++].type='(';
@@ -222,9 +222,9 @@ int eval(int p,int q)
              {
                sum*=10;
                sum+=tokens[p].str[k]-'0';
-	      printf("ae%s\n",tokens[p].str); 
+	      //printf("ae%s\n",tokens[p].str); 
              }
-	    printf("sum%d  %d\n",p,sum);
+	   // printf("sum%d  %d\n",p,sum);
              return sum;
            }
            else if(check_parentheses(p,q))
@@ -235,7 +235,7 @@ int eval(int p,int q)
           {
           int op=find(p,q);
           //if(op!=p)
-         printf("op=%d\n",op);      
+        // printf("op=%d\n",op);      
           int  val1=eval(p,op-1);
           int  val2=eval(op+1,q);
           switch(tokens[op].type)

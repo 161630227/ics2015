@@ -237,14 +237,13 @@ int eval(int p,int q)
           //if(op!=p)
 	  if(op==p) 
 	  {
-		  printf("error input");
-		  return -1;
+		  assert(0);
           }
-          printf("op=%d\n",op);      
+          //printf("op=%d\n",op);      
           int  val1=eval(p,op-1);
-         printf("val1%d\n",val1);
+        // printf("val1%d\n",val1);
           int  val2=eval(op+1,q);
-	  printf("val2=%d\n",val2);
+	 // printf("val2=%d\n",val2);
           switch(tokens[op].type)
           {
             case'+': return val1+val2;

@@ -16,10 +16,10 @@ char* rl_gets() {
 	if (line_read) {
 		free(line_read);
 		line_read = NULL;
+	
 	}
-
 	line_read = readline("(nemu) ");
-
+        
 	if (line_read && *line_read) {
 		add_history(line_read);
 	}
@@ -59,7 +59,11 @@ static int cmd_info(char * args){
            //printf("%s\n",*(regsl+i-1));
 	 }
       }
-      return 1;
+      else if(!strcmp(args,"w"))
+       {
+          pri();
+       }
+       return 1;
 }
 static int  cmd_si(char *str)
 {

@@ -46,6 +46,18 @@ WP* new_wp()
 	  // return NULL;
       }
      // return (index1);
+
+}
+void pri()
+{
+	 WP* index5=head;
+	 while(index5!=NULL)
+	 {
+		 printf("NO%d  expr%s  v%d  \n",index5->NO,index5->watch_expr,index5->v);
+		 index5=index5->next;
+			   
+       	 }
+   return;
 }
 void free_wp(WP *wp)
 {

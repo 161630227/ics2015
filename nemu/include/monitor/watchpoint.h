@@ -16,4 +16,5 @@ typedef struct watchpoint {
 extern WP* new_wp();
 extern bool check_watchpoint();
 extern void free_wp(WP*);
+extern void pri();
 #endif

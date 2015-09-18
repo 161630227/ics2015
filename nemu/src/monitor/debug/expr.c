@@ -9,7 +9,7 @@
 //#include<ui.h>
 #include<memory.h>
 enum {
-	NOTYPE = 256, EQ,N,W,YU,HUO
+	NOTYPE = 256, EQ,N,W,YU,HUO,REG
 
 	/* TODO: Add more token types */
 
@@ -34,7 +34,7 @@ static struct rule {
         {"\\)",')'},
 	{"\\|\\|",HUO},
 	{"\\&\\&",YU},
-//	{"\\$[[:alpha:]]+",REG},
+	{"\\$[[:alpha:]]+",REG},
         {"0x[0-9a-f]+",N},	
         {"[0-9]+",W} 
 //	{"0x[0-9a-f]+",N},//nei cun					// equal
@@ -120,12 +120,13 @@ static int make_token(char *e) {
 						nr_token++;
             
 	                                        break;
-				/*	case N:
-						tokens[nr_token].type=N;
-                                                int kk=0;
-						for ( kk=0;kk<substr_len;++kk)
-		                                tokens[nr_token].str[kk]=e[position-substr_len+kk];
-						break;*/
+					case REG:
+						tokens[nr_token].type=REG;
+                                                int k1=0;
+						for ( k1=0;k1<substr_len;++k1)
+		                                tokens[nr_token].str[k1]=e[position-substr_len+k1];
+						nr_token++;
+						break;
 					case YU:tokens[nr_token++].type=YU;
 						break;
 					case HUO:tokens[nr_token++].type=HUO;
@@ -257,17 +258,30 @@ int eval(int p,int q)
 	    {
 	       int sum1,i;
 	       sum1=0;
-	       printf("hh");
+	     //  printf("hh");
                for (i=2;i<strlen(tokens[p].str);++i)
               {      
                 sum1*=16;
                 if (tokens[p].str[i]>='a') sum1+=10+tokens[p].str[i]-'a';
                 else sum1+=tokens[p].str[i]-'0';
               }
-	       printf("sum1=  %d\n",sum1);
+	     //  printf("sum1=  %d\n",sum1);
 	  
 	       sum=swaddr_read(sum1+i,1);
-                 printf("sum=  %d\n",sum);
+               //  printf("sum=  %d\n",sum);
+	    }
+	     else if(tokens[p].type==REG)
+	     {	
+       		     
+		for (k=R_EAX;k<=R_EDI;k++)
+	      	{
+		  if(strcmp(tokens[p].str,regsl[k]))
+		  {
+
+			  sum=cpu.gpr[k]._32;
+			  break;
+	          }		  
+                }
 	    }
             return sum;
 	   }

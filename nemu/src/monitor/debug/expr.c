@@ -107,6 +107,7 @@ static int make_token(char *e) {
 						break;
 					case EQ:
 						tokens[nr_token++].type=EQ;
+						break;
 					  case N:
 						tokens[nr_token].type=N;
 					        int kk=0;

@@ -221,6 +221,7 @@ int find(int p,int q)
 		    if(((tokens[k].type==NOT)||(tokens[k].type==EQ))&&(!index))
 		    {
 		      op=k;
+		      printf("here\n");
 		      index=true;
 		      break;
 		    }

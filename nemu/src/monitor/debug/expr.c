@@ -348,7 +348,8 @@ int eval(int p,int q)
 		      if(val1!=val2) return 1;
 		      else return 0;
 	    case EQ:
-		      return(val1==val2);
+		      if(val1==val2) return 1;
+		      else return 0;
 	    default:{
                     assert(0);
                     //return 0;

@@ -349,6 +349,7 @@ int eval(int p,int q)
 		      if(val1!=val2) return 1;
 		      else return 0;
 	    case EQ:
+		      printf("te\n");
 		      if(val1==val2) return 1;
 		      else return 0;
 	    default:{

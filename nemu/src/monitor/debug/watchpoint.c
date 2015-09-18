@@ -36,6 +36,7 @@ WP* new_wp()
       else
       {
 	      head=index1;
+	      index1->next=NULL;
 	      head->next=NULL;
 	      return index1;
       }

@@ -88,7 +88,8 @@ static int make_token(char *e) {
 				switch(rules[i].token_type) {
 					case '+':
 						tokens[nr_token].type='+';
-					nr_token++;	break;
+	           printf("nr_token%d\n",nr_token);				nr_token++;	break;
+	
 					case '-':
 						tokens[nr_token++].type='-';
 						break;

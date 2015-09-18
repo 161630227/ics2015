@@ -125,7 +125,7 @@ static int cmd_x(char *args){
 	printf("\n");         
 return 1;
 }
-/*static int necun(char *args){
+/* int necun(char *args){
 	int i;   
        	int sum=0;
 	for (i=2;i<strlen(args);++i)
@@ -134,10 +134,8 @@ return 1;
             if (args[i]>='a') sum+=10+args[i]-'a';
 	    else sum+=args[i]-'0';
 	  }
-         uint32_t x1= swaddr_read(sum+i,1);
-	 printf(
-	 }
-*/
+         return(swaddr_read(sum+i,1));
+ }*/
 static int cmd_help(char *args);
 
 static struct {

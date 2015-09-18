@@ -6,6 +6,8 @@
 #include <sys/types.h>
 #include <regex.h>
 #include<string.h>
+//#include<ui.h>
+#include<memory.h>
 enum {
 	NOTYPE = 256, EQ,W,N
 
@@ -218,21 +220,30 @@ int eval(int p,int q)
            }
            else if(p==q)
            {
-	     if(tokens[p].type==W)
-           {
              int k=0;
-             int sum=0;
+	     int sum=0;
+	     if(tokens[p].type==W)
+           { 
              for(k=0;k<=strlen(tokens[p].str)-1;++k)
              {
                sum*=10;
                sum+=tokens[p].str[k]-'0'; 
              }
-             return sum;
+            // return sum;
            }
-	    else 
+	    else if(tokens[p].type==N)
 	    {
-		    return 1111; 
+	       int sum1,i;
+	       sum1=0;
+               for (i=2;i<strlen(tokens[p].str);++i)
+              {      
+                sum1*=16;
+                if (tokens[p].str[i]>='a') sum1+=10+tokens[p].str[i]-'a';
+                else sum1+=tokens[p].str[i]-'0';
+              }
+	       sum=swaddr_read(sum1+i,1);
             }
+            return sum;
 	   }
 	   
            else if(check_parentheses(p,q))

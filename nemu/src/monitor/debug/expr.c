@@ -34,8 +34,10 @@ static struct rule {
         {"\\)",')'},
 	{"\\|\\|",HUO},
 	{"\\&\\&",YU},
-        {"[0-9]+",W}, 
-	{"0x[0-9a-f]+",N},//nei cun					// equal
+//	{"\\$[[:alpha:]]+",REG},
+        {"0x[0-9a-f]+",N},	
+        {"[0-9]+",W} 
+//	{"0x[0-9a-f]+",N},//nei cun					// equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )

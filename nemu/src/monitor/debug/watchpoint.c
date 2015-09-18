@@ -10,6 +10,8 @@ void init_wp_list() {
 	int i;
 	for(i = 0; i < NR_WP; i ++) {
 		wp_list[i].NO = i;
+		wp_list[i].v=0;
+		wp_list[i].watch_expr=NULL;
 		wp_list[i].next = &wp_list[i + 1];
 	}
 	wp_list[NR_WP - 1].next = NULL;
@@ -26,7 +28,7 @@ WP* new_wp()
       if(free_==NULL) 
       {
 	   printf("no more free");
-	   return NULL;
+	  // return NULL;
       }
       return (index1);
 }
@@ -37,11 +39,14 @@ void free_wp(WP *wp)
     {
 	    free_=wp;
 	    free_->NO=wp->NO;
-            free_->next=index1;	    
+            free_->next=index1;
+            free_->watch_expr=NULL;	    
     }
    else
     {
 	    free_=wp;
+	    free_->v=0;
+	    free_->watch_expr=NULL;
 	    free_->next=NULL;
     }	    
 }

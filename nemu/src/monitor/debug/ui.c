@@ -85,18 +85,22 @@ static int  cmd_si(char *str)
 static int cmd_q(char *args) {
 	return -1;
 }
-/*static void cmd_w(char *expr)
-{
- if(!expr)
+static int cmd_w(char *args)
+  {
+ if(!args)
  {
-	 printf(”no vaild input“);
-	 return;
+	 printf("no vaild input");
+	 return 1;
  }
  bool k=true;
  uint32_t rst=expr(args,&k);
+ char *watch_point=(char *)malloc(strlen(args) + 1);
  WP* watch=new_wp();
-return 0;
-}*/
+ strcpy(watch_point, args);
+ watch->v=rst;
+ watch->watch_expr=watch_point;
+return 1;
+}
 static int cmd_x(char *args){
 
          char * index=strtok(args," ");
@@ -149,8 +153,8 @@ static struct {
         {"si"," the times",cmd_si},
         {"info","print the state",cmd_info},
 	{"x","visit the memory",cmd_x},
-        {"p","expr",cmd_p}
-     //   {"w","watchpoint",cmd_w}
+        {"p","expr",cmd_p},
+        {"w","watchpoint",cmd_w}
         /* TODO: Add more commands */
 
 };

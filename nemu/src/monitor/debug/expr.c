@@ -109,6 +109,7 @@ static int make_token(char *e) {
 					        int kk=0;
 						for ( kk=0;kk<substr_len;++kk)
 			                        tokens[nr_token].str[kk]=e[position-substr_len+kk];
+						nr_token++;
 					        break;
 
 					case W:

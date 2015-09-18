@@ -235,9 +235,11 @@ int eval(int p,int q)
           {
           int op=find(p,q);
           //if(op!=p)
-        // printf("op=%d\n",op);      
+          printf("op=%d\n",op);      
           int  val1=eval(p,op-1);
+         printf("val1%d\n",val1);
           int  val2=eval(op+1,q);
+	  printf("val2=%d\n",val2);
           switch(tokens[op].type)
           {
             case'+': return val1+val2;

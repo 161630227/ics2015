@@ -229,7 +229,10 @@ int eval(int p,int q)
              }
              return sum;
            }
-	    else return 1;
+	    else 
+	    {
+		    return 1111; 
+            }
 	   }
 	   
            else if(check_parentheses(p,q))

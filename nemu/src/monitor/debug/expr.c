@@ -256,6 +256,7 @@ int eval(int p,int q)
 	    {
 	       int sum1,i;
 	       sum1=0;
+	       printf("hh");
                for (i=2;i<strlen(tokens[p].str);++i)
               {      
                 sum1*=16;

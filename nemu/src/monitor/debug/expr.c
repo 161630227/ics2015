@@ -103,7 +103,7 @@ static int make_token(char *e) {
 						tokens[nr_token].type=W;
 						int kk=0;
 						printf("sub%d\n",nr_token);						for ( kk=0;kk<substr_len;++kk)
- 							tokens[nr_token].str[kk]=e[nr_token+kk];
+ 							tokens[nr_token].str[kk]=e[nr_token+1+kk];
 						nr_token++;
                                                printf("kt%s\n",tokens[nr_token-1].str);
 	break;

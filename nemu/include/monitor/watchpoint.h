@@ -17,4 +17,5 @@ extern WP* new_wp();
 extern bool check_watchpoint();
 extern void free_wp(WP*);
 extern void pri();
+extern void delete(int);
 #endif

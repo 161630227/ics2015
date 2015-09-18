@@ -31,6 +31,19 @@ static int cmd_c(char *args) {
 	cpu_exec(-1);
 	return 0;
 }
+static int cmd_d(char *args)
+{
+       int len=strlen(args);
+       int i, sum3;
+       sum3=0;
+       for (i=0;i<len;++i)
+       {
+	       sum3*=10;
+	       sum3+=args[i]-'0';
+       }
+       delete(sum3);
+       return 1;
+}
 static int cmd_p(char *args)
 {
        bool k=true;
@@ -158,6 +171,7 @@ static struct {
         {"info","print the state",cmd_info},
 	{"x","visit the memory",cmd_x},
         {"p","expr",cmd_p},
+	{"d","delete watchpoint",cmd_d},
         {"w","watchpoint",cmd_w}
         /* TODO: Add more commands */
 

@@ -59,6 +59,25 @@ void pri()
        	 }
    return;
 }
+void delete(int x)
+{
+	WP*index6=head;
+	if(index6==NULL)
+       {
+	       printf("no extra watchpoint now");
+	       return;
+       }
+       if(index6->NO==x)
+       {
+	       free_wp(index6);
+	       return;
+	}
+       while(index6->NO!=x)
+	       index6=index6->next;
+       free_wp(index6);
+       return;
+	       
+}
 void free_wp(WP *wp)
 {
     index1=free_;

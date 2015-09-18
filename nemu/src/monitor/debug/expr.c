@@ -33,7 +33,7 @@ static struct rule {
         {"\\(",'('},
         {"\\)",')'},
         {"[0-9]+",W}, 
-	{"0x[0-9A-Fa-f]+",N},//nei cun					// equal
+	{"0x[0-9a-f]+",N},//nei cun					// equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -110,7 +110,7 @@ static int make_token(char *e) {
 					case W:
 						tokens[nr_token].type=W;
 						int ku=0;
-												for ( ku=0;ku<substr_len;++ku)
+						for ( ku=0;ku<substr_len;++ku)
  							tokens[nr_token].str[ku]=e[position-substr_len+ku];
 						nr_token++;
             

@@ -4,7 +4,7 @@
 #define NR_WP 32
 
 static WP wp_list[NR_WP];
-static WP *head, *free_,*index1;
+static WP *head, *free_,*index1,*index2;
 
 void init_wp_list() {
 	int i;
@@ -23,24 +23,48 @@ void init_wp_list() {
 /* TODO: Implement the functionality of watchpoint */
 WP* new_wp()
 {
-      index1=free_;	
+      index1=free_;
+      index2=head;      
       free_=free_->next;
+      if(head)
+      {
+	      head->next=index1;
+	      index1->next=index2->next;
+	      return index1;
+	      
+      }
+      else
+      {
+	      head=index1;
+	      head->next=NULL;
+	      return index1;
+      }
       if(free_==NULL) 
       {
 	   printf("no more free");
 	  // return NULL;
       }
-      return (index1);
+     // return (index1);
 }
 void free_wp(WP *wp)
 {
     index1=free_;
+    index2=head;
+    if(wp!=head)
+   {	 
+	   while(index2->next!=wp)
+           index2=index2->next;
+	   index2->next=wp->next; 
+   }
+    else
+	    head=head->next;
+  
     if(index1!=NULL)
     {
 	    free_=wp;
-	    free_->NO=wp->NO;
             free_->next=index1;
-            free_->watch_expr=NULL;	    
+            free_->watch_expr=NULL;
+            free_->v=0;	    
     }
    else
     {
@@ -50,4 +74,21 @@ void free_wp(WP *wp)
 	    free_->next=NULL;
     }	    
 }
-
+bool check_watchpoint()
+{
+   index1=head;
+   bool x2=false;
+   if(index1)
+	   while(index1!=NULL)
+	   {
+		   bool k=true;
+		   uint32_t rst=expr(index1->watch_expr,&k);
+		   if((rst!=index1->v))
+		   {
+		 	   printf("nemu: HIT watchpoint %d:%s\n\nOld value = %d\nNew value = %d\n",index1->NO, index1->watch_expr, index1->v, rst);
+                           x2=true;
+	           }
+		   index1=index1->next;
+           }
+   return x2;
+}

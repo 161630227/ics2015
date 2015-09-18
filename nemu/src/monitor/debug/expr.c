@@ -105,6 +105,8 @@ static int make_token(char *e) {
 					case '/':
 						tokens[nr_token++].type='/';
 						break;
+					case EQ:
+						tokens[nr_token++].type=EQ;
 					  case N:
 						tokens[nr_token].type=N;
 					        int kk=0;
@@ -211,6 +213,26 @@ int find(int p,int q)
             k--;
           }
      }
+     if(!index)
+     {
+	     k=q;
+	    while(k>p)
+	    {
+		    if(((tokens[k].type==NOT)||(tokens[k].type==EQ))&&(!index))
+		    {
+		      op=k;
+		      index=true;
+		      break;
+		    }
+		   else if((tokens[k].type==')')&&k>p)
+		   {
+			   while((tokens[k].type!='('&&(k>p))) k--;
+	           }
+		   k--;
+	   }
+    }
+            
+     
    if (index) return op;
    else return p;
 } bool check_parentheses(int p,int q)
@@ -325,6 +347,8 @@ int eval(int p,int q)
             case NOT:
 		      if(val1!=val2) return 1;
 		      else return 0;
+	    case EQ:
+		      return(val1==val2);
 	    default:{
                     assert(0);
                     //return 0;

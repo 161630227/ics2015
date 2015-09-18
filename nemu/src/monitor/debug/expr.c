@@ -262,8 +262,11 @@ int eval(int p,int q)
                 if (tokens[p].str[i]>='a') sum1+=10+tokens[p].str[i]-'a';
                 else sum1+=tokens[p].str[i]-'0';
               }
+	       printf("sum1=  %d\n",sum1);
+	  
 	       sum=swaddr_read(sum1+i,1);
-            }
+                 printf("sum=  %d\n",sum);
+	    }
             return sum;
 	   }
 	   

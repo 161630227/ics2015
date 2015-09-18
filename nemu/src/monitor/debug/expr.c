@@ -101,7 +101,7 @@ static int make_token(char *e) {
 					case W:
 						tokens[nr_token].type=W;
 						int kk=0;
-						printf("sub%d\n",substr_len);						for ( kk=0;kk<substr_len;++kk)
+						printf("sub%d\n",nr_token);						for ( kk=0;kk<substr_len;++kk)
  							tokens[nr_token].str[kk]=e[nr_token+kk];
 						nr_token++;
                                                printf("kt%s\n",tokens[nr_token-1].str);

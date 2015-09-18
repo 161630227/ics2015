@@ -21,7 +21,7 @@ void init_wp_list() {
 }
 
 /* TODO: Implement the functionality of watchpoint */
-WP* new_wp()
+/*WP* new_wp()
 {
       index1=free_;
       index2=head;      
@@ -47,6 +47,23 @@ WP* new_wp()
       }
      // return (index1);
 
+}*/
+WP* new_wp()
+{
+if(!free_) return NULL;
+    WP* newbp = free_; free_ = free_->next;
+    newbp->next = NULL;
+    if(!head) {
+    head = newbp;
+    } 
+    else {
+    WP* tail = head;
+    while(tail->next) {
+    tail = tail->next;
+    }
+    tail->next = newbp;
+    }
+   return newbp;
 }
 void pri()
 {

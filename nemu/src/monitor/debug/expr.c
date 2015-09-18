@@ -165,7 +165,7 @@ int find(int p,int q)
           k=q;
           while(k>p)
           {
-             if(((tokens[k].type=='*')||(tokens[k].type=='/'))&&index)
+             if(((tokens[k].type=='*')||(tokens[k].type=='/'))&&(!index))
              {
                op=k;
                index=true;
@@ -235,6 +235,11 @@ int eval(int p,int q)
           {
           int op=find(p,q);
           //if(op!=p)
+	  if(op==p) 
+	  {
+		  printf("error input");
+		  return -1;
+          }
           printf("op=%d\n",op);      
           int  val1=eval(p,op-1);
          printf("val1%d\n",val1);

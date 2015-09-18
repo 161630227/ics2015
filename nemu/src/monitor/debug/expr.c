@@ -7,7 +7,7 @@
 #include <regex.h>
 #include<string.h>
 enum {
-	NOTYPE = 256, EQ,W
+	NOTYPE = 256, EQ,W,N
 
 	/* TODO: Add more token types */
 
@@ -30,8 +30,8 @@ static struct rule {
 	{"==", EQ},
         {"\\(",'('},
         {"\\)",')'},
-        {"[0-9]+",W} 
-						// equal
+        {"[0-9]+",W}, 
+	{"0x[0-9A-Fa-f]+",N},//nei cun					// equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -100,12 +100,18 @@ static int make_token(char *e) {
 						break;
 					case W:
 						tokens[nr_token].type=W;
-						int kk=0;
-												for ( kk=0;kk<substr_len;++kk)
- 							tokens[nr_token].str[kk]=e[position-substr_len+kk];
+						int ku=0;
+												for ( ku=0;ku<substr_len;++ku)
+ 							tokens[nr_token].str[ku]=e[position-substr_len+ku];
 						nr_token++;
             
-	break;
+	                                        break;
+					case N:
+						tokens[nr_token].type=N;
+                                                int kk=0;
+						for ( kk=0;kk<substr_len;++kk)
+		                                tokens[nr_token].str[kk]=e[position-substr_len+kk];
+						break;
 					case '(':
 						tokens[nr_token++].type='(';
 						break;
@@ -184,7 +190,7 @@ int find(int p,int q)
         else return false;
 }
 
-int32_t expr(char *e,bool *success) {
+uint32_t expr(char *e,bool *success) {
      
 	if(!success)
 	{
@@ -212,18 +218,20 @@ int eval(int p,int q)
            }
            else if(p==q)
            {
+	     if(tokens[p].type==W)
+           {
              int k=0;
              int sum=0;
-	 //    rintf("strlen%d  %d\n",p,strlen(tokens[p].str));
              for(k=0;k<=strlen(tokens[p].str)-1;++k)
              {
                sum*=10;
-               sum+=tokens[p].str[k]-'0';
-	      //rintf("ae%s\n",tokens[p].str); 
+               sum+=tokens[p].str[k]-'0'; 
              }
-	   // rintf("sum%d  %d\n",p,sum);
              return sum;
            }
+	    else return 1;
+	   }
+	   
            else if(check_parentheses(p,q))
           
            return eval(p+1,q-1);
@@ -247,6 +255,7 @@ int eval(int p,int q)
             case'-': return val1-val2;
             case'*': return val1*val2;
             case'/': return val1/val2;
+           
             default:{
                     assert(0);
                     //return 0;

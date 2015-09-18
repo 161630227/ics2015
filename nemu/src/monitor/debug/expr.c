@@ -289,11 +289,11 @@ int eval(int p,int q)
             case'*': return val1*val2;
             case'/': return val1/val2;
             case HUO:
-		  /*   if(val1) return 1;
+		     if(val1) return 1;
 		     else if(val2) return 1;
 		     else return 0;//return val1||val2;
-		     */
-		     return 10;
+		     
+		    // return 10;
 	    case YU:
 		     if(val1&&val2)return 1;
                      else return 0;		     

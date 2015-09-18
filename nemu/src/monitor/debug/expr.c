@@ -50,7 +50,7 @@ void init_regex() {
 		ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
 		if(ret != 0) {
 			regerror(ret, &re[i], error_msg, 128);
-			Assert(ret == 0, "regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+			Assert(ret != 0, "regex compilation failed: %s\n%s", error_msg, rules[i].regex);
 		}
 	}
 }
@@ -184,7 +184,7 @@ int find(int p,int q)
         else return false;
 }
 
-uint32_t expr(char *e,bool *success) {
+int32_t expr(char *e,bool *success) {
      
 	if(!success)
 	{

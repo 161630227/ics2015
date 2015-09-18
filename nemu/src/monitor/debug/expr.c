@@ -9,7 +9,7 @@
 //#include<ui.h>
 #include<memory.h>
 enum {
-	NOTYPE = 256, EQ,N,W
+	NOTYPE = 256, EQ,N,W,YU,HUO
 
 	/* TODO: Add more token types */
 
@@ -32,7 +32,8 @@ static struct rule {
 	{"==", EQ},
         {"\\(",'('},
         {"\\)",')'},
-//	{"||",YU},
+	{"\\|\\|",HUO},
+	{"\\&\\&",YU},
         {"[0-9]+",W}, 
 	{"0x[0-9a-f]+",N},//nei cun					// equal
 };
@@ -122,6 +123,11 @@ static int make_token(char *e) {
 						for ( kk=0;kk<substr_len;++kk)
 		                                tokens[nr_token].str[kk]=e[position-substr_len+kk];
 						break;*/
+					case YU:tokens[nr_token++].type=YU;
+						break;
+					case HUO:tokens[nr_token++].type=HUO;
+						break;
+
 					case '(':
 						tokens[nr_token++].type='(';
 						break;
@@ -161,7 +167,12 @@ int find(int p,int q)
       bool index=false;//decide whether have found op
       while(k>p)
       {
-
+          if((tokens[k].type==YU||tokens[k].type==HUO))
+	  {
+		  op=k;
+		  index=true;
+		  break;
+          }
           if((tokens[k].type=='+')||(tokens[k].type=='-'))
           {
             op=k;
@@ -277,7 +288,15 @@ int eval(int p,int q)
             case'-': return val1-val2;
             case'*': return val1*val2;
             case'/': return val1/val2;
-           
+            case HUO:
+		  /*   if(val1) return 1;
+		     else if(val2) return 1;
+		     else return 0;//return val1||val2;
+		     */
+		     return 10;
+	    case YU:
+		     if(val1&&val2)return 1;
+                     else return 0;		     
             default:{
                     assert(0);
                     //return 0;

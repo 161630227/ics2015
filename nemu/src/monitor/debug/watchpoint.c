@@ -70,7 +70,7 @@ void pri()
 	 WP* index5=head;
 	 while(index5!=NULL)
 	 {
-		 printf("NO%d  expr%s  v%d  \n",index5->NO,index5->watch_expr,index5->v);
+		 printf("NO%d  expr%s  value %d  \n",index5->NO,index5->watch_expr,index5->v);
 		 index5=index5->next;
 			   
        	 }
@@ -137,6 +137,7 @@ bool check_watchpoint()
 		 	   printf("nemu: HIT watchpoint %d:%s\n\nOld value = %d\nNew value = %d\n",index1->NO, index1->watch_expr, index1->v, rst);
                            x2=true;
 	           }
+		   index1->v=rst;
 		   index1=index1->next;
            }
    return x2;

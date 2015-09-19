@@ -360,8 +360,9 @@ int eval(int p,int q)
 			   sum7*=16;
 		           if (tokens[q].str[k2]>='a') sum7+=10+tokens[q].str[k2]-'a';
 		           else sum7+=tokens[q].str[k2]-'0';
-		           return swaddr_read(sum7,1);
+		      //      return swaddr_read(sum7,1);
                     }
+		   return swaddr_read(sum7,1);
 	   } 
           
           else

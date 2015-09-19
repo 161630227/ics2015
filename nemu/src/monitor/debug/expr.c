@@ -9,7 +9,7 @@
 //#include<ui.h>
 #include<memory.h>
 enum {
-	NOTYPE = 256, EQ,N,W,YU,HUO,REG,NOT
+	NOTYPE = 256, EQ,N,W,YU,HUO,REG,NOT,RETEF
 
 	/* TODO: Add more token types */
 
@@ -33,6 +33,7 @@ static struct rule {
 	{"\\!\\=",NOT},
         {"\\(",'('},
         {"\\)",')'},
+	
 	{"\\|\\|",HUO},
 	{"\\&\\&",YU},
 	{"\\$[[:alpha:]]+",REG},
@@ -234,7 +235,26 @@ int find(int p,int q)
 	   }
     }
             
-     
+ /*   if(!index)
+    {
+	     k=q;
+          while(k>p)
+            {       
+		    if(((tokens[k].type==RETEF)&&(!index))
+                    {
+                       op=k;
+                     //  printf("here\n");
+                       index=true;
+                       break;
+                     }
+                    else if((tokens[k].type==')')&&k>p)
+	                   {
+	                           while((tokens[k].type!='('&&(k>p))) k--;
+		            }
+                   k--;
+           }
+         }
+*/
    if (index) return op;
    else return p;
 } bool check_parentheses(int p,int q)
@@ -253,6 +273,10 @@ uint32_t expr(char *e,bool *success) {
 	}
         int index=make_token(e);
 	//index=make_token(e);
+	int i1;
+	for(i1=0;i1<nr_token;++i1)
+		if((tokens[i1].type=='*')&&(i1==0||((tokens[i1-1].type!=N)&&(tokens[i1-1].type!=W)&&(tokens[i1-1].type!=REG))))
+					tokens[i1].type=RETEF;
 	if(index==-1) {
 		
 		*success = false;
@@ -271,76 +295,103 @@ int eval(int p,int q)
            }
            else if(p==q)
            {
-             int k=0;
-	     int sum=0;
-	     if(tokens[p].type==W)
-           { 
-             for(k=0;k<=strlen(tokens[p].str)-1;++k)
-             {
-               sum*=10;
-               sum+=tokens[p].str[k]-'0'; 
-             }
+ 
+       		   int k=0;
+		   int sum=0;
+          	   if(tokens[p].type==W)
+                   { 
+                  
+			   for(k=0;k<=strlen(tokens[p].str)-1;++k)
+                           {
+              
+				   sum*=10;
+                                   sum+=tokens[p].str[k]-'0'; 
+                            }
             // return sum;
-           }
-	    else if(tokens[p].type==N)
-	    {
-	       int sum1,i;
-	       sum1=0;
-	     //  printf("hh");
-               for (i=2;i<strlen(tokens[p].str);++i)
-              {      
-                sum1*=16;
-                if (tokens[p].str[i]>='a') sum1+=10+tokens[p].str[i]-'a';
-                else sum1+=tokens[p].str[i]-'0';
-              }
-	     //  printf("sum1=  %d\n",sum1);
+                   }
+	           else if(tokens[p].type==N)
+	                {
+	       
+				int sum1,i;
+	                        sum1=0;
+	      
+                                for (i=2;i<strlen(tokens[p].str);++i)
+                                {      
+                
+					sum1*=16;
+                                        if (tokens[p].str[i]>='a') sum1+=10+tokens[p].str[i]-'a';
+                                        else sum1+=tokens[p].str[i]-'0';
+                                }
+	                        //  printf("sum1=  %d\n",sum1);
 	  
-	       sum=swaddr_read(sum1+i,1);
-               //  printf("sum=  %d\n",sum);
-	    }
-	     else if(tokens[p].type==REG)
-	     {	
+	                        sum=swaddr_read(sum1,1);
+               
+	                }
+	          else if(tokens[p].type==REG)
+	          {	
        		     
-		for (k=R_EAX;k<=R_EDI;k++)
-	      	{
-		  if(strcmp(tokens[p].str,regsl[k]))
-		  {
-                        //  printf("%d\n",k);
-			  sum=cpu.gpr[k]._32;
-			  break;
-	          }		  
-                }
-	    }
+		
+			  for (k=R_EAX;k<=R_EDI;k++)
+	      	          {
+		  
+				  if(strcmp(tokens[p].str,regsl[k]))
+		                  {
+                                   //  printf("%d\n",k);
+			 
+					  sum=cpu.gpr[k]._32;
+			                  break;
+	                           }		  
+                           } 
+	          }
             return sum;
 	   }
 	   
            else if(check_parentheses(p,q))
           
            return eval(p+1,q-1);
-         
-        else
+           else if(tokens[p].type==RETEF)
+           {
+          
+		   int sum7=0;
+	           int k2;
+	           for (k2=2;k2<strlen(tokens[q].str);++k2)
+	           {
+		   
+			   sum7*=16;
+		           if (tokens[q].str[k2]>='a') sum7+=10+tokens[q].str[k2]-'a';
+		           else sum7+=tokens[q].str[k2]-'0';
+		           return swaddr_read(sum7,1);
+                    }
+	   } 
+          
+          else
           {
-          int op=find(p,q);
-          //if(op!=p)
-	  if(op==p) 
-	  {
-		  assert(0);
-          }
+      
+          
+		  int op=find(p,q);
+                  //if(op!=p)
+	          if(op==p) 
+	          {
+		 
+			  assert(0);
+			  return 0;
+                  }
           //rintf("op=%d\n",op);      
-          int  val1=eval(p,op-1);
+                  int  val1=eval(p,op-1);
         //rintf("val1%d\n",val1);
-          int  val2=eval(op+1,q);
+                  int  val2=eval(op+1,q);
 	 // printf("val2=%d\n",val2);
-          switch(tokens[op].type)
-          {
-            case'+': return val1+val2;
-            case'-': return val1-val2;
-            case'*': return val1*val2;
-            case'/': return val1/val2;
-            case HUO:
-		     if(val1) return 1;
-		     else if(val2) return 1;
-		     else return 0;//return val1||val2;
+                 switch(tokens[op].type)
+                {
+            
+			case'+': return val1+val2;
+                        case'-': return val1-val2;
+                        case'*': return val1*val2;
+                        case'/': return val1/val2;
+                        case HUO:
+		        if(val1) return 1;
+		         else if(val2) return 1;
+		          else return 0;//return val1||val2;
 		     
 		    // return 10;
 	    case YU:
@@ -355,14 +406,14 @@ int eval(int p,int q)
 		      else return 0;
 	    default:{
                     assert(0);
-                    //return 0;
+                   return 0;
                     }
-          }
+                }
           
-       }       
+        }       
         
 //	TODO: Insert codes to evaluate the expression. */
       //	panic("please implement me");
-     
+    return 0; 
 }
 

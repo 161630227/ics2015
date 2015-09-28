@@ -4,7 +4,7 @@
 #define instr test
 
 static void do_execute () {
-	printf("ss\n");
+//	printf("ss\n");
 	DATA_TYPE index = op_dest->val & op_src->val;
 //	OPERAND_W(op_dest, result);
 
@@ -12,6 +12,7 @@ static void do_execute () {
         cpu.eflags.CF=0;
 	cpu.eflags.ZF=(index==0);
 	cpu.eflags.PF=1;
+	printf("ss1\n");
 	while (index)
        {
 	       if(index&0x1) cpu.eflags.PF=!cpu.eflags.PF;

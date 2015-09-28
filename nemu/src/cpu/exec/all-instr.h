@@ -12,6 +12,7 @@
 #include "arith/div.h"
 #include "arith/sub.h"
 #include "arith/cmp.h"
+#include "arith/call.h"
 #include "logic/and.h"
 #include "logic/or.h"
 #include "logic/not.h"

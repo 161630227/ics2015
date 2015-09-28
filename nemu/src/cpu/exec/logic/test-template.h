@@ -20,7 +20,7 @@ static void do_execute () {
         cpu.eflags.SF=index<0;
         cpu.eflags.OF=0;
 	panic("please implement me");
-
+        printf("%d\n",cpu.eflags.value);
 	print_asm_template2();
 }
 

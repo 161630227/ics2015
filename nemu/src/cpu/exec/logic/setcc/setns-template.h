@@ -1,11 +1,11 @@
 
 #include "cpu/exec/template-start.h"
 
-#define instr setg
+#define instr setns
 
 static void do_execute () {
 	int  index;
-	if((cpu.eflags.SF==cpu.eflags.OF)&&cpu.eflags.ZF==0)
+	if(cpu.eflags.SF==0)
       	 index=1;
 	else index=0;
 	OPERAND_W(op_dest, index);

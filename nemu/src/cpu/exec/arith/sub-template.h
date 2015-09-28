@@ -3,12 +3,13 @@
 
 #define instr sub
 static void do_execute(){
-	DATA_TYPE_S result = op_dest->val - op_src->val;
+	DATA_TYPE result = op_dest->val - op_src->val;
+        cpu.eflags.CF=result>op_dest->val;
 	OPERAND_W(op_dest, result);
 
 	/* TODO: Update EFLAGS. */
-	DATA_TYPE_S index=result;
-        cpu.eflags.CF=result<op_dest->val;
+	DATA_TYPE index=result;
+       // cpu.eflags.CF=result<op_dest->val;
 	cpu.eflags.ZF=(result==0);
 	cpu.eflags.PF=1;
 	while (index)

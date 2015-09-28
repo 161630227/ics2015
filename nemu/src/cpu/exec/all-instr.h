@@ -9,6 +9,7 @@
 #include "arith/imul.h"
 #include "arith/mul.h"
 #include "arith/add.h"
+#include "arith/adc.h"
 #include "arith/idiv.h"
 #include "arith/div.h"
 #include "arith/sub.h"

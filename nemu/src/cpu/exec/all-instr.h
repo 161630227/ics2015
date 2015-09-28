@@ -21,6 +21,7 @@
 #include "logic/and.h"
 #include "logic/or.h"
 #include "logic/setcc/seta.h"
+#include "logic/setcc/setae.h"
 #include "logic/not.h"
 #include "logic/xor.h"
 #include "logic/sar.h"

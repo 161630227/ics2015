@@ -8,6 +8,7 @@
 #include "arith/neg.h"
 #include "arith/imul.h"
 #include "arith/mul.h"
+#include "arith/add.h"
 #include "arith/idiv.h"
 #include "arith/div.h"
 #include "arith/sub.h"

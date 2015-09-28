@@ -24,7 +24,7 @@
 #include "logic/setcc/setae.h"
 #include "logic/setcc/setb.h"
 #include "logic/setcc/setbe.h"
-//#include "logic/setcc/setc.h"
+#include "logic/setcc/setno.h"
 #include "logic/setcc/sete.h"
 #include "logic/setcc/setg.h"
 #include "logic/setcc/setge.h"

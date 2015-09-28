@@ -4,7 +4,7 @@
 #define instr test
 
 static void do_execute () {
-	DATA_TYPE_S index = op_dest->val & op_src->val;
+	DATA_TYPE index = op_dest->val & op_src->val;
 //	OPERAND_W(op_dest, result);
 
 	/* TODO: Update EFLAGS. */

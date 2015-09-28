@@ -12,7 +12,7 @@ static void do_execute () {
         cpu.eflags.CF=0;
 	cpu.eflags.ZF=(index==0);
 	cpu.eflags.PF=1;
-	printf("ss1\n");
+	//printf("ss1\n");
 	while (index)
        {
 	       if(index&0x1) cpu.eflags.PF=!cpu.eflags.PF;
@@ -21,7 +21,6 @@ static void do_execute () {
         //cpu.eflags.AF=(result^(op_dest->val))>>4;
         cpu.eflags.SF=index<0;
         cpu.eflags.OF=0;
-	panic("please implement me");
         printf("%d\n",cpu.eflags.value);
 	print_asm_template2();
 }

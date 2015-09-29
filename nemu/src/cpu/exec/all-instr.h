@@ -18,7 +18,7 @@
 #include "arith/sub.h"
 #include "arith/cmp.h"
 #include "arith/call.h"
-#include "control/je.h"
+#include "control/jcc.h"
 #include "control/push.h"
 #include "logic/and.h"
 #include "logic/or.h"

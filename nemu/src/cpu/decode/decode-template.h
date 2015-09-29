@@ -7,7 +7,7 @@
 #define decode_i concat(decode_i_, SUFFIX)
 #define decode_a concat(decode_a_, SUFFIX)
 #define decode_r2rm concat(decode_r2rm_, SUFFIX)
-
+//#define decode_rm2rm concat(decode_rm2rm_,SUFFIX)
 /* Ib, Iv */
 make_helper(concat(decode_i_, SUFFIX)) {
 	/* eip here is pointing to the immediate */
@@ -88,11 +88,14 @@ make_helper(concat(decode_r2rm_, SUFFIX)) {
 /* Gb <- Eb
  * Gv <- Ev
  */
+/*make_helper(concat(decode_rm2rm_,SUFFIX)){
+	int len= decode_rm_internal(eip,op_dest,op_src);
+             len+=decode_rm_intermal(eip,op_src,op_dest);
+	     return len;
+	   }*/
 make_helper(concat(decode_rm2r_, SUFFIX)) {
 	return decode_rm_internal(eip, op_src, op_dest);
 }
-
-
 /* AL <- Ib
  * eAX <- Iv
  */

@@ -9,6 +9,8 @@
 make_helper(concat(movsx_rmb2r_, SUFFIX)) {
    //	swaddr_t addr = instr_fetch(eip + 1, 4);
     //	MEM_W(addr, REG(R_EAX));
+	DATA_TYPE index=op_src->val;
+	OPERAND_W(op_dest,index);
 //	print_asm("mov" str(SUFFIX) " %%%s,0x%x", REG_NAME(R_EAX), addr);
 	return 5;
 }

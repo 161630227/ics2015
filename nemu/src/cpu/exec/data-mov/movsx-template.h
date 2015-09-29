@@ -11,15 +11,16 @@ make_helper(concat(movsx_rmb2r_, SUFFIX)) {
     //	MEM_W(addr, REG(R_EAX));
 	DATA_TYPE index=op_src->val;
 	OPERAND_W(op_dest,index);
-//	print_asm("mov" str(SUFFIX) " %%%s,0x%x", REG_NAME(R_EAX), addr);
+        print_asm_template2();
+	return (3+DATA_BYTE);
+}
+
+make_helper(concat(movsx_rmw2r_, SUFFIX)) {
+//	swaddr_t addr = instr_fetch(eip + 1, 4);
+	DATA_TYPE index=op_src->val;
+	OPERAND_W(op_dest,index);
+        print_asm_template2();
 	return 5;
 }
 
-/*make_helper(concat(mov_moffs2a_, SUFFIX)) {
-	swaddr_t addr = instr_fetch(eip + 1, 4);
-	REG(R_EAX) = MEM_R(addr);
-	print_asm("mov" str(SUFFIX) " 0x%x,%%%s", addr, REG_NAME(R_EAX));
-	return 5;
-}
-*/
 #include "cpu/exec/template-end.h"

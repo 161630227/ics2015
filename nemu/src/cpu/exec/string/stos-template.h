@@ -17,6 +17,21 @@ make_helper(concat(stos_, SUFFIX)) {
            if(cpu.eflags.DF==0) cpu.edi++;
             else cpu.edi--;	   
 	}
+	else if (DATA_BYTE==2)
+	{
+		DATA_TYPE index=cpu.eax&0xFFFF;
+		MEM_W(cpu.edi,index);
+          if (cpu.eflags.DF==0) cpu.edi+=2;
+	  else cpu.edi-=2;
+	 }
+        else
+	{
+		DATA_TYPE index=cpu.eax;
+		MEM_W(cpu.edi,index);
+		if (cpu.eflags.DF==0) cpu.edi+=4;
+		else cpu.edi-=4;
+	}
+	
 
         print_asm_template2();
 	return 1;

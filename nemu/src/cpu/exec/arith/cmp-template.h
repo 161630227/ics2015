@@ -4,12 +4,12 @@
 
 #define instr cmp
 static void do_execute(){
-	DATA_TYPE_S result = op_dest->val - op_src->val;
+	DATA_TYPE result = op_dest->val - op_src->val;
 	
 
 	/* TODO: Update EFLAGS. */
         DATA_TYPE_S index=result;
-        cpu.eflags.CF=result<op_dest->val;
+        cpu.eflags.CF=op_dest->val<op_src->val;
 	cpu.eflags.ZF=(result==0);
 	cpu.eflags.PF=1;
 	while (index)
@@ -20,6 +20,7 @@ static void do_execute(){
         cpu.eflags.AF=(result^(op_dest->val))>>4;
         cpu.eflags.SF=result<0;
         cpu.eflags.OF=(((op_src->val<0)!=(op_dest->val<0))&&((op_dest->val<0)!=(result<0)));
+	cpu.eflags.OF = (MSB(op_src->val)!=MSB(op_dest->val)&&(MSB(op_dest->val!=MSB(result))));
 print_asm_template2();
 }
 make_instr_helper(i2rm)

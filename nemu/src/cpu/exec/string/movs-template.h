@@ -2,17 +2,10 @@
 #include "cpu/exec/template-start.h"
 
 #define instr movs
-
-/*static void do_execute() {
-	OPERAND_W(op_dest, op_src->val);
-	print_asm_template2();
-}*/
 make_helper(concat(movb_, SUFFIX)) {
-   //	swaddr_t addr = instr_fetch(eip + 1, 4);
-    //	MEM_W(addr, REG(R_EAX));
-	DATA_TYPE index=op_src->val;
+	DATA_TYPE index=MEM_R(cpu.esi);
 	int incdec;
-	OPERAND_W(op_dest,index);
+	MEM_W(cpu.edi,index);
 	if(cpu.eflags.DF==0)incdec=1;
 	else incdec=-1;	
 	cpu.esi+=incdec;
@@ -23,9 +16,9 @@ make_helper(concat(movb_, SUFFIX)) {
 
 make_helper(concat(movv_, SUFFIX)) {
 //	swaddr_t addr = instr_fetch(eip + 1, 4);
-	DATA_TYPE index=op_src->val;
+	DATA_TYPE index=MEM_R(cpu.esi);
+	MEM_W(cpu.edi,index);
 	int incdec;
-	OPERAND_W(op_dest,index);
 	if (cpu.eflags.DF==0&&DATA_BYTE==1) incdec=2;
 	else if(cpu.eflags.DF==0&&DATA_BYTE==2)incdec=4;
 	else if (cpu.eflags.DF==1&&DATA_BYTE==1)incdec=-2;

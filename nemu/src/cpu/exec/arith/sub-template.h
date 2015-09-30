@@ -4,7 +4,7 @@
 #define instr sub
 static void do_execute(){
 	DATA_TYPE result = op_dest->val - op_src->val;
-        cpu.eflags.CF=result>op_dest->val;
+        cpu.eflags.CF=op_dest->val<op_src->val;
 	OPERAND_W(op_dest, result);
 
 	/* TODO: Update EFLAGS. */

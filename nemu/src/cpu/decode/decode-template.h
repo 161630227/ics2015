@@ -7,7 +7,7 @@
 #define decode_i concat(decode_i_, SUFFIX)
 #define decode_a concat(decode_a_, SUFFIX)
 #define decode_r2rm concat(decode_r2rm_, SUFFIX)
-//#define decode_rm2rm concat(decode_rm2rm_,SUFFIX)
+//#define decode_null concat(decode_null_,SUFFIX)
 /* Ib, Iv */
 make_helper(concat(decode_i_, SUFFIX)) {
 	/* eip here is pointing to the immediate */

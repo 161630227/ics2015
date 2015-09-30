@@ -1,0 +1,20 @@
+
+#include "cpu/exec/helper.h"
+
+#define DATA_BYTE 1
+#include "cmps-template.h"
+#undef DATA_BYTE
+
+#define DATA_BYTE 2
+#include "cmps-template.h"
+#undef DATA_BYTE
+
+#define DATA_BYTE 4
+#include "cmps-template.h"
+#undef DATA_BYTE
+
+/* for instruction encoding overloading */
+
+make_helper_v(cmps);
+//make_helper_v(movv);
+//make_helper_v(mov_moffs2a)

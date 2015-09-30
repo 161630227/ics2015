@@ -69,9 +69,15 @@ static int cmd_info(char * args){
            for (i=R_EAX;i<=R_EDI;i++)
           {
            printf("%s    %x\n",regsl[i],cpu.gpr[i]._32);
-           printf("eflags.cf=  %d\n",cpu.eflags.CF);
+          
 	   //printf("%s\n",*(regsl+i-1));
 	 }
+	  printf("eflags.cf=  %d\n",cpu.eflags.CF);   
+	  printf("eflags.pf=  %d\n",cpu.eflags.PF); 
+	  printf("eflags.df=  %d\n",cpu.eflags.DF);  
+	  printf("eflags.sf=  %d\n",cpu.eflags.SF);
+          printf("eflags.if=  %d\n",cpu.eflags.IF);	  
+	  printf("eflags.zf=  %d\n",cpu.eflags.ZF);
       }
       else if(!strcmp(args,"w"))
        {

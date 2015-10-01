@@ -9,13 +9,13 @@ static void do_execute () {
 	cpu.eflags.CF=0;
 	cpu.eflags.ZF=(result==0);
 	cpu.eflags.PF=1;
-	DATA_TYPE index=result;
+	DATA_TYPE_S index=result;
+        cpu.eflags.SF=index<0;
 	while (index)
        {
 	       if(index&0x1) cpu.eflags.PF=!cpu.eflags.PF;
 	       index&=(index-1);
         }
-        cpu.eflags.SF=result<0;
 
 	print_asm_template2();
 }

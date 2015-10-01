@@ -15,7 +15,7 @@ make_helper(concat(leave_, SUFFIX))
         }
        else if(DATA_BYTE==2)
        {	
-	//  regsl[R_BP]=MEM_R(cpu.esp);
+	  cpu.ebp=MEM_R(cpu.esp);
           cpu.esp+=2; 
        	  print_asm_template1();
        }   

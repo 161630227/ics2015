@@ -8,10 +8,8 @@ make_helper(concat(concat(concat(j, CC), _), SUFFIX)) {
   #if DATA_BYTE == 2
      eip_temp &= 0xffff;
   #endif
- if (COND) {
-									cpu.eip = eip_temp;
-										}
-#if DATA_BYTE == 1
+
+ #if DATA_BYTE == 1
  print_asm("j" str(CC) " %x", eip_temp + 1 + DATA_BYTE);
 #else
  print_asm("j" str(CC) " %x", eip_temp + 2 + DATA_BYTE);

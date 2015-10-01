@@ -10,11 +10,25 @@ make_helper(concat(jmp_rel_,SUFFIX))
 }
 make_helper(concat(jmp_rm_,SUFFIX))
 {
-	DATA_TYPE index=instr_fetch(eip+1,DATA_BYTE);
+
+	DATA_TYPE_S index=instr_fetch(eip+1,DATA_BYTE);
+        DATA_TYPE addr=index;
 	if(DATA_BYTE==2)
+    {
+	if(addr>0x1500)
 	cpu.eip=MEM_R(index)&0x0000ffff;
 	else
-	cpu.eip=MEM_R(index);
+	{ 
+	  cpu.eip+=MEM_R(index);
+	  cpu.eip&=0x0000ffff;
+	 }
+   }
+	else
+	{
+	 if(addr>0x1500)
+		 cpu.eip=MEM_R(index);
+          else cpu.eip+=MEM_R(index);
+	 }
 	return 1+DATA_BYTE;
 }
 #include "cpu/exec/template-end.h"

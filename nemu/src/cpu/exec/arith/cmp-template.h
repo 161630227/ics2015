@@ -13,13 +13,13 @@ static void do_execute(){
         cpu.eflags.CF=op_dest->val<op_src->val;
 	cpu.eflags.ZF=(result==0);
 	cpu.eflags.PF=1;
+        cpu.eflags.SF=index<0;
 	while (index)
        {
 	       if(index&0x1) cpu.eflags.PF=!cpu.eflags.PF;
 	       index&=(index-1);
         }
         cpu.eflags.AF=(result^(op_dest->val))>>4;
-        cpu.eflags.SF=index<0;
 //        cpu.eflags.OF=(((op_src->val<0)!=(op_dest->val<0))&&((op_dest->val<0)!=(result<0)));
 	cpu.eflags.OF = (MSB(op_src->val)!=MSB(op_dest->val)&&(MSB(op_dest->val!=MSB(result))));
 print_asm_template2();

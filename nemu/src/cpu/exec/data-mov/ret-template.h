@@ -12,7 +12,7 @@ make_helper(concat(retnear_, SUFFIX))
 	   cpu.esp+=4;
 //	   print_asm_template1();
 	   print_asm("ret");
-	   return 1+DATA_BYTE;
+	   return 1;
 }
 
 #include "cpu/exec/template-end.h"

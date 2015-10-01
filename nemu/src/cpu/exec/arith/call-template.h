@@ -12,6 +12,7 @@ printf("%x\n",addr);
 	   cpu.esp-=DATA_BYTE;
 	   MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
 	   cpu.eip+=op_src->val;
+printf("%x\n",op_src->val);
 	   print_asm_template1();
            return 1+DATA_BYTE;
 }

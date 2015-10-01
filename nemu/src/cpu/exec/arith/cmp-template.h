@@ -9,12 +9,10 @@ static void do_execute(){
 
 	/* TODO: Update EFLAGS. */
         DATA_TYPE_S index=result;
-	printf("%d\n",index);
         cpu.eflags.CF=op_dest->val<op_src->val;
 	cpu.eflags.ZF=(result==0);
 	cpu.eflags.PF=1;
         cpu.eflags.SF=MSB(result);//index<0;
-	printf("%x  %x %x\n",MSB(op_dest->val),MSB(op_src->val), MSB(result));
 	while (index)
        {
 	       if(index&0x1) cpu.eflags.PF=!cpu.eflags.PF;

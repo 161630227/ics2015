@@ -52,7 +52,7 @@ static int cmd_p(char *args)
       
        int32_t rst=expr(args,&k);
       
-       printf("%d",rst);
+       printf("%x",rst);
 /*
      if(!k)  
    {

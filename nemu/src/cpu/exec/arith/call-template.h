@@ -7,7 +7,8 @@ make_helper(concat(call_rel32_, SUFFIX))
 {
 	 
 	   
-//	   swaddr_t addr=instr_fetch(eip+1,DATA_BYTE);
+	   swaddr_t addr=instr_fetch(eip+1,DATA_BYTE);
+printf("%x\n",addr);
 	   cpu.esp-=DATA_BYTE;
 	   MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
 	   cpu.eip+=op_src->val;

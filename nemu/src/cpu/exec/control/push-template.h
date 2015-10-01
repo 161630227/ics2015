@@ -10,8 +10,8 @@ static void do_execute() {
 		cpu.esp=cpu.esp-4;
 		if (DATA_BYTE!=1)
 		swaddr_write(cpu.esp,4,op_src->val);
-	           print_asm("push");				
-	//	print_asm_template1();
+	          			
+		print_asm_template1();
 }
 make_instr_helper(r)
 make_instr_helper(rm)

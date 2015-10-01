@@ -4,7 +4,8 @@
 
 make_helper(concat(jmp_rel_,SUFFIX))
 {
-   DATA_TYPE_S addr=instr_fetch(eip+1,DATA_BYTE); 
+	printf("***\n");
+     	DATA_TYPE_S addr=instr_fetch(eip+1,DATA_BYTE); 
    cpu.eip+=addr;
    print_asm("jmp"  " $0x%x", cpu.eip+DATA_BYTE+1);
     return 1+DATA_BYTE;

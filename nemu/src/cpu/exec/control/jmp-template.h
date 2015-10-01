@@ -1,17 +1,9 @@
 #include "cpu/exec/helper.h"
 #include "cpu/exec/template-start.h"
 #include "cpu/decode/modrm.h"
-
-make_helper(concat(jmp_rel_,SUFFIX))
-{
-     	DATA_TYPE_S addr=instr_fetch(eip+1,DATA_BYTE); 
-   cpu.eip+=addr;
-   print_asm("jmp"  " $0x%x", cpu.eip+DATA_BYTE+1);
-    return 1+DATA_BYTE;
-}
-make_helper(concat(jmp_rm_,SUFFIX))
-{
-	DATA_TYPE_S index=instr_fetch(eip+1,DATA_BYTE);
+#define instr jmp
+static void do_execute() {
+	DATA_TYPE_S index=op_dest->val;
         DATA_TYPE addr=index;
 	if(DATA_BYTE==2)
     {
@@ -30,7 +22,17 @@ make_helper(concat(jmp_rm_,SUFFIX))
           else cpu.eip+=index;
 	printf("%x\n",index);	
        	}
-	return 1+DATA_BYTE;
+	print_asm_template1();
+}
+
+make_instr_helper(rm);
+
+make_helper(concat(jmp_rel_,SUFFIX))
+{
+     	DATA_TYPE_S addr=instr_fetch(eip+1,DATA_BYTE); 
+   cpu.eip+=addr;
+   print_asm("jmp"  " $0x%x", cpu.eip+DATA_BYTE+1);
+    return 1+DATA_BYTE;
 }
 #include "cpu/exec/template-end.h"
 

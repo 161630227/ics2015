@@ -1,12 +1,14 @@
  #define DATA_BYTE 4
- #undef DATA_BYTE
 #include "cpu/exec/helper.h"
 #include "cpu/reg.h"
- make_helper(leave)
+#include "cpu/exec/template-start.h" 
+make_helper(leave)
 {
 //OPERAND_W(cpu.esp, reg_l[R_EBP]);
  cpu.esp= cpu.ebp;
- cpu.ebp=cpu.esp;
- cpu.esp=cpu.esp+4;
+ cpu.ebp=MEM_R(cpu.esp);
+ cpu.esp=cpu.esp+DATA_BYTE;
 return 1;
 }
+#undef DATA_BYTE
+#include "cpu/exec/template-end.h"

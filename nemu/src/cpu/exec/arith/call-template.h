@@ -3,17 +3,6 @@
 #include "cpu/reg.h"
 
 #define instr call
-
-/*#if DATA_BYTE == 2 || DATA_BYTE == 4
-static void do_execute() {
-		cpu.esp=cpu.esp-4;
-		swaddr_write(cpu.esp+1,4,cpu.eip);
-		cpu.eip+=op_src->val;
-
-					
-		print_asm_template1();
-}
-*/
 make_helper(concat(call_rel32_, SUFFIX))
 {
 	 

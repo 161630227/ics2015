@@ -26,6 +26,7 @@
 #include "control/push.h"
 #include "control/jmp.h"
 #include "logic/and.h"
+#include "logic/sar.h"
 #include "logic/or.h"
 #include "logic/setcc/seta.h"
 #include "logic/setcc/setae.h"

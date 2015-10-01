@@ -29,6 +29,7 @@ make_helper(concat(imul_rm2r_, SUFFIX)) {
 	return len + 1;
 }
 
+make_instr_helper(rm)
 make_instr_helper(si_rm2r)
 make_instr_helper(i_rm2r)
 #endif

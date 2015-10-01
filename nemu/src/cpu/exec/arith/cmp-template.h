@@ -13,7 +13,7 @@ static void do_execute(){
         cpu.eflags.CF=op_dest->val<op_src->val;
 	cpu.eflags.ZF=(result==0);
 	cpu.eflags.PF=1;
-        cpu.eflags.SF=index<0;
+        cpu.eflags.SF=MSB(result);//index<0;
 	while (index)
        {
 	       if(index&0x1) cpu.eflags.PF=!cpu.eflags.PF;

@@ -41,7 +41,7 @@
 #undef CC
 
 #define CC g
-#define COND FLAG(ZF) &&( FLAG(OF)==FLAG(SF))
+#define COND (!FLAG(ZF)) &&( FLAG(OF)==FLAG(SF))
 #include "jcc-template.h"
 #undef COND
 #undef CC

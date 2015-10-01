@@ -77,6 +77,7 @@ static int cmd_info(char * args){
 	  printf("eflags.df=  %d\n",cpu.eflags.DF);  
 	  printf("eflags.sf=  %d\n",cpu.eflags.SF);
           printf("eflags.if=  %d\n",cpu.eflags.IF);	  
+          printf("eflags.of=  %d\n",cpu.eflags.OF);
 	  printf("eflags.zf=  %d\n",cpu.eflags.ZF);
       }
       else if(!strcmp(args,"w"))

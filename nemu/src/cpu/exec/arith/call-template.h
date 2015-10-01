@@ -12,6 +12,7 @@ make_helper(concat(call_rel32_, SUFFIX))
 	   cpu.esp-=DATA_BYTE;
 	   MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
 	   cpu.eip+=addr;
+printf("%x\n",cpu.eip);
 //printf("%x\n",op_src->val);
 	   print_asm_template1();
            return 1+DATA_BYTE;

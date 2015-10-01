@@ -4,7 +4,7 @@
 
 static void do_execute() {
 	OPERAND_W(op_dest, op_src->val);
-        printf("hhhh\n");
+     //   printf("hhhh\n");
 	print_asm_template2();
 }
 

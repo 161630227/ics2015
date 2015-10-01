@@ -12,12 +12,13 @@ static void do_execute () {
 	cpu.eflags.PF=1;
 	DATA_TYPE_S index=result;
         cpu.eflags.SF=index<0;
-       printf("jeremy");
+ //       printf("jeremy");
 	while (index)
        {
 	       if(index&0x1) cpu.eflags.PF=!cpu.eflags.PF;
 	       index&=(index-1);
         }
+	 print_asm_template2();
 }
 
 make_instr_helper(i2a)

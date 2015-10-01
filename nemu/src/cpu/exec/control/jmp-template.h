@@ -4,7 +4,8 @@
 
 make_helper(concat(jmp_rel_,SUFFIX))
 {
-   cpu.eip+=instr_fetch(eip+1,DATA_BYTE); 
+   DATA_TYPE_S addr=instr_fetch(eip+1,DATA_BYTE); 
+   cpu.eip+=addr;
    print_asm("jmp"  " $0x%x", cpu.eip+DATA_BYTE+1);
     return 1+DATA_BYTE;
 }
@@ -15,7 +16,7 @@ make_helper(concat(jmp_rm_,SUFFIX))
         DATA_TYPE addr=index;
 	if(DATA_BYTE==2)
     {
-	if(addr>0x1500)
+	if(addr>0x100000)
 	cpu.eip=MEM_R(index)&0x0000ffff;
 	else
 	{ 

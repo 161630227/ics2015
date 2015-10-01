@@ -6,9 +6,11 @@ make_helper(concat(concat(concat(j, CC), _), SUFFIX)) {
  swaddr_t eip_temp = cpu.eip;
  eip_temp += (int32_t)offset;
   #if DATA_BYTE == 2
-     eip_temp &= 0xffff;
+     eip_temp &= 0x0000ffff;
   #endif
-
+if (COND) {
+			cpu.eip = eip_temp;
+				}
  #if DATA_BYTE == 1
  print_asm("j" str(CC) " %x", eip_temp + 1 + DATA_BYTE);
 #else

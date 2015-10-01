@@ -14,7 +14,7 @@ make_helper(concat(call_rel32_, SUFFIX))
 	   cpu.eip+=addr;
 	   if (DATA_BYTE==2)
 		   cpu.eip&=0xffff;
-printf("%x\n",cpu.eip);
+//printf("%x\n",cpu.eip);
 //printf("%x\n",op_src->val);
 	   print_asm_template1();
            return 1+DATA_BYTE;

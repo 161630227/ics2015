@@ -7,8 +7,8 @@
 make_helper(concat(retnear_, SUFFIX))
 {
 	   cpu.eip=MEM_R(cpu.esp);
-	   cpu.esp+=DATA_BYTE;
-
+//	   cpu.esp+=DATA_BYTE;
+	   cpu.esp+=4;
 //	   print_asm_template1();
 	   print_asm("ret");
 	   return 1+DATA_BYTE;

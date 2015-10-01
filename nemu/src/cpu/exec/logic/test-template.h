@@ -21,7 +21,6 @@ static void do_execute () {
         }
         //cpu.eflags.AF=(result^(op_dest->val))>>4;
         cpu.eflags.OF=0;
-        printf("%d\n",cpu.eflags.value);
 	print_asm_template2();
 }
 

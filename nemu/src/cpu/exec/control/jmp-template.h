@@ -29,8 +29,8 @@ make_helper(concat(jmp_rm_,SUFFIX))
 	{
 	printf("*\n");
 	 if(addr>0x1500)
-		 cpu.eip=MEM_R(index);
-          else cpu.eip+=MEM_R(index);
+		 cpu.eip=index;
+          else cpu.eip+=index;
 	 }
 	return 1+DATA_BYTE;
 }

@@ -166,7 +166,7 @@
 #undef CC
 
 #define CC le
-#define COND FLAG(ZF)&&(FLAG(SF)!=FLAG(OF))
+#define COND FLAG(ZF)||(FLAG(SF)!=FLAG(OF))
 #include "jcc-template.h"
 #undef COND
 #undef CC
@@ -278,7 +278,7 @@
 #undef CC
 
 #define CC le
-#define COND FLAG(ZF)&&(FLAG(SF)!=FLAG(OF))
+#define COND FLAG(ZF)||(FLAG(SF)!=FLAG(OF))
 #include "jcc-template.h"
 #undef COND
 #undef CC

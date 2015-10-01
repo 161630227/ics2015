@@ -6,7 +6,8 @@
 #define instr ret
 make_helper(concat(retnear_, SUFFIX))
 {
-	   cpu.eip=MEM_R(cpu.esp);
+//	   cpu.eip=MEM_R(cpu.esp);
+	   cpu.eip=swaddr_read(cpu.esp,4);
 //	   cpu.esp+=DATA_BYTE;
 	   cpu.esp+=4;
 //	   print_asm_template1();

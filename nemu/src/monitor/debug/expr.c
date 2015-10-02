@@ -128,8 +128,8 @@ static int make_token(char *e) {
 					case REG:
 						tokens[nr_token].type=REG;
                                                 int k1=0;
-						for ( k1=0;k1<substr_len;++k1)
-		                                tokens[nr_token].str[k1]=e[position-substr_len+k1];
+						for ( k1=0;k1<substr_len-1;++k1)
+		                                tokens[nr_token].str[k1]=e[position-substr_len+k1+1];
 						nr_token++;
 						break;
 					case YU:tokens[nr_token++].type=YU;

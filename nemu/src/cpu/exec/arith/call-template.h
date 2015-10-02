@@ -14,7 +14,7 @@ make_helper(concat(call_rel32_, SUFFIX))
 //	   cpu.eip+=op_src->val;
 	   cpu.eip+=addr;
 	   if (DATA_BYTE==2)
-	         cpu.eip&=0xffff;
+	         cpu.eip&=0x0000ffff;
 	   print_asm_template1();
            return 1+DATA_BYTE;
 }

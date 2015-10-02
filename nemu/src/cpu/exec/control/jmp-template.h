@@ -19,7 +19,7 @@ static void do_execute() {
 	else
 	{
 	 if(addr>0x1500)
-		 cpu.eip=index;
+		 cpu.eip=index - 2;
           else cpu.eip+=index;
 	printf("%x\n",index);	
        	}

@@ -9,13 +9,13 @@ make_helper(concat(call_rel32_, SUFFIX))
 	   
 	   swaddr_t addr=instr_fetch(eip+1,DATA_BYTE);
 	   cpu.esp-=DATA_BYTE;
-	   MEM_W(cpu.esp,cpu.eip+DATA_BYTE+1);
+	   MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
 //	   cpu.eip+=op_src->val;
 	   cpu.eip+=addr;
 	   if (DATA_BYTE==2)
 	         cpu.eip&=0xffff;
 	   print_asm_template1();
-           return 1+DATA_BYTE;
+           return 1;
 }
 static void do_execute() {
                DATA_TYPE_S addr=op_dest->val;

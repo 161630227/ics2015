@@ -19,8 +19,8 @@ static void do_execute() {
 	else
 	{
 	 if(addr>0x1500)
-		 cpu.eip=index - 2;
-          else cpu.eip+=index;
+		 cpu.eip=MEM_R(index) - 2;
+          else cpu.eip+=MEM_R(index);
 	printf("%x\n",index);	
        	}
 	print_asm_template1();

@@ -16,5 +16,5 @@
 
 make_helper_v(movzx_rmb2r)
 make_helper(movzx_rmw2r_l){
-	return idex(cpu.eip,decode_rm2r_w,do_movzx_l);
+	return idex(eip,decode_rm2r_w,do_movzx_l);
 }

@@ -323,7 +323,7 @@ int eval(int p,int q)
                                         else sum1+=tokens[p].str[i]-'0';
                                 }
 	                        //  printf("sum1=  %d\n",sum1);
-	  
+	                       printf("sum= %x\n",sum1);
 	                        sum=swaddr_read(sum1,1);
                
 	                }

@@ -336,7 +336,7 @@ int eval(int p,int q)
 		  
 				  if(strcmp(tokens[p].str,regsl[k]))
 		                  {
-                                         printf("%s\n",tokens[p].str);
+                                         printf("%s  %d\n",tokens[p].str,k);
 			                  sum=reg_l(k);
 					  //sum=cpu.gpr[k]._32;
 					  printf("sum=  %d\n",sum);

@@ -10,7 +10,6 @@ make_helper(concat(call_rel32_, SUFFIX))
 	printf("HHHH\n");
 	   swaddr_t addr=instr_fetch(eip+1,DATA_BYTE);
 	   cpu.esp-=DATA_BYTE;
-	   printf("%x\n",cpu.eip);
 	   MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
 //	   cpu.eip+=op_src->val;
 	   cpu.eip+=addr;

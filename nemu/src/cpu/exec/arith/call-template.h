@@ -7,6 +7,7 @@ make_helper(concat(call_rel32_, SUFFIX))
 {
 	 
 	   
+	printf("HHHH\n");
 	   swaddr_t addr=instr_fetch(eip+1,DATA_BYTE);
 	   cpu.esp-=DATA_BYTE;
 	   MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
@@ -15,7 +16,7 @@ make_helper(concat(call_rel32_, SUFFIX))
 	   if (DATA_BYTE==2)
 	         cpu.eip&=0xffff;
 	   print_asm_template1();
-           return 1;
+           return 1+DATA_BYTE;
 }
 static void do_execute() {
                DATA_TYPE_S addr=op_dest->val;

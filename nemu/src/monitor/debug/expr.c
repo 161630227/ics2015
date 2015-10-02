@@ -333,13 +333,13 @@ int eval(int p,int q)
 		
 			  for (k=R_EAX;k<=R_EDI;k++)
 	      	          {
-		                  printf("regsl[k]=  %s  %d\n ",tokens[p].str,k);
+		                 // printf("regsl[k]=  %s  %d\n ",tokens[p].str,k);
 				  if(!strcmp(tokens[p].str,regsl[k]))
 		                  {
-                                         printf("%s  %d\n",tokens[p].str,k);
+                                    //     printf("%s  %d\n",tokens[p].str,k);
 			                  sum=reg_l(k);
 					  //sum=cpu.gpr[k]._32;
-					  printf("sum=  %d\n",sum);
+				//	  printf("sum=  %d\n",sum);
 			                  break;
 	                           }		  
                            } 

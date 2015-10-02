@@ -16,4 +16,4 @@
 /* for instruction encoding overloading */
 
 make_helper_v(call_rel32);
-make_helper_v(call_rm32);
+make_helper_v(call_rm);

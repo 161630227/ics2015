@@ -353,7 +353,7 @@ int eval(int p,int q)
            {
           
 		   int sum7=0;
-	           int k2;
+	           /*int k2;
 	           for (k2=2;k2<strlen(tokens[q].str);++k2)
 	           {
 		   
@@ -363,7 +363,13 @@ int eval(int p,int q)
 		      //      return swaddr_read(sum7,1);
                     }
 		   return swaddr_read(sum7,1);
-	   } 
+	           */
+		  sum7=eval(p+1,q);
+	          printf("*  %x\n",sum7);
+		  return (swaddr_read(sum7,4));
+
+	 } 
+
           
           else
           {

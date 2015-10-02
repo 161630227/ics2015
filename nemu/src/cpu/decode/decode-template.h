@@ -7,6 +7,8 @@
 #define decode_i concat(decode_i_, SUFFIX)
 #define decode_a concat(decode_a_, SUFFIX)
 #define decode_r2rm concat(decode_r2rm_, SUFFIX)
+#define decode_rm_b2r concat(decode_rm_b2r_,SUFFIX)
+#define decode_rm_w2r concat(decode_rm_w2r_,SUFFIX)
 //#define decode_null concat(decode_null_,SUFFIX)
 /* Ib, Iv */
 make_helper(concat(decode_i_, SUFFIX)) {
@@ -98,7 +100,33 @@ make_helper(concat(decode_rm2r_, SUFFIX)) {
 }
 /* AL <- Ib
  * eAX <- Iv
- */
+ 
+*/
+make_helper(concat(decode_rm_b2r_, SUFFIX)) {
+ Operand *rm = op_src;
+ Operand *reg = op_dest;
+ rm->size = 1;
+ int len = read_ModR_M(eip, rm, reg);
+ reg->val = REG(reg->reg);
+
+#ifdef DEBUG
+ snprintf(reg->str, OP_STR_SIZE, "%%%s", REG_NAME(reg->reg));
+#endif
+ return len;
+}
+
+make_helper(concat(decode_rm_w2r_, SUFFIX)) {
+ Operand *rm = op_src;
+ Operand *reg = op_dest;
+ rm->size = 2;
+ int len = read_ModR_M(eip, rm, reg);
+ reg->val = REG(reg->reg);
+
+#ifdef DEBUG
+snprintf(reg->str, OP_STR_SIZE, "%%%s", REG_NAME(reg->reg));
+#endif
+return len;
+}
 make_helper(concat(decode_i2a_, SUFFIX)) {
 	decode_a(eip, op_dest);
 	return decode_i(eip);

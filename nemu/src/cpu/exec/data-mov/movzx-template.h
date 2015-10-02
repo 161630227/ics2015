@@ -10,6 +10,7 @@ static void do_execute(){
 	OPERAND_W(op_dest,index);
 }
 make_helper(concat(movzx_rmb2r_,SUFFIX)){
+       printf("***\n");
 	return idex(cpu.eip,decode_rm2r_b,concat(do_movzx_,SUFFIX));
 }
 #include "cpu/exec/template-end.h"

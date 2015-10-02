@@ -1,26 +1,17 @@
 #include "cpu/exec/template-start.h"
 
+//#include "cpu/decode/modrm.h"
 #define instr movsx
-
-/*static void do_execute() {
-	OPERAND_W(op_dest, op_src->val);
-	print_asm_template2();
-}*/
-make_helper(concat(movsx_rmb2r_, SUFFIX)) {
-   //	swaddr_t addr = instr_fetch(eip + 1, 4);
-    //	MEM_W(addr, REG(R_EAX));
-	DATA_TYPE index=op_src->val;
+static void do_execute(){
+	DATA_TYPE_S index=op_src->val;
+	index=(index<<(DATA_BYTE*8-8)>>(DATA_BYTE*8-8));
 	OPERAND_W(op_dest,index);
-        print_asm_template2();
-	return (3+DATA_BYTE);
 }
-
-make_helper(concat(movsx_rmw2r_, SUFFIX)) {
-//	swaddr_t addr = instr_fetch(eip + 1, 4);
-	DATA_TYPE index=op_src->val;
-	OPERAND_W(op_dest,index);
-        print_asm_template2();
-	return 5;
+make_helper(concat(movsx_rmb2r_,SUFFIX)){
+	return idex(cpu.eip,decode_rm2r_b,concat(do_movsx_,SUFFIX));
 }
-
 #include "cpu/exec/template-end.h"
+//make_helper(movsx_rmb2r_v);
+//make_helper(movsx_rmw2r_v);
+
+

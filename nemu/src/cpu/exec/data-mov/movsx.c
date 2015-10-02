@@ -15,5 +15,6 @@
 /* for instruction encoding overloading */
 
 make_helper_v(movsx_rmb2r)
-make_helper_v(movsx_rmw2r)
-//make_helper_v(mov_moffs2a)
+make_helper(movsx_rmw2r_l){
+	return idex(cpu.eip,decode_rm2r_w,do_movsx_l);
+}

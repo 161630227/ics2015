@@ -72,6 +72,7 @@ static int cmd_info(char * args){
           
 	   //printf("%s\n",*(regsl+i-1));
 	 }
+	  printf("cpu.eip=    %x\n",cpu.eip);
 	  printf("eflags.cf=  %d\n",cpu.eflags.CF);   
 	  printf("eflags.pf=  %d\n",cpu.eflags.PF); 
 	  printf("eflags.df=  %d\n",cpu.eflags.DF);  

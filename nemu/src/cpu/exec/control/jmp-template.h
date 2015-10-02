@@ -5,6 +5,7 @@
 static void do_execute() {
 	DATA_TYPE_S index=op_dest->val;
         DATA_TYPE addr=index;
+	printf("%x\n",index);	
 	if(DATA_BYTE==2)
     {
 	if(addr>0x100000)

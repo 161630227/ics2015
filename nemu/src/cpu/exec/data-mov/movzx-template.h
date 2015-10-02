@@ -11,7 +11,7 @@ static void do_execute(){
 }
 make_helper(concat(movzx_rmb2r_,SUFFIX)){
        printf("***\n");
-	return idex(cpu.eip,decode_rm2r_b,concat(do_movzx_,SUFFIX));
+	return idex(eip,decode_rm2r_b,concat(do_movzx_,SUFFIX));
 }
 #include "cpu/exec/template-end.h"
 //make_helper(movsx_rmb2r_v);

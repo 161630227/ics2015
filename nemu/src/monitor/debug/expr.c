@@ -334,7 +334,7 @@ int eval(int p,int q)
 			  for (k=R_EAX;k<=R_EDI;k++)
 	      	          {
 		  
-				  if(strcmp(tokens[p].str,regsl[k]))
+				  if(!strcmp(tokens[p].str,regsl[k]))
 		                  {
                                          printf("%s  %d\n",tokens[p].str,k);
 			                  sum=reg_l(k);

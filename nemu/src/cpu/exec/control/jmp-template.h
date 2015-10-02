@@ -5,7 +5,6 @@
 static void do_execute() {
 	DATA_TYPE_S index=op_dest->val;
         DATA_TYPE addr=index;
-	printf("%x\n",index);	
 	if(DATA_BYTE==2)
     {
 	if(addr>0x100000)
@@ -21,7 +20,6 @@ static void do_execute() {
 	 if(addr>0x1500)
 		 cpu.eip=MEM_R(index) - 2;
           else cpu.eip+=MEM_R(index);
-	printf("%x\n",index);	
        	}
 	print_asm_template1();
 }

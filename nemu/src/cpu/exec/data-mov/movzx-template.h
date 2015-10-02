@@ -1,29 +1,18 @@
-
 #include "cpu/exec/template-start.h"
 
+//#include "cpu/decode/modrm.h"
 #define instr movzx
-
-static void do_execute() {
-	if(DATA_BYTE==1)
-	{
-		OPERAND_W(op_dest,(op_src->val&0xff));
-	}
-	else if(DATA_BYTE==2)
-	{
-
-	        OPERAND_W(op_dest,(op_src->val&0x00ff));
-        }
-      else
-     	 {     
-	     OPERAND_W(op_dest, op_src->val);
-         }
-	/* There is no need to update EFLAGS, since no other instructions 
-	 * in PA will test the flags updated by this instruction.
-	 */
-
-	print_asm_template2();
+static void do_execute(){
+	DATA_TYPE_S index=op_src->val;
+       if(DATA_BYTE==2)index&=0x00ff;
+       if(DATA_BYTE==4)index&=0x0000ffff;       
+	OPERAND_W(op_dest,index);
 }
-
-make_instr_helper(rm2r)
-
+make_helper(concat(movzx_rmb2r_,SUFFIX)){
+	return idex(cpu.eip,decode_rm2r_b,concat(do_movzx_,SUFFIX));
+}
 #include "cpu/exec/template-end.h"
+//make_helper(movsx_rmb2r_v);
+//make_helper(movsx_rmw2r_v);
+
+

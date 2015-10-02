@@ -5,8 +5,8 @@
 static void do_execute(){
         printf("****");
 	DATA_TYPE index=op_src->val;
-       if(DATA_BYTE==2)index&=0x00ff;
-       if(DATA_BYTE==4)index&=0x0000ffff;       
+     //  if(DATA_BYTE==2)index&=0x00ff;
+      // if(DATA_BYTE==4)index&=0x0000ffff;       
 	OPERAND_W(op_dest,index);
 }
 make_helper(concat(movzx_rmb2r_,SUFFIX)){

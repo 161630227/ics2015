@@ -333,7 +333,7 @@ int eval(int p,int q)
 		
 			  for (k=R_EAX;k<=R_EDI;k++)
 	      	          {
-		                  printf("regsl[k]=  %s  %d\n ",regsl[k],k);
+		                  printf("regsl[k]=  %s  %d\n ",tokens[p].str,k);
 				  if(!strcmp(tokens[p].str,regsl[k]))
 		                  {
                                          printf("%s  %d\n",tokens[p].str,k);

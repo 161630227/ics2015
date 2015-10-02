@@ -3,7 +3,7 @@
 //#include "cpu/decode/modrm.h"
 #define instr movzx
 static void do_execute(){
-        printf("%x\n",op_dest->val);
+        printf("****");
 	DATA_TYPE_S index=op_src->val;
        if(DATA_BYTE==2)index&=0x00ff;
        if(DATA_BYTE==4)index&=0x0000ffff;       

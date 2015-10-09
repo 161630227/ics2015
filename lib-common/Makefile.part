@@ -1,4 +1,4 @@
-AT_OBJ := $(FLOAT:.a=.o)
+FLOAT_OBJ := $(FLOAT:.a=.o)
 FLOAT_SRC := lib-common/FLOAT.c
 FLOAT_DIR := lib-common
 

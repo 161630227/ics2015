@@ -25,7 +25,7 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT F_div_F(FLOAT a, FLOAT b) {
-  unsigned int a,b,i,ans,nb;
+  unsigned int i,ans,nb;
    nb=31; 
   unsigned int  a0=a&0xffff;
    unsigned int  a1=(a>>16);

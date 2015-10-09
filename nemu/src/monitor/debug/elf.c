@@ -91,3 +91,16 @@ int find_var(char *str)
 		}
  	return -1;
 }
+char * find_func(int addr)
+{
+	int ii=0;
+	char *s;
+	for (ii=0;ii<nr_symtab_entry;++ii){
+	if(addr>=symtab[ii].st_value&&addr<symtab[ii].st_value+symtab[ii].st_size)
+	{
+		s=strtab+symtab[ii].st_name;
+		return s;
+	}
+	}
+	return 0;
+}

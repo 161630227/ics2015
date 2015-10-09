@@ -7,6 +7,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include"cpu/reg.h"
+extern char* find_func(int addr);
 void cpu_exec(uint32_t);
 
 /* We use the ``readline'' library to provide more flexibility to read from stdin. */
@@ -61,6 +62,31 @@ static int cmd_p(char *args)
    }
    printf("%d",rst);*/
    return 0 ;
+}
+static int cmd_bt()
+{
+	if(!cpu.eip)
+	{
+		printf("NO STACK\n");
+		return 1;
+	}
+       int ebp_index=cpu.ebp;
+       int addr=cpu.eip;
+      int i=0;
+       while(ebp_index!=0)
+       {
+                char * str=find_func(addr);
+		int x1,x2,x3,x4;
+		x1= swaddr_read(ebp_index + 0x8,4);
+		x2= swaddr_read(ebp_index+0xc, 4);
+		x3=swaddr_read(ebp_index + 0x10, 4);
+	        x4=swaddr_read(ebp_index+ 0x14, 4);
+	        printf("#%d 0x%x in %s(%d, %d, %d, %d)\n", i++, addr, str,x1,x2,x3,x4);	 
+	       addr = swaddr_read(ebp_index + 4, 4);
+	       ebp_index = swaddr_read(ebp_index, 4);
+
+       }
+      return 1;
 }
 static int cmd_info(char * args){
       if(!strcmp(args,"r"))
@@ -181,8 +207,9 @@ static struct {
 	{"x","visit the memory",cmd_x},
         {"p","expr",cmd_p},
 	{"d","delete watchpoint",cmd_d},
-        {"w","watchpoint",cmd_w}
-        /* TODO: Add more commands */
+        {"w","watchpoint",cmd_w},
+        {"bt","stack",cmd_bt}
+ 	/* TODO: Add more commands */
 
 };
 

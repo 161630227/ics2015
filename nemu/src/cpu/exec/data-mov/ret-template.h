@@ -8,7 +8,7 @@ make_helper(concat(retnear_, SUFFIX))
 {
 //	   cpu.eip=MEM_R(cpu.esp);
 	   cpu.eip=swaddr_read(cpu.esp,4);
-	   printf("%x\n",cpu.eip);
+//	   printf("%x\n",cpu.eip);
 //	   cpu.esp+=DATA_BYTE;
 	   cpu.esp+=4;
 //	   print_asm_template1();

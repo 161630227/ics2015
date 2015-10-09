@@ -19,7 +19,7 @@ make_helper(concat(call_rel32_, SUFFIX))
            return 1+DATA_BYTE;
 }
 static void do_execute() {
-               DATA_TYPE_S addr=op_dest->val;
+               DATA_TYPE_S addr=op_src->val;
 //	       DATA_TYPE index=addr;
 	       cpu.esp-=DATA_BYTE;
 	       MEM_W(cpu.esp,cpu.eip+DATA_BYTE);

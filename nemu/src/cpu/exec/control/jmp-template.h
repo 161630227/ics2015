@@ -3,7 +3,7 @@
 #include "cpu/decode/modrm.h"
 #define instr jmp
 static void do_execute() {
-	DATA_TYPE_S index=op_dest->val;
+	DATA_TYPE_S index=op_src->val;
 //        DATA_TYPE addr=index;
 /*	if(DATA_BYTE==2)
     {

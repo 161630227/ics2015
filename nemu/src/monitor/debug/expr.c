@@ -9,11 +9,12 @@
 //#include<ui.h>
 #include<memory.h>
 enum {
-	NOTYPE = 256, EQ,N,W,YU,HUO,REG,NOT,RETEF
+	NOTYPE = 256, EQ,N,W,YU,VAR,HUO,REG,NOT,RETEF
 
 	/* TODO: Add more token types */
 
 };
+extern int find_var(char *str);
 int eval(int p,int q);
 static struct rule {
 	char *regex;
@@ -38,7 +39,8 @@ static struct rule {
 	{"\\&\\&",YU},
 	{"\\$[[:alpha:]]+",REG},
         {"0x[0-9a-f]+",N},	
-        {"[0-9]+",W} 
+        {"[0-9]+",W},
+	{"[a-zA-Z_][a-zA-Z0-9_]*",VAR}
 //	{"0x[0-9a-f]+",N},//nei cun					// equal
 };
 
@@ -117,6 +119,13 @@ static int make_token(char *e) {
 						nr_token++;
 					        break;
 
+					case VAR:
+						tokens[nr_token].type=VAR;
+						int k9=0;
+						for (k9=0;k9<substr_len;++k9)
+						tokens[nr_token].str[k9]=e[position-substr_len+k9];
+						nr_token++;
+						break;
 					case W:
 						tokens[nr_token].type=W;
 						int ku=0;
@@ -327,6 +336,14 @@ int eval(int p,int q)
 	                        sum=swaddr_read(sum1,1);
                
 	                }
+		   else if(tokens[p].type==VAR)
+		   {
+			   uint32_t var_addr = find_var(tokens[p].str);
+			   if(var_addr !=-1) 
+			   {
+				sum= var_addr;																             }
+			   else sum=0;
+		   }
 	          else if(tokens[p].type==REG)
 	          {	
        		     

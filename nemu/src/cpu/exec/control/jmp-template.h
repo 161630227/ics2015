@@ -4,8 +4,8 @@
 #define instr jmp
 static void do_execute() {
 	DATA_TYPE_S index=op_dest->val;
-        DATA_TYPE addr=index;
-	if(DATA_BYTE==2)
+//        DATA_TYPE addr=index;
+/*	if(DATA_BYTE==2)
     {
 	if(addr>0x100000)
 	cpu.eip=MEM_R(index)&0x0000ffff;
@@ -21,6 +21,8 @@ static void do_execute() {
 		 cpu.eip=MEM_R(index) - 2;
           else cpu.eip+=MEM_R(index);
        	}
+*/
+	cpu.eip += index - 2;
 	print_asm_template1();
 }
 

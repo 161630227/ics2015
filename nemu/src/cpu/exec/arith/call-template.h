@@ -16,7 +16,7 @@ make_helper(concat(call_rel32_, SUFFIX))
 //	   if (DATA_BYTE==2)
 //	         cpu.eip&=0x0000ffff;
 	   print_asm_template1();
-           return DATA_BYTE;
+           return 1+DATA_BYTE;
 }
 static void do_execute() {
                DATA_TYPE_S addr=op_src->val;

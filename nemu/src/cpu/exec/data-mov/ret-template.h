@@ -6,7 +6,7 @@
 #define instr ret
 static void do_execute() {
 	       //OPERAND_W(op_src,MEM_R(cpu.esp));
-	        cpu.eip=swaddr_read(cpu.esp,4);
+	        cpu.eip=swaddr_read(cpu.esp,4)-2;
 	        cpu.esp+=4;
 		cpu.esp+=op_src->val;
 		print_asm_template1();

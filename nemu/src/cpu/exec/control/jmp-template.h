@@ -22,7 +22,7 @@ static void do_execute() {
           else cpu.eip+=MEM_R(index);
        	}
 */
-	cpu.eip += index - 2;
+	cpu.eip = index - 2;
 	print_asm_template1();
 }
 

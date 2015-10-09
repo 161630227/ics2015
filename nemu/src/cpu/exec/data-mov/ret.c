@@ -16,5 +16,4 @@
 /* for instruction encoding overloading */
 
 make_helper_v(retnear)
-make_helper_v(ret_i)
 //make_helper_v(push_si)	

@@ -25,7 +25,7 @@ static void do_execute() {
 	       MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
 //	       if (index<0x100000)cpu.eip+=addr;
 	//         else 
-        	 cpu.eip=addr - 2;
+        	 cpu.eip=addr - 1;
 	print_asm_template1();
 }
 

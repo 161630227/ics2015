@@ -18,7 +18,8 @@ static void do_execute() {
 		{
 			cpu.esp-=4;
 			printf("%x\n",op_src->val);
-			MEM_W(cpu.esp,op_src->val);
+			swaddr_write(cpu.esp, 4, op_src->val);
+//			MEM_W(cpu.esp,op_src->val);
 		         // swaddr_write(cpu.esp,4,op_src->val);
 		} 			
 		print_asm_template1();

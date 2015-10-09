@@ -11,7 +11,7 @@ void ide_read(uint8_t *, uint32_t, uint32_t);
 
 void ramdisk_read(uint8_t *, uint32_t, uint32_t);
 #endif
-#define ramdisk_write(uint8_t*,uint32_t,uint32_t);
+void ramdisk_write(uint8_t*,uint32_t,uint32_t);
 #define STACK_SIZE (1 << 20)
 
 void create_video_mapping();
@@ -47,9 +47,9 @@ uint32_t loader() {
 			 * to the memory region [VirtAddr, VirtAddr + FileSiz)
 			 */
 			int j;
-			ramdisk_write(buf + ph->p_offset, ph->p_vaddr, ph->p_filesz);
+			ramdisk_write (buf + ph->p_offset, ph->p_vaddr, ph->p_filesz);
 			 
-	                 uin8_t zero=0;
+	                 uint8_t zero=0;
 	                for(j=ph->p_filesz;j<ph->p_memsz;++j)
 				ramdisk_write(&zero, ph->p_vaddr + j, 1);
 			/* TODO: zero the memory region 

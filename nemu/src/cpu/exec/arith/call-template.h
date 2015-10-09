@@ -20,11 +20,12 @@ make_helper(concat(call_rel32_, SUFFIX))
 }
 static void do_execute() {
                DATA_TYPE_S addr=op_dest->val;
-	       DATA_TYPE index=addr;
+//	       DATA_TYPE index=addr;
 	       cpu.esp-=DATA_BYTE;
 	       MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
-	       if (index<0x100000)cpu.eip+=addr;
-	         else cpu.eip=addr;
+//	       if (index<0x100000)cpu.eip+=addr;
+	//         else 
+        	 cpu.eip=addr - 1;
 	print_asm_template1();
 }
 

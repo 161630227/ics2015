@@ -10,26 +10,17 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 {
 	uint32_t set_index=(addr& GET_SET_INDEX)>>BLOCK_BYTE;
 	uint32_t i;
-//	uint32_t n=10;
-//	printf("%x\n",addr);
-//	printf("%s\n",LEVEL);
 	uint32_t block_offset=addr &GET_BLOCK_OFFSET;
         uint32_t addr_me=addr&GET_HEAD_ADDR;
     	//    printf("N=0x%x\n",N);
 	for(i=0;i<N;++i)
 	{
-//		printf("%d\n",n);
-//		printf("i%d %d\n",i, i < N);
-		
 		uint32_t max=cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE;
 		if((cache_LEVEL[set_index].cache_line[i].tag==addr_me)&&cache_LEVEL[set_index].cache_line[i].valid==true)
 		{
 	        
-		//	printf("%d\n",cache_LEVEL[set_index].cache_line[i].valid);
 			if(addr+len>max)
 			{
-				//	printf("jj%x\n",block_offset);
-			//	uint8_t temp[4]={0,0,0,0};
 				uint32_t count=64-block_offset;
 				bool hit2=false;
 				
@@ -42,6 +33,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 					*hit=true;
 					uint32_t index;
 					index=cache_LEVEL[set_index].cache_line[i].block[63];
+					printf("36行index=%x\n",index);
 					for(j=62;j>=block_offset;j--)
 				       {
 					       index<<=8;

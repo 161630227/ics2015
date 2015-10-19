@@ -4,6 +4,7 @@ uint32_t dram_read(hwaddr_t addr, size_t len);
 uint32_t dram_read(hwaddr_t addr, size_t len);
 uint32_t dram(hwaddr_t addr,size_t len);
 void dram_write(hwaddr_t addr,size_t len,uint32_t data);
+
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 {
@@ -124,7 +125,14 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 			uint32_t count=64-block_offset;
 			if (addr+size>(head_addr+64))
 			{
-				hwaddr_write(addr+count,size-count,(uint32_t)data+count);
+				//hwaddr_write(addr+count,size-count,(uint32_t)data+count);
+				bool hit=cache_write_l1(data+count,addr+count,size-count,1,0);
+				if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
+				else
+				{
+					cache_write_l1(data+count,addr+count,size-count,1,0);
+					dram_write(addr+count,size-count,(uint32_t)data+count);
+				}
 				for (j=0;j<count;j++)
 				{
                                     cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*(data+j);

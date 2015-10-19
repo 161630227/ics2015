@@ -140,7 +140,13 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
                        // printf("data%x\n",*data);
 			}
 			//printf("cache%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);
-			if(addr==0x100030) printf("119行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);
+			if(addr==0x100030)
+			{
+				printf("145行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);
+			        printf("146行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset+1]);
+			        printf("147行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset+2]);
+		                printf("148行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset+3]);
+			}
 			if(l2)
 				cache_LEVEL[set_index].cache_line[i].dirty=true;
                   return true;                   

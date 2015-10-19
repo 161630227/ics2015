@@ -37,8 +37,8 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				if(hit2)
 				{
 					*hit=true;
-		//		        printf("dram=   cache=    %x   %x\n",dram(addr,len),(index+(result<<(8*count))));	
-				        if(addr==0x10003e) 	printf("49行result2=%x\n",result<<(8*count));
+				        printf("dram=   cache=    %x   %x\n",dram(addr,len),(index+(result<<(8*count))));	
+//				        if(addr==0x10003e) 	printf("49行result2=%x\n",result<<(8*count));
 					return(index+(result<<(8*count)));
 				}
 				else

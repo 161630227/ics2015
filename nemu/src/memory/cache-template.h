@@ -127,10 +127,12 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 					cache_write_l1(data+count,addr+count,size-count,0,0);
 					dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
-				for (j=0;j<count;j++)
+				/*for (j=0;j<count;j++)
 				{
                                     cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*(data+j);
-				}
+				}*/
+				int data1=(*data)&(~0u >> ((4 - count) << 3));
+				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 			}
 			else
 			for (j=0;j<size;j++)

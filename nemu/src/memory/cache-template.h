@@ -136,10 +136,9 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 				{
 					cache_write_l1(data,count,addr+count,size-count,0,0);
 				//	dram_write(addr+count,size-count,(uint32_t)data+count);
-	                 	printf("%%126\n");
 				}
 			uint32_t data_index=(*data)>>(8*byte);
-	                int data1=data_index&(~0u >> ((4 - size) << 3));
+	                int data1=data_index&(~0u >> ((4 - count) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 			}
 			else

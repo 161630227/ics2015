@@ -130,7 +130,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 				if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
 				else
 				{
-					cache_write_l1(data+count,addr+count,size-count,0,0);
+//					cache_write_l1(data+count,addr+count,size-count,0,0);
 					dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 				for (j=0;j<count;j++)

@@ -148,7 +148,8 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 				printf("145行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);
 			        printf("146行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset+1]);
 			        bool data_hit=false;
-			        printf("index=%x\n",set_index);	
+				int rr=(addr+64-size)&GET_SET_INDEX;
+			        printf("index=%x\n",rr);	
 			       	printf("cache  %x\n",cache_read_l1(&data_hit,0x100030,4));
 			        printf("147行%x\n",cache_LEVEL[set_index+1].cache_line[i].block[0]);
 		                printf("148行%x\n",cache_LEVEL[set_index+1].cache_line[i].block[0]);

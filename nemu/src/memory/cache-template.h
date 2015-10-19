@@ -123,7 +123,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
             
 			cache_LEVEL[set_index].cache_line[i].tag=head_addr;
 			int j;
-			printf("%%126\n");
+		//	printf("%%126\n");
 			for (j=0;j<BLOCK_SIZE;j++)
 			{	cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr+j,1)&(~0u >> ((4 - 1) << 3));
 			}

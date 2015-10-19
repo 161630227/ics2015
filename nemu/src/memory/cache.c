@@ -57,8 +57,8 @@ void cache_init()
 		for(j=0;j<8;++j)
 	       {
 		cache_l1[i].cache_line[j].valid=false;
-	//	       cache_l1[i].cache_line[j].valid=false;
-	//	       cache_l2[i].cache_line[j].dirty=false;
+		       cache_l1[i].cache_line[j].valid=false;
+	       cache_l2[i].cache_line[j].dirty=false;
 
 	       }
        }

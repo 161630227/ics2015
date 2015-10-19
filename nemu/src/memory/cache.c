@@ -1,4 +1,5 @@
-#include "common.h"
+//#include "cache-template.h"
+
 #define NAME 1
 #define N 8
 #define SET_SIZE 128
@@ -48,6 +49,20 @@
 void cache_init()
 {
 	int i,j;
+//       for (i=0;i<4096;i++)
+//       {
+//	       for (j=0;j<16;j++)
+		for (i=0;i<128;i++)
+	{
+		for(j=0;j<8;++j)
+	       {
+		cache_l1[i].cache_line[j].valid=false;
+	//	       cache_l1[i].cache_line[j].valid=false;
+	//	       cache_l2[i].cache_line[j].dirty=false;
+
+	       }
+       }
+
 	for (i=0;i<128;i++)
 	{
 		for(j=0;j<8;++j)
@@ -55,13 +70,4 @@ void cache_init()
 			cache_l1[i].cache_line[j].valid=false;
 		}
 	}
-       for (i=0;i<4096;i++)
-       {
-	       for (j=0;j<16;j++)
-	       {
-		   //    cache_l2[i].cache_line[j].valid=false;
-//		       cache_l2[i].cache_line[j].dirty=false;
-
-	       }
-       }
 }

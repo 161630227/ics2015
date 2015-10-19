@@ -23,7 +23,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 		{
 	        
 			printf("hh\n");
-		/*	if(addr+len>max)
+			if(addr+len>max)
 			{
 			//	uint8_t temp[4]={0,0,0,0};
 				uint32_t count=64-block_offset;
@@ -65,7 +65,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 			      return index2;
 				//	return *(uint32_t *)(&(cache_LEVEL[set_index].cache_line[i].block[block_offset]));
 			}
-			*/
+			
 		}
 		
 	}

@@ -82,6 +82,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 {
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
+	printf("85读入数据%x\n",*data);
 	uint32_t head_addr=addr & GET_HEAD_ADDR;
 
 	uint32_t block_offset=addr & GET_BLOCK_OFFSET;

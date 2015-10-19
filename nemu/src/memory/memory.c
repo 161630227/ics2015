@@ -23,18 +23,18 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	{
 	
 	//	printf("^**\n");
-		result=cache_read_l2(&data_hit,addr,len);
+//		result=cache_read_l2(&data_hit,addr,len);
                // printf("aaaaa\n");
-		if(data_hit)
-			return result& (~0u >> ((4 - len) << 3));
-		else
-                {
+//		if(data_hit)
+//			return result& (~0u >> ((4 - len) << 3));
+//		else
+  //              {
 
 		
 			result=dram_read(addr,len);
 		//	printf("result= %x\n",result);
                    	cache_write_l1(&result,addr,len,0,0);
-                 }
+    //             }
 	}
 
 
@@ -48,24 +48,25 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 
 
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
- /*       assert(len==1||len==2||len==4);
+        assert(len==1||len==2||len==4);
 	bool hit=cache_write_l1(&data,addr,len,1,0);
 	if(hit)
 		dram_write(addr,len,data);
 	else
 	{
 	
-		hit= cache_write_l2(&data,addr,len,1,1);
-		if(!hit)
-		{
+//		hit= cache_write_l2(&data,addr,len,1,1);
+//		if(!hit)
+//		{
 
-			dram_write(addr,len,data);
-			cache_write_l2(&data,addr,len,0,1);
-                }
+        cache_write_l1(&data,addr,len,0,0);
+    	dram_write(addr,len,data);
+//			cache_write_l2(&data,addr,len,0,1);
+//                }
 	}
-      */
+      
 //	cache_write(addr,len,data);
-	dram_write(addr, len, data);
+//	dram_write(addr, len, data);
 }
 
 uint32_t lnaddr_read(lnaddr_t addr, size_t len) {

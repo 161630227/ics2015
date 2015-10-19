@@ -117,7 +117,15 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 		}
 	}
 	int ran=rand()%N;
+	//  改过l1  before l2
 	if(l2 &&cache_LEVEL[set_index].cache_line[ran].dirty==true)
+	{
+		for (i=0;i<BLOCK_SIZE;i++,cache_LEVEL[set_index].cache_line[ran].tag++)
+			dram_write(cache_LEVEL[set_index].cache_line[ran].tag,1,cache_LEVEL[set_index].cache_line[ran].block[i]);
+
+	}
+	
+	if(!l2&&cache_LEVEL[set_index].cache_line[ran].valid==true)
 	{
 		for (i=0;i<BLOCK_SIZE;i++,cache_LEVEL[set_index].cache_line[ran].tag++)
 			dram_write(cache_LEVEL[set_index].cache_line[ran].tag,1,cache_LEVEL[set_index].cache_line[ran].block[i]);

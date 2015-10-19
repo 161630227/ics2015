@@ -21,7 +21,6 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	tt=0x100029;
 		result=dram_read(tt,4)&(~0u >> ((4 - 4) << 3));
   //	printf("dram1 %x\n ",result);
-       printf("addr= %x\n",addr);	
        cache_write_l1(&result,0,tt,4,0,0);	
  //      printf("cache  %x\n",cache_read_l1(&data_hit,tt,4)==result);
         result=cache_read_l1(&data_hit,addr,len);
@@ -58,6 +57,7 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
         assert(len==1||len==2||len==4);
 	bool hit=cache_write_l1(&data,0,addr,len,1,0);
 //	bool hit=true;
+       printf("addr= %x\n",addr);	
 	if(hit)
 		dram_write(addr,len,data);
 	else

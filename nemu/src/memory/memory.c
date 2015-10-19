@@ -32,7 +32,8 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 
 		
 			result=dram_read(addr,len);
-		//	printf("result= %x\n",result);
+			printf("result= %x\n",result);
+
                    	cache_write_l1(&result,addr,len,0,0);
     //             }
 	}

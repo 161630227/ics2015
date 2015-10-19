@@ -12,7 +12,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 	uint32_t i;
 	uint32_t block_offset=addr &GET_BLOCK_OFFSET;
         uint32_t addr_me=addr&GET_HEAD_ADDR;
-    	//    printf("N=0x%x\n",N);
+    	if(addr==0x8000000)   printf("N=0x%x\n",addr);
 	for(i=0;i<N;++i)
 	{
 		uint32_t max=cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE;

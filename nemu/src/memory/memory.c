@@ -7,9 +7,9 @@ void cache_write(hwaddr_t,size_t, uint32_t);
 //void L2_cache_write_L(hwaddr_t,size_t,uint32_t);
  Memory accessing interfaces */
 uint32_t cache_read_l1(bool *hit,uint32_t addr,uint32_t len);
-bool cache_write_l1(uint32_t *data,uint32_t addr,uint32_t size,bool not_read,bool l2);
+bool cache_write_l1(uint32_t *data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2);
 uint32_t cache_read_l2(bool *hit,uint32_t addr,uint32_t len);
-bool cache_write_l2(uint32_t *data,uint32_t addr,uint32_t size,bool not_read,bool l2);
+bool cache_write_l2(uint32_t *data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2);
 uint32_t dram_read(hwaddr_t addr, size_t len);
 void dram_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
@@ -21,7 +21,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	tt=0x10003e;
 		result=dram_read(tt,4)&(~0u >> ((4 - 4) << 3));
 //    	printf("dram1 %x\n ",result);
-       cache_write_l1(&result,tt,4,0,0);
+       cache_write_l1(&result,0,tt,4,0,0);
 //	printf("cache  %x\n",cache_read_l1(&data_hit,tt,4));
         result=cache_read_l1(&data_hit,addr,len);
 	if(data_hit)
@@ -39,7 +39,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 			result=dram_read(addr,len);
 		//	if (len==4) printf("result= %x\n",result);
                          
-                	cache_write_l1(&result,addr,len,0,0);
+                	cache_write_l1(&result,0,addr,len,0,0);
     //          }
 	}
 
@@ -55,7 +55,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
         assert(len==1||len==2||len==4);
-//	bool hit=cache_write_l1(&data,addr,len,1,0);
+//	bool hit=cache_write_l1(&data,0,addr,len,1,0);
 	bool hit=true;
 	if(hit)
 		dram_write(addr,len,data);

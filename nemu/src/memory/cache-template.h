@@ -4,7 +4,7 @@ uint32_t dram_read(hwaddr_t addr, size_t len);
 uint32_t dram_read(hwaddr_t addr, size_t len);
 uint32_t dram(hwaddr_t addr,size_t len);
 void dram_write(hwaddr_t addr,size_t len,uint32_t data);
-bool cache_write_l1(uint32_t *data,uint32_t addr,uint32_t size,bool not_read,bool l2);
+bool cache_write_l1(uint32_t *data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2);
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 {
@@ -46,7 +46,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				     
 					*hit=false;
 					uint32_t result2=dram_read(addr+count,len-count)&(~0u >> ((4 - len+count) << 3));
-				        cache_write_l1(&result2,addr+count,len-count,0,0);
+				        cache_write_l1(&result2,0,addr+count,len-count,0,0);
 				         
 					return(index+(result2<<(8*count)));
 				}
@@ -74,7 +74,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 	return -1;
 }
 
-bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool not_read,bool l2)//data represent addr
+bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2)//data represent addr
 {
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
@@ -91,8 +91,9 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 			if(cache_LEVEL[set_index].cache_line[i].tag==addr &&cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE>addr+size &&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
 			//	if(addr==(0x100040))printf("YYYY\n");
-		         	int data1=(*data)&(~0u >> ((4 - size) << 3));
-			//	if(addr==(0x100040))printf("data1第94行%x\n",data1);
+				uint32_t data_index=(*data)>>(8*byte);
+	         	int data1=data_index&(~0u >> ((4 - size) << 3));
+                     			//	if(addr==(0x100040))printf("data1第94行%x\n",data1);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 				if(l2)
 					cache_LEVEL[set_index].cache_line[i].dirty=true;
@@ -101,11 +102,11 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 			else if(cache_LEVEL[set_index].cache_line[i].tag==head_addr&&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
                                 int count=64-size;
-				bool hit=cache_write_l1(data+count,addr+count,size-count,1,0);
+				bool hit=cache_write_l1(data+count,count,addr+count,size-count,1,0);
 				if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
 				else
 				{
-					cache_write_l1(data+count,addr+count,size-count,0,0);
+					cache_write_l1(data+count,count,addr+count,size-count,0,0);
 					dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 			int data1=(*data)&(~0u >> ((4 - count) << 3));
@@ -129,11 +130,11 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 			uint32_t count=64-block_offset;
 			if (addr+size>(head_addr+64))
 			{
-				bool hit=cache_write_l1(data+count,addr+count,size-count,1,0);
+				bool hit=cache_write_l1(data,count,addr+count,size-count,1,0);
 				if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
 				else
 				{
-					cache_write_l1(data+count,addr+count,size-count,0,0);
+					cache_write_l1(data+count,0,addr+count,size-count,0,0);
 					dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 			int data1=(*data)&(~0u >> ((4 - count) << 3));
@@ -185,11 +186,11 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 	uint32_t count1=64-block_offset;
 	if (addr+size>(head_addr+64))
 	{
-	   bool hit=cache_write_l1(data+count1,addr+count1,size-count1,1,0);
+	   bool hit=cache_write_l1(data+count1,count1,addr+count1,size-count1,1,0);
 	   if(hit) dram_write(addr+count1,size-count1,(uint32_t)data+count1);
 	   else
 	  {
-		cache_write_l1(data+count1,addr+count1,size-count1,0,0);
+		cache_write_l1(data+count1,count1,addr+count1,size-count1,0,0);
 		dram_write(addr+count1,size-count1,(uint32_t)data+count1);
 	  }
 	   

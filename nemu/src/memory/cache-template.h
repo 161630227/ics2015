@@ -124,7 +124,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 			uint32_t count=64-block_offset;
 			if (addr+size>(head_addr+64))
 			{
-	//			hwaddr_write(addr+count,size-count,data+count);
+				hwaddr_write(addr+count,size-count,data+count);
 				for (j=0;j<count;j++)
 				{
                                     cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*(data+j);

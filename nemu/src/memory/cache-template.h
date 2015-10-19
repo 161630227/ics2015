@@ -13,7 +13,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 	for(i=0;i<N;++i)
 	{
 		printf("%d\n",N);
-		printf("i%d\n",i);
+		printf("i%d %d\n",i,i<N);
 		uint32_t max=cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE;
 	        if(cache_LEVEL[set_index].cache_line[i].tag==addr&&cache_LEVEL[set_index].cache_line[i].valid==true)
 		{

@@ -62,6 +62,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 					index2<<=8;
 					index2+=cache_LEVEL[set_index].cache_line[i].block[block_offset+j];
 				}
+			      printf("index2= %x\n",index2);
 			      return index2;
 				//	return *(uint32_t *)(&(cache_LEVEL[set_index].cache_line[i].block[block_offset]));
 			}
@@ -108,9 +109,9 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
             
 			cache_LEVEL[set_index].cache_line[i].tag=head_addr;
 			int j;
-	//		for (j=0;j<BLOCK_SIZE;j++,head_addr++)
-	//			cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr,1);
-			//cache_LEVEL[set_index].cache_line[i].valid=true;
+			for (j=0;j<BLOCK_SIZE;j++,head_addr++)
+				cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr,1);
+			cache_LEVEL[set_index].cache_line[i].valid=true;
 			for (j=0;j<size;j++,data++)
 			{
 				printf("j=%x\n",*data);

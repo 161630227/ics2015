@@ -3,7 +3,7 @@
 uint32_t dram_read(hwaddr_t addr, size_t len);
 uint32_t dram(hwaddr_t addr,size_t len);
 void dram_write(hwaddr_t addr,size_t len,uint32_t data);
-uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
+uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 {
 	uint32_t set_index=(addr& GET_SET_INDEX)>>BLOCK_BYTE;
 	uint32_t i;

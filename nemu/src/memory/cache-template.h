@@ -45,7 +45,6 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 
 				{
 				     
-					printf("888");
 					*hit=false;
 					uint32_t result2=dram_read(addr+count,len-count)&(~0u >> ((4 - len+count) << 3));
 					cache_write_l1(&result2,0,addr+count,len-count,0,0);
@@ -124,6 +123,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
             
 			cache_LEVEL[set_index].cache_line[i].tag=head_addr;
 			int j;
+			printf("%%126\n");
 			for (j=0;j<BLOCK_SIZE;j++)
 			{	cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr+j,1)&(~0u >> ((4 - 1) << 3));
 			}

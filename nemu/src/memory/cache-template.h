@@ -25,7 +25,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 		//	printf("%d\n",cache_LEVEL[set_index].cache_line[i].valid);
 			if(addr+len>max)
 			{
-				printf("**%**\n");
+				printf("**%**jeremy\n");
 			//	uint8_t temp[4]={0,0,0,0};
 				uint32_t count=64-block_offset;
 				bool hit2=false;
@@ -62,7 +62,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				for (j=len-2;j>=0;--j)
                                 {
 					index2<<=8;
-					printf("**");
+	//				printf("**");
 					index2+=cache_LEVEL[set_index].cache_line[i].block[block_offset+j];
 				}
 		//	      printf("%x   dram=%x\n",len,dram_read(addr,len)& (~0u >> ((4 - len) << 3)));
@@ -75,7 +75,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 		
 	}
 	*hit=false;
-	printf("*\n");
+	//printf("*\n");
 	return -1;
 }
 
@@ -84,7 +84,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
 	uint32_t head_addr=addr & GET_HEAD_ADDR;
-	printf("datahere %x\n",*data);
+	//printf("datahere %x\n",*data);
 	uint32_t block_offset=addr & GET_BLOCK_OFFSET;
 	if(not_read)
 	{
@@ -107,7 +107,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 	}
 	for (i=0;i<N;i++)
 	{
-		printf("%x\n",*data);
+	//	printf("%x\n",*data);
 		if(cache_LEVEL[set_index].cache_line[i].valid==false)
 		{
             

@@ -109,11 +109,12 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 			int j;
 			for (j=0;j<BLOCK_SIZE;j++,head_addr++)
 				cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr,1);
-			printf("cache%x\n",cache_LEVEL[set_index].cache_line[i].block);
 			printf("^ _ ^\n");
 			cache_LEVEL[set_index].cache_line[i].valid=true;
 			for (j=0;j<size;j++,data++,block_offset++)
 				cache_LEVEL[set_index].cache_line[i].block[block_offset]=*data;
+
+			printf("cache%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);
 			if(l2)
 				cache_LEVEL[set_index].cache_line[i].dirty=true;
                   return true;                   

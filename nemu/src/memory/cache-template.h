@@ -108,8 +108,8 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
             
 			cache_LEVEL[set_index].cache_line[i].tag=head_addr;
 			int j;
-			for (j=0;j<BLOCK_SIZE;j++,head_addr++)
-				cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr,1);
+	//		for (j=0;j<BLOCK_SIZE;j++,head_addr++)
+	//			cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr,1);
 			printf("^ _ ^\n");
 			cache_LEVEL[set_index].cache_line[i].valid=true;
 			for (j=0;j<size;j++,data++)

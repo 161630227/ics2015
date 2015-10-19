@@ -88,7 +88,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 		{
 
 		  
-			if(cache_LEVEL[set_index].cache_line[i].tag<=addr &&cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE>addr &&cache_LEVEL[set_index].cache_line[i].valid==true)
+			if(cache_LEVEL[set_index].cache_line[i].tag==addr &&cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE>addr+size &&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
 		         	int data1=(*data)&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
@@ -115,7 +115,6 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 	}
 	for (i=0;i<N;i++)
 	{
-	//	printf("data=%x\n",data);
 		if(cache_LEVEL[set_index].cache_line[i].valid==false)
 		{
             

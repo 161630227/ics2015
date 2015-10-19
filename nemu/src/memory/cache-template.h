@@ -133,10 +133,10 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 				}
 			}
 			else
-			for (j=0;j<size;j++,data++)
+			for (j=0;j<size;j++)
 			{
 			//	printf("j=%x\n",*data);
-				cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*data;
+				cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*(data+j);
                        // printf("data%x\n",*data);
 			}
 			//printf("cache%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);

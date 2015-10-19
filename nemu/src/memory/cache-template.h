@@ -35,14 +35,14 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				{
 					*hit=true;
 					uint32_t index;
-					index=cache_LEVEL[set_index].cache_line[i].block[block_offset];
-					for(j=1;j<count;j++,block_offset++)
+					index=cache_LEVEL[set_index].cache_line[i].block[63];
+					for(j=62;j>=block_offset;j--)
 				       {
 					       index<<=8;
-					       index+=cache_LEVEL[set_index].cache_line[i].block[block_offset];
+					       index+=cache_LEVEL[set_index].cache_line[i].block[j];
 				       }
 					
-					return (index<<8*(len-count))+result;
+					return (index+result<<(8*count));
 				}
 				else
 

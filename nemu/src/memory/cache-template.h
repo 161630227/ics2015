@@ -152,20 +152,37 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 		for (i=0;i<BLOCK_SIZE;i++,cache_LEVEL[set_index].cache_line[ran].tag++)
 			dram_write(cache_LEVEL[set_index].cache_line[ran].tag,1,cache_LEVEL[set_index].cache_line[ran].block[i]);
 
-}
+        }
 	
 	if(!l2&&cache_LEVEL[set_index].cache_line[ran].valid==true)
 	{
-		for (i=0;i<BLOCK_SIZE;i++,cache_LEVEL[set_index].cache_line[ran].tag++)
-			dram_write(cache_LEVEL[set_index].cache_line[ran].tag,1,cache_LEVEL[set_index].cache_line[ran].block[i]);
+		for (i=0;i<BLOCK_SIZE;i++)
+			dram_write(cache_LEVEL[set_index].cache_line[ran].tag+i,1,cache_LEVEL[set_index].cache_line[ran].block[i]);
 
 	}
 	cache_LEVEL[set_index].cache_line[ran].tag=head_addr;
-	for (i=0;i<BLOCK_SIZE;i++,head_addr++)
-		cache_LEVEL[set_index].cache_line[ran].block[i]=dram_read(head_addr,1);
+	for (i=0;i<BLOCK_SIZE;i++)
+		cache_LEVEL[set_index].cache_line[ran].block[i]=dram_read(head_addr+i,1) & (~0u >> ((4 -3) << 3));
 	if(l2)
 		cache_LEVEL[set_index].cache_line[ran].dirty=true;
 	int j;
+	uint32_t count1=64-block_offset;
+	if (addr+size>(head_addr+64))
+	{
+	   bool hit=cache_write_l1(data+count1,addr+count1,size-count1,1,0);
+	   if(hit) dram_write(addr+count1,size-count1,(uint32_t)data+count1);
+	   else
+	  {
+		cache_write_l1(data+count1,addr+count1,size-count1,0,0);
+		dram_write(addr+count1,size-count1,(uint32_t)data+count1);
+	  }
+	   
+	  for (j=0;j<count1;j++)
+				{
+                                    cache_LEVEL[set_index].cache_line[ran].block[block_offset+j]=*(data+j);
+				}
+          return true;
+	}
 	for (j=0;j<size;j++,data++,block_offset++)
 		cache_LEVEL[set_index].cache_line[ran].block[block_offset]=*data;
 	return true;

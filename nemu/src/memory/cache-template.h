@@ -47,8 +47,9 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				{
 				     
 					*hit=false;
-					return(dram_read(addr+count,len-count)&(~0u >> ((4 - len) << 3)));
-			//		return -1;
+					//这里的return值有问题，理论上应该return -1
+			//		return(dram_read(addr+count,len-count)&(~0u >> ((4 - len) << 3)));
+					return -1;
 				}
 			}
 			else

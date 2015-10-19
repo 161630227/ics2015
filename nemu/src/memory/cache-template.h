@@ -57,24 +57,20 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				*hit=true;
 				int j;
 				uint32_t index2=cache_LEVEL[set_index].cache_line[i].block[block_offset+len-1];
-		//	        printf("%%\n");	
 				for (j=len-2;j>=0;--j)
                                 {
 					index2<<=8;
-	//				printf("**");
 					index2+=cache_LEVEL[set_index].cache_line[i].block[block_offset+j];
 				}
 		//	      printf("%x   dram=%x\n",len,dram_read(addr,len)& (~0u >> ((4 - len) << 3)));
 			     // printf("index2= %x\n",index2);
 			      return index2;
-				//	return *(uint32_t *)(&(cache_LEVEL[set_index].cache_line[i].block[block_offset]));
 			}
 			
 		}
 		
 	}
 	*hit=false;
-	//printf("*\n");
 	return -1;
 }
 
@@ -144,7 +140,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
                        // printf("data%x\n",*data);
 			}
 			//printf("cache%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);
-			if(addr==0x100030)
+			if(addr==0x10003e)
 			{
 				printf("data=%x\n",*data);
 				printf("145行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);

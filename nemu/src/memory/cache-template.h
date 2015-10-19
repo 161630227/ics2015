@@ -63,7 +63,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 					index2<<=8;
 					index2+=cache_LEVEL[set_index].cache_line[i].block[block_offset+j];
 				}
-			      printf("%x   dram=%x\n",len,dram_read(addr,len));
+			      printf("%x   dram=%x\n",len,dram_read(addr,len)& (~0u >> ((4 - len) << 3)));
 			      printf("index2= %x\n",index2);
 			      return index2;
 				//	return *(uint32_t *)(&(cache_LEVEL[set_index].cache_line[i].block[block_offset]));

@@ -58,7 +58,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				int j;
 				uint32_t index2=cache_LEVEL[set_index].cache_line[i].block[block_offset+len-1];
 			        printf("%%\n");	
-				for (j=len-2;j>=0;++j)
+				for (j=len-2;j>=0;--j)
                                 {
 					index2<<=8;
 					printf("**");

@@ -38,7 +38,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				{
 					*hit=true;
 			//	        printf("dram=   cache=    %x   %x\n",dram(addr,len),(index+(result<<(8*count))));	
-				        if(addr==0x10003e) 	printf("49行result2=%x\n",result<<(8*count));
+				       // if(addr==0x10003e) 	printf("49行result2=%x\n",result<<(8*count));
 					return(index+(result<<(8*count)));
 				}
 				else
@@ -152,12 +152,12 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			//	printf("data=%x\n",*data);
 			//	printf("145行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);
 			  //      printf("146行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset+1]);
-			        bool data_hit=false;
+			     //   bool data_hit=false;
 			//	int rr=(addr+64-block_offset+1)&GET_BLOCK_OFFSET;
 			       // int rr=(addr+64-block_offset)&GET_BLOCK_OFFSET;
-	                 	printf("%%126\n");
+	                 //	printf("%%126\n");
 			//	printf("index=%x\n",rr);	
-			       	printf("cache158  %x\n",cache_read_l1(&data_hit,0x10003e,4));
+			   //    	printf("cache158  %x\n",cache_read_l1(&data_hit,0x10003e,4));
 			  //      printf("147行%x\n",cache_LEVEL[40].cache_line[i].block[0]);
 		            //    printf("148行%x\n",cache_LEVEL[40].cache_line[i].block[1]);
 			}

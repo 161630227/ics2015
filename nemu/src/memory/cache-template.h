@@ -90,13 +90,8 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 		  
 			if(cache_LEVEL[set_index].cache_line[i].tag==addr &&cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE>addr+size &&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
-			//	if(addr==(0x100040))printf("YYYY\n");
-				printf("data=%x\n",*data);
 				uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
-				printf("data_index%x\n",data_index);
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
-				printf("data1=%x\n",data1);
-                     			//	if(addr==(0x100040))printf("data1第94行%x\n",data1);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 				if(l2)
 					cache_LEVEL[set_index].cache_line[i].dirty=true;
@@ -112,7 +107,9 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 					cache_write_l1(data+count,count,addr+count,size-count,0,0);
 					dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
-			int data1=(*data)&(~0u >> ((4 - count) << 3));
+			
+				uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 		        }
 		}
@@ -134,18 +131,19 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			if (addr+size>(head_addr+64))
 			{
 				bool hit=cache_write_l1(data,count,addr+count,size-count,1,0);
-				if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
-				else
+				if(!hit)
 				{
 					cache_write_l1(data+count,0,addr+count,size-count,0,0);
-					dram_write(addr+count,size-count,(uint32_t)data+count);
+				//	dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
-			int data1=(*data)&(~0u >> ((4 - count) << 3));
+			uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+	                int data1=data_index&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 			}
 			else
 			{
-		         	int data1=(*data)&(~0u >> ((4 - size) << 3));
+				uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 			}
 			if(addr==0x10003e)
@@ -190,19 +188,21 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 	if (addr+size>(head_addr+64))
 	{
 	   bool hit=cache_write_l1(data+count1,count1,addr+count1,size-count1,1,0);
-	   if(hit) dram_write(addr+count1,size-count1,(uint32_t)data+count1);
-	   else
+	  // if(hit) dram_write(addr+count1,size-count1,(uint32_t)data+count1);
+	   if(!hit)
 	  {
 		cache_write_l1(data+count1,count1,addr+count1,size-count1,0,0);
-		dram_write(addr+count1,size-count1,(uint32_t)data+count1);
+	//	dram_write(addr+count1,size-count1,(uint32_t)data+count1);
 	  }
 	   
-            int data1=(*data)&(~0u >> ((4 - count1) << 3));
+	    uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+	    int data1=data_index&(~0u >> ((4 - size) << 3));
             memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count1);
           return true;
 	}
 
-	int data1=(*data)&(~0u >> ((4 - size) << 3));
+	uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+	int data1=data_index&(~0u >> ((4 - size) << 3));
 	memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 	return true;
 

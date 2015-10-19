@@ -16,17 +16,17 @@ void ramdisk_write(uint8_t*,uint32_t,uint32_t);
 
 void create_video_mapping();
 uint32_t get_ucr3();
-
+#define SIZE (0xa0000-1)
 uint32_t loader() {
 	Elf32_Ehdr *elf;
 	Elf32_Phdr *ph = NULL;
 
-	uint8_t buf[0x100000];
+	uint8_t buf[SIZE];
 
 #ifdef HAS_DEVICE
-	ide_read(buf, ELF_OFFSET_IN_DISK, 0x100000);
+	ide_read(buf, ELF_OFFSET_IN_DISK, SIZE);
 #else
-	ramdisk_read(buf, ELF_OFFSET_IN_DISK, 0x100000);
+	ramdisk_read(buf, ELF_OFFSET_IN_DISK, SIZE);
 #endif
 
 	elf = (void*)buf;

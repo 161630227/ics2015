@@ -94,7 +94,8 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 				printf("data=%x\n",*data);
 				uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
 				printf("data_index%x\n",data_index);
-	         	int data1=data_index&(~0u >> ((4 - size) << 3));
+	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
+				printf("data1=%x\n",data1);
                      			//	if(addr==(0x100040))printf("data1第94行%x\n",data1);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 				if(l2)

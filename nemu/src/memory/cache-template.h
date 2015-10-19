@@ -84,7 +84,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
 	uint32_t head_addr=addr & GET_HEAD_ADDR;
-	//printf("datahere %x\n",*data);
+
 	uint32_t block_offset=addr & GET_BLOCK_OFFSET;
 	if(not_read)
 	{

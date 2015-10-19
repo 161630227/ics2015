@@ -146,7 +146,6 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 	}
 	int ran=rand()%N;
 	//  改过l1  before l2
-	printf("jhhh149行");
 	if(l2 &&cache_LEVEL[set_index].cache_line[ran].dirty==true)
 	{
 		for (i=0;i<BLOCK_SIZE;i++,cache_LEVEL[set_index].cache_line[ran].tag++)

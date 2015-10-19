@@ -25,12 +25,13 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 		//	printf("%d\n",cache_LEVEL[set_index].cache_line[i].valid);
 			if(addr+len>max)
 			{
-				printf("*jeremy");
+				printf("jj%x\n",64-block_offset);
 			//	uint8_t temp[4]={0,0,0,0};
 				uint32_t count=64-block_offset;
 				bool hit2=false;
+				
 				uint32_t result=concat(cache_read_,LEVEL)(&hit2,addr+count,len-count);
-				printf("result=%x\n",result);
+			//	printf("result=%x\n",result);
 				int j;
 				if(hit2)
 				{

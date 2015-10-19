@@ -5,17 +5,17 @@ uint32_t dram(hwaddr_t addr,size_t len);
 void dram_write(hwaddr_t addr,size_t len,uint32_t data);
 uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 {
-	uint32_t set_index=(addr& GET_SET_INDEX)>>BLOCK_BYTE;
+//	uint32_t set_index=(addr& GET_SET_INDEX)>>BLOCK_BYTE;
 	uint32_t i;
 	uint32_t n=10;
 	printf("%x\n",addr);
 //	printf("%s\n",LEVEL);
-	uint32_t block_offset=addr &GET_BLOCK_OFFSET;
+//	uint32_t block_offset=addr &GET_BLOCK_OFFSET;
         printf("N=0x%x\n",N);
 	for(i=0;i<n;++i)
 	{
 		printf("%d\n",n);
-		printf("i%d %d\n",i, i < n);
+		printf("i%d %d\n",i, i < n);/*
 		uint32_t max=cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE;
 	        if(cache_LEVEL[set_index].cache_line[i].tag==addr&&cache_LEVEL[set_index].cache_line[i].valid==true)
 		{
@@ -63,6 +63,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 				//	return *(uint32_t *)(&(cache_LEVEL[set_index].cache_line[i].block[block_offset]));
 			}
 		}
+		*/
 	}
 	*hit=false;
 	printf("*\n");

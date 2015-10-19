@@ -13,7 +13,7 @@ bool cache_write_l2(uint32_t *data,uint32_t addr,uint32_t size,bool not_read,boo
 uint32_t dram_read(hwaddr_t addr, size_t len);
 void dram_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
-    
+/*    
 	assert(len==1||len==2||len==4);
 	bool data_hit=false;
 	uint32_t result=cache_read_l1(&data_hit,addr,len);
@@ -36,12 +36,15 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 
 	return  result & (~0u >> ((4 - len) << 3));
 	
-	//return cache_read(addr,len)&(~0u >> ((4 - len) << 3));
+	return cache_read(addr,len)&(~0u >> ((4 - len) << 3));
+*/
+	return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
+
 }
 
 
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
-        assert(len==1||len==2||len==4);
+ /*       assert(len==1||len==2||len==4);
 	bool hit=cache_write_l1(&data,addr,len,1,0);
 	if(hit)
 		dram_write(addr,len,data);
@@ -56,9 +59,9 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 			cache_write_l2(&data,addr,len,0,1);
                 }
 	}
-      
+      */
 //	cache_write(addr,len,data);
-	//dram_write(addr, len, data);
+	dram_write(addr, len, data);
 }
 
 uint32_t lnaddr_read(lnaddr_t addr, size_t len) {

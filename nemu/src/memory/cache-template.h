@@ -7,7 +7,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 {
 	uint32_t set_index=(addr& GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
-	printf("%x\n",set_index);
+	printf("%x\n",addr);
 	uint32_t block_offset=addr &GET_BLOCK_OFFSET;
 	for(i=0;i<N;++i)
 	{

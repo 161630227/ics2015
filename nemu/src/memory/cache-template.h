@@ -59,6 +59,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 		}
 	}
 	*hit=false;
+	printf("*\n");
 	return -1;
 }
 

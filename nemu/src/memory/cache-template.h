@@ -45,7 +45,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 
 				{
 				     
-					*hit=false;
+					*hit=true;
 					uint32_t result2=dram_read(addr+count,len-count)&(~0u >> ((4 - len+count) << 3));
 					cache_write_l1(&result2,0,addr+count,len-count,0,0);
 				         

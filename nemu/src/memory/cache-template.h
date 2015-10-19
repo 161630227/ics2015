@@ -49,7 +49,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				     
 					*hit=false;
 					uint32_t result2=dram_read(addr+count,len-count)&(~0u >> ((4 - len+count) << 3));
-				//	*hit= concat(cache_write_,LEVEL)(&result2,addr+count,len-count,0,0);
+				        cache_write_l1(&result2,addr+count,len-count,0,0);
 				         
 					return(index+(result2<<(8*count)));
 			//		printf("result252行%x\n",result2);

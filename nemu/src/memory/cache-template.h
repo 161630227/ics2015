@@ -1,6 +1,7 @@
 #include "cache.h"
 #include <stdlib.h>
 uint32_t dram_read(hwaddr_t addr, size_t len);
+uint32_t dram_read(hwaddr_t addr, size_t len);
 uint32_t dram(hwaddr_t addr,size_t len);
 void dram_write(hwaddr_t addr,size_t len,uint32_t data);
 uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
@@ -31,7 +32,8 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 				bool hit2=false;
 				
 				uint32_t result=concat(cache_read_,LEVEL)(&hit2,addr+count,len-count);
-			//	printf("result=%x\n",result);
+				printf("result1=%x",result);
+				printf("result2=%x\n",dram_read(addr+count,len-count)&(~0u >> ((4 - len) << 3)));
 				int j;
 				if(hit2)
 				{

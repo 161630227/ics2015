@@ -131,14 +131,16 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 				{
                                     cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*(data+j);
 				}*/
-				int data1=(*data)&(~0u >> ((4 - count) << 3));
+			int data1=(*data)&(~0u >> ((4 - count) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 			}
 			else
-			for (j=0;j<size;j++)
+		//	for (j=0;j<size;j++)
 			{
 			//	printf("j=%x\n",*data);
-				cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*(data+j);
+		         	int data1=(*data)&(~0u >> ((4 - size) << 3));
+				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
+			//	cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*(data+j);
                        // printf("data%x\n",*data);
 			}
 			//printf("cache%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);

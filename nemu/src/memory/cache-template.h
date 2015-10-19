@@ -113,19 +113,17 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 			cache_LEVEL[set_index].cache_line[i].tag=head_addr;
 			int j;
 			for (j=0;j<BLOCK_SIZE;j++)
-			{	cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr+j,1);
-				printf("%x\n",dram_read(head_addr+j,1)&(~0u >> ((4 - 1) << 3)));
+			{	cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr+j,1)&(~0u >> ((4 - 1) << 3));
 			}
 			cache_LEVEL[set_index].cache_line[i].valid=true;
 			uint32_t count=64-block_offset;
 			if (addr+size>(head_addr+64))
 			{
-				//hwaddr_write(addr+count,size-count,(uint32_t)data+count);
 				bool hit=cache_write_l1(data+count,addr+count,size-count,1,0);
 				if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
 				else
 				{
-//					cache_write_l1(data+count,addr+count,size-count,0,0);
+					cache_write_l1(data+count,addr+count,size-count,0,0);
 					dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 				for (j=0;j<count;j++)
@@ -148,12 +146,13 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 	}
 	int ran=rand()%N;
 	//  改过l1  before l2
+	printf("jhhh149行");
 	if(l2 &&cache_LEVEL[set_index].cache_line[ran].dirty==true)
 	{
 		for (i=0;i<BLOCK_SIZE;i++,cache_LEVEL[set_index].cache_line[ran].tag++)
 			dram_write(cache_LEVEL[set_index].cache_line[ran].tag,1,cache_LEVEL[set_index].cache_line[ran].block[i]);
 
-	}
+}
 	
 	if(!l2&&cache_LEVEL[set_index].cache_line[ran].valid==true)
 	{

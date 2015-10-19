@@ -18,10 +18,10 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	bool data_hit=false;
 	uint32_t result;
 
-		result=dram_read(0x1012b1,1)&(~0u >> ((4 - 4) << 3));
+		result=dram_read(0x1012b1,2)&(~0u >> ((4 - 2) << 3));
     	printf("dram %x ",result);
-        cache_write_l1(&result,0x1012b1,4,0,0);
-	printf("cache  %x\n",cache_read_l1(&data_hit,0x1012b1,4));
+        cache_write_l1(&result,0x1012b1,2,0,0);
+	printf("cache  %x\n",cache_read_l1(&data_hit,0x1012b1,2));
 	result=cache_read_l1(&data_hit,addr,len);
 	if(data_hit)
 	 return result & (~0u >> ((4 - len) << 3));

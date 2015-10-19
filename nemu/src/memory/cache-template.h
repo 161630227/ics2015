@@ -79,7 +79,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 {
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
-    	if(addr==0x8000000)   printf("N=0x%x\n",addr);
+    	if(addr==8000000)   printf("N=0x%x\n",addr);
 	uint32_t head_addr=addr & GET_HEAD_ADDR;
 
 	uint32_t block_offset=addr & GET_BLOCK_OFFSET;

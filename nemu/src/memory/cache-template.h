@@ -21,9 +21,9 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 		uint32_t max=cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE;
 		if(cache_LEVEL[set_index].cache_line[i].tag==addr_me&&cache_LEVEL[set_index].cache_line[i].valid==true)
 		{
-	        /*
+	        
 			printf("hh\n");
-			if(addr+len>max)
+		/*	if(addr+len>max)
 			{
 			//	uint8_t temp[4]={0,0,0,0};
 				uint32_t count=64-block_offset;

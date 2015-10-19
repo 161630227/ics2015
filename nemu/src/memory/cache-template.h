@@ -79,6 +79,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
 	uint32_t head_addr=addr & GET_HEAD_ADDR;
+	printf("head_addr= %x\n",head_addr);
 	uint32_t block_offset=addr & GET_BLOCK_OFFSET;
 	if(not_read)
 	{
@@ -108,6 +109,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 			int j;
 			for (j=0;j<BLOCK_SIZE;j++,head_addr++)
 				cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr,1);
+			printf("cache%x\n",cache_LEVEL[set_index].cache_line[i].block);
 			printf("^ _ ^\n");
 			cache_LEVEL[set_index].cache_line[i].valid=true;
 			for (j=0;j<size;j++,data++,block_offset++)

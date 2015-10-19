@@ -25,17 +25,17 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	//	printf("^**\n");
 //		result=cache_read_l2(&data_hit,addr,len);
                // printf("aaaaa\n");
-		if(data_hit)
-			return result& (~0u >> ((4 - len) << 3));
-  	else
-                {
+	//	if(data_hit)
+	//		return result& (~0u >> ((4 - len) << 3));
+//  	else
+  //              {
 
 		
 			result=dram_read(addr,len);
 			printf("result= %x\n",result);
 
                    	cache_write_l1(&result,addr,len,0,0);
-              }
+    //          }
 	}
 
 

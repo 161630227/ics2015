@@ -18,7 +18,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	bool data_hit=false;
 	uint32_t result;
         uint32_t tt;
-	tt=0x100030;
+	tt=0x10003e;
 		result=dram_read(tt,4)&(~0u >> ((4 - 4) << 3));
     	printf("dram %x ",result);
         cache_write_l1(&result,tt,4,0,0);

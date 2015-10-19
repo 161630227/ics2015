@@ -56,9 +56,9 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
                          
 				*hit=true;
 				int j;
-				uint32_t index2=cache_LEVEL[set_index].cache_line[i].block[block_offset];
+				uint32_t index2=cache_LEVEL[set_index].cache_line[i].block[block_offset+len-1];
 				
-				for (j=1;j<len;++j)
+				for (j=len-2;j>=0;++j)
                                 {
 					index2<<=8;
 					index2+=cache_LEVEL[set_index].cache_line[i].block[block_offset+j];

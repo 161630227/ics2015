@@ -131,10 +131,10 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			uint32_t count=64-block_offset;
 			if (addr+size>(head_addr+64))
 			{
-				bool hit=cache_write_l1(data,byte+count,addr+count,size-count,1,0);
+				bool hit=cache_write_l1(data,count,addr+count,size-count,1,0);
 				if(!hit)
 				{
-					cache_write_l1(data,byte+count,addr+count,size-count,0,0);
+					cache_write_l1(data,count,addr+count,size-count,0,0);
 				//	dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 			uint32_t data_index=(*data)>>(8*byte);

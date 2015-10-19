@@ -22,7 +22,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr,uint32_t len)
 		if((cache_LEVEL[set_index].cache_line[i].tag==addr_me)&&cache_LEVEL[set_index].cache_line[i].valid==true)
 		{
 	        
-			printf("%d\n",cache_LEVEL[set_index].cache_line[i].valid);
+		//	printf("%d\n",cache_LEVEL[set_index].cache_line[i].valid);
 			if(addr+len>max)
 			{
 			//	uint8_t temp[4]={0,0,0,0};

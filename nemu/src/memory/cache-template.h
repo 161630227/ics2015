@@ -90,7 +90,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 		  
 			if(cache_LEVEL[set_index].cache_line[i].tag==addr &&cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE>addr+size &&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
-				uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+				uint32_t data_index=((*data)>>(8*byte));
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 				if(l2)
@@ -108,7 +108,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 				//	dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 			
-				uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+				uint32_t data_index=(*data)>>(8*byte);
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 		        }
@@ -136,13 +136,13 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 					cache_write_l1(data+count,0,addr+count,size-count,0,0);
 				//	dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
-			uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+			uint32_t data_index=(*data)>>(8*byte);
 	                int data1=data_index&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 			}
 			else
 			{
-				uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+				uint32_t data_index=(*data)>>(8*byte);
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 			}
@@ -196,13 +196,13 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 	//	dram_write(addr+count1,size-count1,(uint32_t)data+count1);
 	  }
 	   
-	    uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+	    uint32_t data_index=((*data))>>(8*byte);
 	    int data1=data_index&(~0u >> ((4 - size) << 3));
             memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count1);
           return true;
 	}
 
-	uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
+	uint32_t data_index=(*data)>>(8*byte);
 	int data1=data_index&(~0u >> ((4 - size) << 3));
 	memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 	return true;

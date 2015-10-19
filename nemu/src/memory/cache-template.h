@@ -129,10 +129,10 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			uint32_t count=64-block_offset;
 			if (addr+size>(head_addr+64))
 			{
-				bool hit=cache_write_l1(data,count,addr+count,size-count,1,0);
+				bool hit=cache_write_l1(data,byte+count,addr+count,size-count,1,0);
 				if(!hit)
 				{
-					cache_write_l1(data,count,addr+count,size-count,0,0);
+					cache_write_l1(data,byte+count,addr+count,size-count,0,0);
 				//	dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 			uint32_t data_index=(*data)>>(8*byte);
@@ -181,22 +181,22 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 	}
 	cache_LEVEL[set_index].cache_line[ran].tag=head_addr;
 	for (i=0;i<BLOCK_SIZE;i++)
-		cache_LEVEL[set_index].cache_line[ran].block[i]=dram_read(head_addr+i,1) & (~0u >> ((4 -3) << 3));
+		cache_LEVEL[set_index].cache_line[ran].block[i]=dram_read(head_addr+i,1) & (~0u >> ((4 -1) << 3));
 	if(l2)
 		cache_LEVEL[set_index].cache_line[ran].dirty=true;
 	uint32_t count1=64-block_offset;
 	if (addr+size>(head_addr+64))
 	{
-	   bool hit=cache_write_l1(data+count1,count1,addr+count1,size-count1,1,0);
+	   bool hit=cache_write_l1(data,count1,addr+count1,size-count1,1,0);
 	  // if(hit) dram_write(addr+count1,size-count1,(uint32_t)data+count1);
 	   if(!hit)
 	  {
-		cache_write_l1(data+count1,count1,addr+count1,size-count1,0,0);
+		cache_write_l1(data,count1,addr+count1,size-count1,0,0);
 	//	dram_write(addr+count1,size-count1,(uint32_t)data+count1);
 	  }
 	   
 	    uint32_t data_index=((*data))>>(8*byte);
-	    int data1=data_index&(~0u >> ((4 - size) << 3));
+	    int data1=data_index&(~0u >> ((4 - count1) << 3));
             memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count1);
           return true;
 	}

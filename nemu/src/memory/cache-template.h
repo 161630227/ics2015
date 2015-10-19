@@ -101,11 +101,11 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			{
                                 int count=64-size;
 				bool hit=cache_write_l1(data+count,count,addr+count,size-count,1,0);
-				if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
-				else
+		//		if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
+				if(!hit)
 				{
 					cache_write_l1(data+count,count,addr+count,size-count,0,0);
-					dram_write(addr+count,size-count,(uint32_t)data+count);
+				//	dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 			
 				uint32_t data_index=((*data)<<(8*byte))>>(8*byte);
@@ -161,6 +161,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			}
 			if(l2)
 				cache_LEVEL[set_index].cache_line[i].dirty=true;
+                  
                   return true;                   
 		}
 	}

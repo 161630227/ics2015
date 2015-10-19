@@ -114,7 +114,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 			cache_LEVEL[set_index].cache_line[i].valid=true;
 			for (j=0;j<size;j++,data++,block_offset++)
 			{
-				printf("j=%x",*data);
+				printf("j=%x\n",*data);
 				cache_LEVEL[set_index].cache_line[i].block[block_offset]=*data;
                        // printf("data%x\n",*data);
 			}

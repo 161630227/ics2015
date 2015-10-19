@@ -4,6 +4,7 @@ uint32_t dram_read(hwaddr_t addr, size_t len);
 uint32_t dram_read(hwaddr_t addr, size_t len);
 uint32_t dram(hwaddr_t addr,size_t len);
 void dram_write(hwaddr_t addr,size_t len,uint32_t data);
+void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 {
 	uint32_t set_index=(addr& GET_SET_INDEX)>>BLOCK_BYTE;
@@ -117,9 +118,19 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
             
 			cache_LEVEL[set_index].cache_line[i].tag=head_addr;
 			int j;
-			for (j=0;j<BLOCK_SIZE;j++,head_addr++)
-				cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr,1);
+			for (j=0;j<BLOCK_SIZE;j++)
+				cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr+j,1);
 			cache_LEVEL[set_index].cache_line[i].valid=true;
+			uint32_t count=64-block_offset;
+			if (addr+size>(head_addr+64))
+			{
+				hwaddr_write(addr+count,size-count,data+count);
+				for (j=0;j<count;j++)
+				{
+                                    cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*(data+j);
+				}
+			}
+			else
 			for (j=0;j<size;j++,data++)
 			{
 			//	printf("j=%x\n",*data);

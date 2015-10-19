@@ -112,7 +112,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 	}
 	for (i=0;i<N;i++)
 	{
-	//	printf("%x\n",*data);
+		printf("data=%x\n",*data);
 		if(cache_LEVEL[set_index].cache_line[i].valid==false)
 		{
             

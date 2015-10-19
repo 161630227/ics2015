@@ -19,7 +19,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	uint32_t result=cache_read_l1(&data_hit,addr,len);
 	if(data_hit)
 	 return result & (~0u >> ((4 - len) << 3));
-/*	else
+	else
 	{
 	
 		printf("^**\n");
@@ -37,7 +37,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
                  }
 	}
 
-*/
+
 	return  result & (~0u >> ((4 - len) << 3));
 	
 //	return cache_read(addr,len)&(~0u >> ((4 - len) << 3));

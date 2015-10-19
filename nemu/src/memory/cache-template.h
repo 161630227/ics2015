@@ -46,8 +46,8 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 					       index<<=8;
 					       index+=cache_LEVEL[set_index].cache_line[i].block[j];
 				       }
-				        printf("dram=   cache=    %x   %x\n",dram(addr,len),(index+result<<(8*count)));	
-					return (index+result<<(8*count));
+				        printf("dram=   cache=    %x   %x\n",dram(addr,len),(index+(result<<(8*count))));	
+					return (index+(result<<(8*count)));
 				}
 				else
 
@@ -112,7 +112,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 	}
 	for (i=0;i<N;i++)
 	{
-		printf("data=%x\n",data);
+	//	printf("data=%x\n",data);
 		if(cache_LEVEL[set_index].cache_line[i].valid==false)
 		{
             
@@ -124,7 +124,7 @@ bool concat(cache_write_,LEVEL)(uint8_t *data,uint32_t addr,uint32_t size,bool n
 			uint32_t count=64-block_offset;
 			if (addr+size>(head_addr+64))
 			{
-				hwaddr_write(addr+count,size-count,data+count);
+				hwaddr_write(addr+count,size-count,(uint32_t)data+count);
 				for (j=0;j<count;j++)
 				{
                                     cache_LEVEL[set_index].cache_line[i].block[block_offset+j]=*(data+j);

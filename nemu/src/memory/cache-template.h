@@ -142,7 +142,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 		         	int data1=(*data)&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 			}
-			if(addr==0x100030)
+			if(addr==0x10003e)
 			{
 				printf("data=%x\n",*data);
 				printf("145行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);

@@ -46,7 +46,7 @@ uint32_t loader() {
 			/* TODO: read the content of the segment from the ELF file 
 			 * to the memory region [VirtAddr, VirtAddr + FileSiz)
 			 */
-			int j;
+			//int j;
 			memcpy((void *)ph->p_vaddr, (void *)(buf + ph->p_offset), ph->p_filesz);
 			 
 	                for(i = ph->p_filesz; i < ph->p_memsz; i ++) 

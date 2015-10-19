@@ -78,7 +78,6 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 {
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
-//	printf("85读入数据%x\n",*data);
 	uint32_t head_addr=addr & GET_HEAD_ADDR;
 
 	uint32_t block_offset=addr & GET_BLOCK_OFFSET;
@@ -133,7 +132,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 				bool hit=cache_write_l1(data,count,addr+count,size-count,1,0);
 				if(!hit)
 				{
-					cache_write_l1(data+count,0,addr+count,size-count,0,0);
+					cache_write_l1(data,count,addr+count,size-count,0,0);
 				//	dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 			uint32_t data_index=(*data)>>(8*byte);

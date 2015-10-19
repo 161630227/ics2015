@@ -48,26 +48,27 @@
 #undef NAME
 void cache_init()
 {
-	int i,j;
+//	int i,j;
 //       for (i=0;i<4096;i++)
 //       {
 //	       for (j=0;j<16;j++)
-		for (i=0;i<128;i++)
+/*		for (i=0;i<128;i++)
 	{
-		for(j=0;j<8;++j)
+		for(j=0;j<16;++j)
 	       {
-		cache_l1[i].cache_line[j].valid=false;
-		       cache_l1[i].cache_line[j].valid=false;
+		cache_l2[i].cache_line[j].valid=false;
+		     //  cache_l1[i].cache_line[j].valid=false;
 	       cache_l2[i].cache_line[j].dirty=false;
 
 	       }
-       }
-
-	for (i=0;i<128;i++)
+       }*/
+memset(cache_l1,0, sizeof(cache_l1));
+memset(cache_l2,0, sizeof(cache_l2));
+/*	for (i=0;i<128;i++)
 	{
 		for(j=0;j<8;++j)
 		{
 			cache_l1[i].cache_line[j].valid=false;
 		}
-	}
+	}*/
 }

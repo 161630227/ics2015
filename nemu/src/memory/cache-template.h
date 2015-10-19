@@ -90,8 +90,9 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t addr,uint32_t size,bool 
 		  
 			if(cache_LEVEL[set_index].cache_line[i].tag==addr &&cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE>addr+size &&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
-				if(addr==(0x100040))printf("YYYY\n");
+			//	if(addr==(0x100040))printf("YYYY\n");
 		         	int data1=(*data)&(~0u >> ((4 - size) << 3));
+				if(addr==(0x100040))printf("data1第94行%x\n",data1);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 				if(l2)
 					cache_LEVEL[set_index].cache_line[i].dirty=true;

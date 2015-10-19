@@ -146,7 +146,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 			}
-			if(addr==0x10003e)
+		/*	if(addr==0x10003e)
 			{
 				printf("data=%x\n",*data);
 				printf("145行%x\n",cache_LEVEL[set_index].cache_line[i].block[block_offset]);
@@ -158,7 +158,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			       	printf("cache  %x\n",cache_read_l1(&data_hit,0x10003e,4));
 			        printf("147行%x\n",cache_LEVEL[40].cache_line[i].block[0]);
 		                printf("148行%x\n",cache_LEVEL[40].cache_line[i].block[1]);
-			}
+			}*/
 			if(l2)
 				cache_LEVEL[set_index].cache_line[i].dirty=true;
                   

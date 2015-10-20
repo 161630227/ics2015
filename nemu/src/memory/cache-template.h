@@ -10,8 +10,8 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 {
 	uint32_t set_index=(addr& GET_SET_INDEX)>>BLOCK_BYTE;
 	uint32_t i;
-	  int data1=0xac;
-       	  memcpy(cache_LEVEL[1000].cache_line[1].block,&data1,4);
+	//  int data1=0xac;
+       	  //memcpy(cache_LEVEL[1000].cache_line[1].block,&data1,4);
 	uint32_t block_offset=addr &GET_BLOCK_OFFSET;
         uint32_t addr_me=addr&GET_HEAD_ADDR;
 	for(i=0;i<N;++i)
@@ -95,6 +95,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			{
 				uint32_t data_index=((*data)>>(8*byte));
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
+				printf("97data1=%x\n",data1);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 				if(l2)
 					cache_LEVEL[set_index].cache_line[i].dirty=true;

@@ -12,10 +12,8 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 	uint32_t i;
 	uint32_t block_offset=addr &GET_BLOCK_OFFSET;
         uint32_t addr_me=addr&GET_HEAD_ADDR;
-//        printf("N=0x%x   len=%x\n",addr,len);
 	for(i=0;i<N;++i)
 	{
-		//uint32_t max=cache_LEVEL[set_index].cache_line[i].tag+BLOCK_SIZE;
 		if((cache_LEVEL[set_index].cache_line[i].tag==addr_me)&&cache_LEVEL[set_index].cache_line[i].valid==true)
 		{
 	        
@@ -103,12 +101,10 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			else if(cache_LEVEL[set_index].cache_line[i].tag==head_addr&&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
                                 int count=64-block_offset;
-	//			printf("block_offset= %x  tag= %x  addr= %x  106size=  %xcount= %x",block_offset,cache_LEVEL[set_index].cache_line[i].tag,addr,size,count);
-				bool hit=cache_write_l1(data+count,count,addr+count,size-count,1,0);
-		//		if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
+				bool hit=cache_write_l1(data+count,byte+count,addr+count,size-count,1,0);
 				if(!hit)
 				{
-					cache_write_l1(data+count,count,addr+count,size-count,0,0);
+					cache_write_l1(data+count,byte+count,addr+count,size-count,0,0);
 				//	dram_write(addr+count,size-count,(uint32_t)data+count);
 				}
 			
@@ -130,7 +126,6 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			int j;
 			for (j=0;j<BLOCK_SIZE;j++)
 			{//	printf("j=%x\n",j);
-				if(j==0) printf("head_addr %x\n",addr);
 				cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr+j,1)&(~0u >> ((4 - 1) << 3));
 			}
 			cache_LEVEL[set_index].cache_line[i].valid=true;

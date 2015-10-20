@@ -215,7 +215,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 	int data1=data_index&(~0u >> ((4 - size) << 3));
          printf("200行size=  %x data1=%x\n",size,data1);
 	 memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
-	printf("么么哒晴晴");
+//	printf("么么哒晴晴");
 	return true;
 
 }

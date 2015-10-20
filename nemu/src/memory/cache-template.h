@@ -102,6 +102,8 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			else if(cache_LEVEL[set_index].cache_line[i].tag==head_addr&&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
                                 int count=64-block_offset;
+				 if(size-count==0)printf("105\n");
+
 				bool hit=cache_write_l1(data+count,byte+count,addr+count,size-count,1,0);
 				if(!hit)
 				{
@@ -132,7 +134,10 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			cache_LEVEL[set_index].cache_line[i].valid=true;
 			uint32_t count=64-block_offset;
 			if (block_offset+size>64)
+				
 			{
+				 if(size-count==0)printf("136\n");
+
 				bool hit=cache_write_l1(data,count,addr+count,size-count,1,0);
 			       
 				if(!hit)
@@ -180,6 +185,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 	uint32_t count1=64-block_offset;
 	if (block_offset+size>64)
 	{
+		if(size-count1==0)printf("183\n");
 	   bool hit=cache_write_l1(data,count1,addr+count1,size-count1,1,0);
 	  // if(hit) dram_write(addr+count1,size-count1,(uint32_t)data+count1);
 	   if(!hit)

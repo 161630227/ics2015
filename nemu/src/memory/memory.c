@@ -16,6 +16,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
     
 	assert(len==1||len==2||len==4);
        if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
+ printf("addr=%x\n",addr);
 	bool data_hit=false;
 	uint32_t result;
    //     uint32_t tt;

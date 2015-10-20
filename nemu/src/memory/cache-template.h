@@ -80,7 +80,6 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2)//data represent addr
 {
 //    if(size==0)	printf("80行 addr=%x\n",addr);
-      if((*data)!=0)printf("118data1=%x\n",*data);
  
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
@@ -97,6 +96,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			{
 				uint32_t data_index=((*data)>>(8*byte));
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
+                               if((*data)!=0)printf("99data1=%x\n",data1);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 				if(l2)
 					cache_LEVEL[set_index].cache_line[i].dirty=true;
@@ -117,6 +117,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			
 				uint32_t data_index=(*data)>>(8*byte);
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
+                              if((*data)!=0)printf("118data1=%x\n",data1);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 		               return true;
 		 	}
@@ -151,12 +152,14 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 				}
 			uint32_t data_index=(*data)>>(8*byte);
 	                int data1=data_index&(~0u >> ((4 - count) << 3));
+                          if((*data)!=0)printf("155data1=%x\n",data1);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 			}
 			else
 			{
 				uint32_t data_index=(*data)>>(8*byte);
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
+                               if((*data)!=0)printf("162data1=%x\n",data1);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 			}
 			

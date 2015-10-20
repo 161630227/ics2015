@@ -100,10 +100,11 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 					cache_LEVEL[set_index].cache_line[i].dirty=true;
 				return true;
                         }
+
 			else if(cache_LEVEL[set_index].cache_line[i].tag==head_addr&&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
                                 int count=64-block_offset;
-				printf("tag= %x  addr= %x  106size=  %xcount= %x",cache_LEVEL[set_index].cache_line[i].tag,addr,size,count);
+				printf("block_offset= %x  tag= %x  addr= %x  106size=  %xcount= %x",block_offset,cache_LEVEL[set_index].cache_line[i].tag,addr,size,count);
 				bool hit=cache_write_l1(data+count,count,addr+count,size-count,1,0);
 		//		if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
 				if(!hit)

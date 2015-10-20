@@ -47,8 +47,39 @@ typedef struct {
 		uint32_t value;
 	} eflags;
 
+struct sreg
+{
+	uint32_t base_addr;
+	uint16_t selector;
+} es,ds,ss,cs;
+ struct
+{
+	uint32_t base_addr;
+	uint32_t limit;
+} gdtr;
+ union CR0{
+     struct
+     {
 
-       
+	     uint32_t PE :1;
+	     uint32_t MP :1;
+	     uint32_t EM :1;
+	     uint32_t TS :1;
+	     uint32_t ET :1;
+	     uint32_t NON:26;//undefined
+	     uint32_t PG :1;
+     };
+     uint32_t val;
+  } cr0;  
+ union CR3
+{
+	struct
+	{
+		uint32_t  NON :12;// undefined
+                uint32_t page_directory_base :20;
+        };
+	uint32_t val;
+}cr3;	
 
 } CPU_state;
 

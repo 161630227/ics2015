@@ -89,7 +89,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 		{
 
 		  
-			if(cache_LEVEL[set_index].cache_line[i].tag==head_addr &&(BLOCK_SIZE>=(block_offset+size)) &&cache_LEVEL[set_index].cache_line[i].valid==true)
+			if(cache_LEVEL[set_index].cache_line[i].tag==head_addr &&(BLOCK_SIZE>(block_offset+size)) &&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
 				uint32_t data_index=((*data)>>(8*byte));
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));

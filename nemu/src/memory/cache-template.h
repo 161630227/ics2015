@@ -80,6 +80,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2)//data represent addr
 {
 //    if(size==0)	printf("80行 addr=%x\n",addr);
+	printf("118data1=%x\n",*data);
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
 	uint32_t head_addr=addr & GET_HEAD_ADDR;
@@ -115,7 +116,6 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			
 				uint32_t data_index=(*data)>>(8*byte);
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
-				printf("118data1=%x\n",*data);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count);
 		               return true;
 		 	}

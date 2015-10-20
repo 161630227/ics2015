@@ -64,8 +64,9 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 //		{
 
        cache_write_l1(&data,0,addr,len,0,0);
-       dram_write(addr,len,data);
       if(addr==0x7f5ffa0)printf("fuck22\n");    
+       dram_write(addr,len,data);
+       printf("***\n");
 //			cache_write_l2(&data,addr,len,0,1);
 //                }
 	}

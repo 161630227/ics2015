@@ -106,7 +106,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			else if(cache_LEVEL[set_index].cache_line[i].tag==head_addr&&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
                                 int count=64-block_offset;
-				 if(size-count==0)printf("105\n");
+//				 if(size-count==0)printf("105\n");
 
 				bool hit=cache_write_l1(data+count,byte+count,addr+count,size-count,1,0);
 				if(!hit)

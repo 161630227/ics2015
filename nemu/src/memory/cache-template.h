@@ -79,7 +79,6 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 
 bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2)//data represent addr
 {
-//    if(size==0)	printf("80行 addr=%x\n",addr);
  
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
@@ -96,11 +95,9 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			{
 				uint32_t data_index=((*data)>>(8*byte));
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
-                              if((*data)!=0&&size!=0)printf("99data1=%x   size  %x\n",data1,size);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 				int k;
 				if((*data)!=0&&size!=0)for (k=0;k<size;++k)
-				printf("k= %x  data=%x\n",k,cache_LEVEL[set_index].cache_line[i].block[block_offset+k]);
 				if(l2)
 					cache_LEVEL[set_index].cache_line[i].dirty=true;
 				return true;
@@ -162,7 +159,6 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			{
 				uint32_t data_index=(*data)>>(8*byte);
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
-                               //if(((*data)!=0)&&size!=0)printf("162data1=%x size= %x\n",data1,size);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 			}
 			
@@ -197,11 +193,9 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 	{
 		if(size-count1==0)printf("183\n");
 	   bool hit=cache_write_l1(data,count1,addr+count1,size-count1,1,0);
-	  // if(hit) dram_write(addr+count1,size-count1,(uint32_t)data+count1);
 	   if(!hit)
 	  {
 		cache_write_l1(data,count1,addr+count1,size-count1,0,0);
-	//	dram_write(addr+count1,size-count1,(uint32_t)data+count1);
 	  }
 	   
 	    uint32_t data_index=((*data))>>(8*byte);
@@ -213,10 +207,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 
 	uint32_t data_index=(*data)>>(8*byte);
 	int data1=data_index&(~0u >> ((4 - size) << 3));
-         //printf("200行size=  %x data1=%x\n",size,data1);
-	//printf("block_offset=%x\n",cache_LEVEL[set_index].cache_line[i].block[1]);
 	 memcpy(cache_LEVEL[set_index].cache_line[ran].block+block_offset,&data1,size);
-	printf("么么哒晴晴");
 	return true;
 
 }

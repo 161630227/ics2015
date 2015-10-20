@@ -1,4 +1,5 @@
 #include "common.h"
+//#include"cache.h"
 #include "cpu/reg.h"
 /*uint32_t dram_read(hwaddr_t,size_t);
 void dram_write(hwaddr_t, size_t,uint32_t);
@@ -18,8 +19,8 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 //       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
 	bool data_hit=false;
 	uint32_t result;
-	//int data1=0x1ac;
-//	 memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
+//	int data1=0x1ac;
+//	 memcpy(cache_LEVEL[1000].cache_line[1].block,&data1,4);
 //	printf("read_addr=%x\n",addr);
 //	printf("11=%x\n",cache_read_l1(&data_hit,0x7f5fffd,4));
         result=cache_read_l1(&data_hit,addr,len);
@@ -67,8 +68,8 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 //		if(!hit)
 //		{
 
-       cache_write_l1(&data,0,addr,len,0,0);
-      if(addr==0x7f5ffa0)printf("fuck22\n");    
+       //cache_write_l1(&data,0,addr,len,0,0);
+     // if(addr==0x7f5ffa0)printf("fuck22\n");    
        dram_write(addr,len,data);
  //      printf("***\n");
 //			cache_write_l2(&data,addr,len,0,1);

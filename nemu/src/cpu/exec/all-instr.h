@@ -10,6 +10,7 @@
 #include "arith/leave.h"
 #include "data-mov/cmovcc.h"
 #include "data-mov/cwd.h"
+#include "data-mov/lgdt.h"
 #include "data-mov/movzx.h"
 #include "arith/dec.h"
 #include "arith/inc.h"

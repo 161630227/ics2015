@@ -16,7 +16,6 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
     
 	assert(len==1||len==2||len==4);
        if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
- printf("addr=%x\n",addr);
 	bool data_hit=false;
 	uint32_t result;
    //     uint32_t tt;
@@ -27,7 +26,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
  //      printf("cache  %x\n",cache_read_l1(&data_hit,tt,4)==result);
         result=cache_read_l1(&data_hit,addr,len);
 	if(data_hit)
-	 return result & (~0u >> ((4 - len) << 3));
+	return result & (~0u >> ((4 - len) << 3));
 	else
 	{
 	
@@ -45,7 +44,8 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
     //          }
 	}
 
-
+       
+ printf("addr=%x\n",addr);
 	return  result & (~0u >> ((4 - len) << 3));
 	
 //	return cache_read(addr,len)&(~0u >> ((4 - len) << 3));

@@ -159,7 +159,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			{
 				uint32_t data_index=(*data)>>(8*byte);
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
-                               if((*data)!=0)printf("162data1=%x size= %x\n",data1,size);
+                               if(((*data)!=0)&&size!=0)printf("162data1=%x size= %x\n",data1,size);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
 			}
 			

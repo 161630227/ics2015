@@ -32,7 +32,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 
 			result=dram_read(addr,len);
                          
-              	cache_write_l1(&result,0,addr,len,0,0);
+//              	cache_write_l1(&result,0,addr,len,0,0);
     //          }
 	}
 

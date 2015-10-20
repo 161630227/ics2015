@@ -103,7 +103,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			else if(cache_LEVEL[set_index].cache_line[i].tag==head_addr&&cache_LEVEL[set_index].cache_line[i].valid==true)
 			{
                                 int count=64-size;
-				printf("size-count106 %x",size-count);
+				printf("106size=  %xcount= %x",size,count);
 				bool hit=cache_write_l1(data+count,count,addr+count,size-count,1,0);
 		//		if(hit) dram_write(addr+count,size-count,(uint32_t)data+count);
 				if(!hit)

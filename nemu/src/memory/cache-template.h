@@ -134,6 +134,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			uint32_t count=64-block_offset;
 			if (addr+size>(head_addr+64))
 			{
+			        printf("count-block_offset%x\n",count);	
 				bool hit=cache_write_l1(data,count,addr+count,size-count,1,0);
 			       
 				if(!hit)

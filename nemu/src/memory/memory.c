@@ -15,15 +15,9 @@ void dram_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
     
 	assert(len==1||len==2||len==4);
-       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
+//       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
 	bool data_hit=false;
 	uint32_t result;
-   //     uint32_t tt;
-//	tt=0x8000000;
-//		result=dram_read(tt,4)&(~0u >> ((4 - 4) << 3));
-  //	printf("dram1 %x\n ",result);
-  //     cache_write_l1(&result,0,tt,4,0,0);	
- //      printf("cache  %x\n",cache_read_l1(&data_hit,tt,4)==result);
         result=cache_read_l1(&data_hit,addr,len);
 	if(data_hit)
 	return result & (~0u >> ((4 - len) << 3));
@@ -36,11 +30,9 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 //  	else
   //              {
 
-		       if(addr+len-1>=0x8000000)printf("&&\n");
 			result=dram_read(addr,len);
-		//	if (len==4) printf("result= %x\n",result);
                          
- //               	cache_write_l1(&result,0,addr,len,0,0);
+              	cache_write_l1(&result,0,addr,len,0,0);
     //          }
 	}
 

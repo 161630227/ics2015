@@ -59,7 +59,7 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
         assert(len==1||len==2||len==4);
 	bool hit=cache_write_l1(&data,0,addr,len,1,0);
 //	bool hit=true;
-       printf("addr= %x len= %x  hit= %x\n",addr,len,hit);	
+      // printf("addr= %x len= %x  hit= %x\n",addr,len,hit);	
 	if(hit)
 		dram_write(addr,len,data);
 	else

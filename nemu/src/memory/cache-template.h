@@ -77,6 +77,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 
 bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2)//data represent addr
 {
+	if (addr==0x7f5ffa0) printf("^^");
 	uint32_t set_index=(addr & GET_SET_INDEX)>>BLOCK_BYTE;
 	int i;
 	uint32_t head_addr=addr & GET_HEAD_ADDR;

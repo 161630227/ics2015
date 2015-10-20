@@ -18,7 +18,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 //       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
 	bool data_hit=false;
 	uint32_t result;
-	printf("read_addr=%x\n",addr);
+//	printf("read_addr=%x\n",addr);
 //	printf("11=%x\n",cache_read_l1(&data_hit,0x7f5fffd,4));
         result=cache_read_l1(&data_hit,addr,len);
 	if(data_hit)

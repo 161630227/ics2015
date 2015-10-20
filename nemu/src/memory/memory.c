@@ -52,7 +52,9 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
         assert(len==1||len==2||len==4);
 	bool hit=cache_write_l1(&data,0,addr,len,1,0);
-//	bool hit=true;
+        if(len==0) printf("80行 addr=%x\n",addr);
+
+	//	bool hit=true;
 //     printf("addr= %x len= %x  hit= %x data%x\n",addr,len,hit,data);	
 	if(hit)
 		dram_write(addr,len,data);

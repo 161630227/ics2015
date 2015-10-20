@@ -98,6 +98,9 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 	                   	int data1=data_index&(~0u >> ((4 - size) << 3));
                                if((*data)!=0&&size!=0)printf("99data1=%x   size  %x\n",data1,size);
 				memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
+				int k;
+				for (k=0;k<size;++k)
+				printf("k= %x  data=%x\n",k,cache_LEVEL[set_index].cache_line[i].block[block_offset+k]);
 				if(l2)
 					cache_LEVEL[set_index].cache_line[i].dirty=true;
 				return true;

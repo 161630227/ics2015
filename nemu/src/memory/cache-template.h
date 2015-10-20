@@ -123,7 +123,6 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 		if(cache_LEVEL[set_index].cache_line[i].valid==false)
 		{
             
-			if (addr==0x7f5ffa0)printf("126行\n");
 			cache_LEVEL[set_index].cache_line[i].tag=head_addr;
 			int j;
 			for (j=0;j<BLOCK_SIZE;j++)
@@ -194,7 +193,8 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
             memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,count1);
           return true;
 	}
-
+        
+	if (addr==0x7f5ffa0)printf("197行\n");
 	uint32_t data_index=(*data)>>(8*byte);
 	int data1=data_index&(~0u >> ((4 - size) << 3));
 	memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);

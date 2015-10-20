@@ -69,7 +69,7 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 //		if(!hit)
 //		{
 
-      cache_write_l1(&data,0,addr,len,0,0);
+     // cache_write_l1(&data,0,addr,len,0,0);
     	dram_write(addr,len,data);
 //			cache_write_l2(&data,addr,len,0,1);
 //                }

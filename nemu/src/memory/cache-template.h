@@ -127,7 +127,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			int j;
 			for (j=0;j<BLOCK_SIZE;j++)
 			{//	printf("j=%x\n",j);
-				if(j==0) printf("head_addr %x\n",head_addr+j);
+				if(j==0) printf("head_addr %x\n",addr);
 				cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr+j,1)&(~0u >> ((4 - 1) << 3));
 			}
 			cache_LEVEL[set_index].cache_line[i].valid=true;

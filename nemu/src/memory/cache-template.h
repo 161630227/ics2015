@@ -10,7 +10,7 @@ uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 {
 	uint32_t set_index=(addr& GET_SET_INDEX)>>BLOCK_BYTE;
 	uint32_t i;
-	  int data1=0x1ac;
+	  int data1=0xac;
        	  memcpy(cache_LEVEL[1000].cache_line[1].block,&data1,4);
 	uint32_t block_offset=addr &GET_BLOCK_OFFSET;
         uint32_t addr_me=addr&GET_HEAD_ADDR;

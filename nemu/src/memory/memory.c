@@ -15,6 +15,7 @@ void dram_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
     
 	assert(len==1||len==2||len==4);
+       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
 	bool data_hit=false;
 	uint32_t result;
         uint32_t tt;
@@ -70,7 +71,6 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
        cache_write_l1(&data,0,addr,len,0,0);
     	dram_write(addr,len,data);
 //			cache_write_l2(&data,addr,len,0,1);
-       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
 //                }
 	}
       

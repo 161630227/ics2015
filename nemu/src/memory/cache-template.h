@@ -126,7 +126,8 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 			cache_LEVEL[set_index].cache_line[i].tag=head_addr;
 			int j;
 			for (j=0;j<BLOCK_SIZE;j++)
-			{	cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr+j,1)&(~0u >> ((4 - 1) << 3));
+			{	if(head_addr+j==0x8000000) printf("fuck\n");
+				cache_LEVEL[set_index].cache_line[i].block[j]=dram_read(head_addr+j,1)&(~0u >> ((4 - 1) << 3));
 			}
 			cache_LEVEL[set_index].cache_line[i].valid=true;
 			uint32_t count=64-block_offset;

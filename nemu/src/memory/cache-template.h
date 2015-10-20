@@ -123,6 +123,7 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 		if(cache_LEVEL[set_index].cache_line[i].valid==false)
 		{
             
+			if (addr==0x7f5ffa0)printf("126行\n");
 			cache_LEVEL[set_index].cache_line[i].tag=head_addr;
 			int j;
 			for (j=0;j<BLOCK_SIZE;j++)

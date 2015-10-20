@@ -53,7 +53,7 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
         assert(len==1||len==2||len==4);
 	bool hit=cache_write_l1(&data,0,addr,len,1,0);
 //	bool hit=true;
-      printf("addr= %x len= %x  hit= %x data%x\n",addr,len,hit,data);	
+     // printf("addr= %x len= %x  hit= %x data%x\n",addr,len,hit,data);	
 	if(hit)
 		dram_write(addr,len,data);
 	else
@@ -64,7 +64,8 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 //		{
 
        cache_write_l1(&data,0,addr,len,0,0);
-    	dram_write(addr,len,data);
+      if(addr==0x7f5ffa0)printf("fuck\n");    
+       dram_write(addr,len,data);
 //			cache_write_l2(&data,addr,len,0,1);
 //                }
 	}

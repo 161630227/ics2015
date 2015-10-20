@@ -8,6 +8,7 @@ bool cache_write_l1(uint32_t *data,uint32_t byte,uint32_t addr,uint32_t size,boo
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t concat(cache_read_,LEVEL)(bool *hit,uint32_t addr, size_t len)
 {
+        printf("len=%x\n",len);
 	uint32_t set_index=(addr& GET_SET_INDEX)>>BLOCK_BYTE;
 	uint32_t i;
 	uint32_t block_offset=addr &GET_BLOCK_OFFSET;

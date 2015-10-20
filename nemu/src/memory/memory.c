@@ -36,7 +36,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 //  	else
   //              {
 
-		
+		       if(addr+len-1>=0x8000000)printf("&&\n");
 			result=dram_read(addr,len);
 		//	if (len==4) printf("result= %x\n",result);
                          

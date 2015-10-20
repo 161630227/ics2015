@@ -197,9 +197,9 @@ bool concat(cache_write_,LEVEL)(uint32_t* data,uint32_t byte,uint32_t addr,uint3
 
 	uint32_t data_index=(*data)>>(8*byte);
 	int data1=data_index&(~0u >> ((4 - size) << 3));
-        printf("%x\n",data1);
+        printf("size=  %x data1=%x\n",size,data1);
 	memcpy(cache_LEVEL[set_index].cache_line[i].block+block_offset,&data1,size);
-	printf("data1=%x\n",data1);
+//	printf("data1=%x\n",data1);
 	return true;
 
 }

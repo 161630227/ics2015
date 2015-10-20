@@ -19,10 +19,6 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 //       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
 	bool data_hit=false;
 	uint32_t result;
-//	int data1=0x1ac;
-//	 memcpy(cache_LEVEL[1000].cache_line[1].block,&data1,4);
- //       printf("read_addr=%x\n",addr);
-//	printf("11=%x\n",cache_read_l1(&data_hit,0x7f5fffd,4));
         result=cache_read_l1(&data_hit,addr,len);
 	if(data_hit)
 	return result & (~0u >> ((4 - len) << 3));
@@ -30,15 +26,15 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	{
 	
 //		result=cache_read_l2(&data_hit,addr,len);
-	//	if(data_hit)
+//		if(data_hit)
 	//		return result& (~0u >> ((4 - len) << 3));
-//  	else
-  //              {
+ //	else
+   //            {
 
 			result=dram_read(addr,len);
                          
-              	cache_write_l1(&result,0,addr,len,0,0);
-    //          }
+           	cache_write_l1(&result,0,addr,len,0,0);
+     //         }
 	}
 
        

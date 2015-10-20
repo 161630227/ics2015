@@ -18,7 +18,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 //       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
 	bool data_hit=false;
 	uint32_t result;
-//	printf("read_addr=%x\n",addr);
+	printf("read_addr=%x\n",addr);
 //	printf("11=%x\n",cache_read_l1(&data_hit,0x7f5fffd,4));
         result=cache_read_l1(&data_hit,addr,len);
 	if(data_hit)
@@ -53,7 +53,7 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
         assert(len==1||len==2||len==4);
 	bool hit=cache_write_l1(&data,0,addr,len,1,0);
 //	bool hit=true;
-     // printf("addr= %x len= %x  hit= %x data%x\n",addr,len,hit,data);	
+     printf("addr= %x len= %x  hit= %x data%x\n",addr,len,hit,data);	
 	if(hit)
 		dram_write(addr,len,data);
 	else

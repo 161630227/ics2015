@@ -1,5 +1,5 @@
 #include "common.h"
-//#include"cache.h"
+#include"../../lib-common/x86-inc/mmu.h"
 #include "cpu/reg.h"
 /*uint32_t dram_read(hwaddr_t,size_t);
 void dram_write(hwaddr_t, size_t,uint32_t);
@@ -83,18 +83,51 @@ uint32_t lnaddr_read(lnaddr_t addr, size_t len) {
 void lnaddr_write(lnaddr_t addr, size_t len, uint32_t data) {
 	hwaddr_write(addr, len, data);
 }
+lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 
-uint32_t swaddr_read(swaddr_t addr, size_t len) {
-#ifdef DEBUG
+{
+	// uint8_t rpl;权限管理还有offset问题暂时未考虑
+	uint16_t selector;
+	uint16_t reg_index;//段索引
+	switch(sreg)
+	{
+		case 0 :{
+				selector=cpu.es.selector;break;
+			}
+		case 1: {
+				 selector=cpu.cs.selector;break;
+			}
+                case 2: {
+				 selector=cpu.ss.selector;break;
+		        }
+		case 3: {
+			          selector=cpu.ds.selector;break;
+			}
+		default :assert(0);
+	}
+//	rpl=selector &0x3;
+	reg_index=selector&0xfff8;
+//	uint8_t ti=selector &0x4;
+	uint8_t tmp[8]; 
+	int i;
+	for(i = 0; i < 8; ++ i) 
+	tmp[i] = lnaddr_read(cpu.gdtr.base_addr + reg_index * 8 + i, 1);
+	SegDesc *segdesc = (SegDesc*)tmp;
+	return (segdesc->base_31_24 << 24) + (segdesc->base_23_16 << 16) + 	segdesc->base_15_0 + addr;
+}
+uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
+//#ifdef DEBUG
 	assert(len == 1 || len == 2 || len == 4);
-#endif
-	return lnaddr_read(addr, len);
+//#endif
+	lnaddr_t lnaddr= seg_translate(addr, len, sreg);      
+	return lnaddr_read(lnaddr, len);
 }
 
-void swaddr_write(swaddr_t addr, size_t len, uint32_t data) {
-#ifdef DEBUG
+void swaddr_write(swaddr_t addr, size_t len, uint32_t data,uint8_t sreg) {
+//#ifdef DEBUG
 	assert(len == 1 || len == 2 || len == 4);
-#endif
-	lnaddr_write(addr, len, data);
+//#endif
+	 lnaddr_t lnaddr = seg_translate(addr, len, sreg);
+	lnaddr_write(lnaddr, len, data);
 }
 

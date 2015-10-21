@@ -2,7 +2,7 @@
 #define __REG_H__
 
 #include "common.h"
-
+#include "../../lib-common/x86-inc/cpu.h"
 enum { R_EAX, R_ECX, R_EDX, R_EBX, R_ESP, R_EBP, R_ESI, R_EDI };
 enum { R_AX, R_CX, R_DX, R_BX, R_SP, R_BP, R_SI, R_DI };
 enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
@@ -57,30 +57,7 @@ struct sreg
 	uint32_t base_addr;
 	uint32_t limit;
 } gdtr;
- union CR0{
-     struct
-     {
-
-	     uint32_t PE :1;
-	     uint32_t MP :1;
-	     uint32_t EM :1;
-	     uint32_t TS :1;
-	     uint32_t ET :1;
-	     uint32_t NON:26;//undefined
-	     uint32_t PG :1;
-     };
-     uint32_t val;
-  } cr0;  
- union CR3
-{
-	struct
-	{
-		uint32_t  NON :12;// undefined
-                uint32_t page_directory_base :20;
-        };
-	uint32_t val;
-}cr3;	
-
+CR0 cr0;
 } CPU_state;
 
 extern CPU_state cpu;

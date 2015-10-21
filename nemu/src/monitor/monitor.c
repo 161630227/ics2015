@@ -1,5 +1,5 @@
 #include "nemu.h"
-
+#include "../../lib-common/x86-inc/cpu.h"
 #define ENTRY_START 0x100000
 
 extern uint8_t entry [];
@@ -77,7 +77,7 @@ static void load_entry() {
 void restart() {
       
         cpu.eflags.value=0x00000002;
-	  cpu.cr0.val=0;
+	cpu.cr0.val=0;
 	/* Perform some initialization to restart a program */
 #ifdef USE_RAMDISK
 	/* Read the file with name `argv[1]' into ramdisk. */

@@ -47,7 +47,7 @@ make_helper(concat(mov_rm2sreg_,SUFFIX)){
 		default :assert(0);
 
 			
-//print_asm("mov" str(SUFFIX) " %%%s,0x%x", REG_NAME(m&0x3), m&0x3);
+print_asm("mov" str(SUFFIX) " %%%s,0x%x", REG_NAME(m&0x3), m&0x3);
 //	print_asm("mov" str(SUFFIX) " %%%s,%%d", REG_NAME(m & 0x7), ((m >> 3) & 0x7));
 	}
         return 2;

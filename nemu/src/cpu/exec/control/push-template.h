@@ -12,13 +12,13 @@ static void do_execute() {
 		if (DATA_BYTE==2)
 		{
 			cpu.esp-=2;
-			MEM_W(cpu.esp,op_src->val);
+			MEM_W(cpu.esp,op_src->val,SS);
 		}
 		else
 		{
 			cpu.esp-=4;
 //			printf("%x\n",op_src->val);
-			swaddr_write(cpu.esp, 4, op_src->val);
+			swaddr_write(cpu.esp, 4, op_src->val,SS);
 //			MEM_W(cpu.esp,op_src->val);
 		         // swaddr_write(cpu.esp,4,op_src->val);
 		} 			

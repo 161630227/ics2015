@@ -77,13 +77,13 @@ static int cmd_bt()
        {
                 char * str=find_func(addr);
 		int x1,x2,x3,x4;
-		x1= swaddr_read(ebp_index + 0x8,4);
-		x2= swaddr_read(ebp_index+0xc, 4);
-		x3=swaddr_read(ebp_index + 0x10, 4);
-	        x4=swaddr_read(ebp_index+ 0x14, 4);
+		x1= swaddr_read(ebp_index + 0x8,4,SS);
+		x2= swaddr_read(ebp_index+0xc, 4,SS);
+		x3=swaddr_read(ebp_index + 0x10, 4,SS);
+	        x4=swaddr_read(ebp_index+ 0x14, 4,SS);
 	        printf("#%d 0x%x in %s(%d, %d, %d, %d)\n", i++, addr, str,x1,x2,x3,x4);	 
-	       addr = swaddr_read(ebp_index + 4, 4);
-	       ebp_index = swaddr_read(ebp_index, 4);
+	       addr = swaddr_read(ebp_index + 4, 4,SS);
+	       ebp_index = swaddr_read(ebp_index, 4,SS);
 
        }
       return 1;
@@ -173,7 +173,7 @@ static int cmd_x(char *args){
         }
        for (i=0;i<digit;++i)
        {
-	       unsigned x1=swaddr_read(sum+i,1);
+	       unsigned x1=swaddr_read(sum+i,1,DS);
 	       printf("%x ",x1);
        }
       // printf("%02x  ",swaddr_read(sum+i,1));

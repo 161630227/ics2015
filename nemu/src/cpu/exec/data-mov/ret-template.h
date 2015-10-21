@@ -6,7 +6,7 @@
 #define instr ret
 static void do_execute() {
 	       //OPERAND_W(op_src,MEM_R(cpu.esp));
-	        cpu.eip=swaddr_read(cpu.esp,4)-2;
+	        cpu.eip=swaddr_read(cpu.esp,4,CS)-2;
 	        cpu.esp+=4;
 		cpu.esp+=op_src->val;
 		print_asm_template1();
@@ -15,7 +15,7 @@ make_instr_helper(i)
 make_helper(concat(retnear_, SUFFIX))
 {
 //	   cpu.eip=MEM_R(cpu.esp);
-	   cpu.eip=swaddr_read(cpu.esp,4);
+	   cpu.eip=swaddr_read(cpu.esp,4,CS);
 //	   printf("%x\n",cpu.eip);
 //	   cpu.esp+=DATA_BYTE;
 	   cpu.esp+=4;

@@ -6,7 +6,7 @@ make_helper(leave)
 {
 //OPERAND_W(cpu.esp, reg_l[R_EBP]);
  cpu.esp= cpu.ebp;
- cpu.ebp=MEM_R(cpu.esp);
+ cpu.ebp=MEM_R(cpu.esp,SS);
  cpu.esp=cpu.esp+DATA_BYTE;
 return 1;
 }

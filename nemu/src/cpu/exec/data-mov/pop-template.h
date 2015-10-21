@@ -7,7 +7,7 @@
 
 //#if DATA_BYTE == 2 || DATA_BYTE == 4
 static void do_execute() {
-	       OPERAND_W(op_src,MEM_R(cpu.esp));
+	       OPERAND_W(op_src,MEM_R(cpu.esp,SS));
 	       cpu.esp=cpu.esp+DATA_BYTE;
 		print_asm_template1();
 }

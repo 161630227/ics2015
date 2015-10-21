@@ -13,7 +13,7 @@ make_helper(concat(call_rel32_, SUFFIX))
 //	printf("HHHH\n");
 	   swaddr_t addr=instr_fetch(eip+1,DATA_BYTE);
 	   cpu.esp-=DATA_BYTE;
-	   MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
+	   MEM_W(cpu.esp,cpu.eip+DATA_BYTE,CS);
 //	   cpu.eip+=op_src->val;
 	   cpu.eip+=addr;
 //	   if (DATA_BYTE==2)
@@ -25,7 +25,7 @@ static void do_execute() {
                DATA_TYPE_S addr=op_src->val;
 //	       DATA_TYPE index=addr;
 	       cpu.esp-=DATA_BYTE;
-	       MEM_W(cpu.esp,cpu.eip+len);
+	       MEM_W(cpu.esp,cpu.eip+len,CS);
 //	       if (index<0x100000)cpu.eip+=addr;
 	//         else 
         	 cpu.eip=addr - len - 1;

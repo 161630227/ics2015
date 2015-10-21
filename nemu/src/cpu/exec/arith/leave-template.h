@@ -9,13 +9,13 @@ make_helper(concat(leave_, SUFFIX))
         
         if(DATA_BYTE==4)
 	{
-	   cpu.ebp=MEM_R(cpu.esp);
+	   cpu.ebp=MEM_R(cpu.esp,SS);
            cpu.esp+=4;
            print_asm_template1();
         }
        else if(DATA_BYTE==2)
        {	
-	  cpu.ebp=MEM_R(cpu.esp);
+	  cpu.ebp=MEM_R(cpu.esp,SS);
           cpu.esp+=2; 
        	  print_asm_template1();
        }   

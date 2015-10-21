@@ -333,7 +333,7 @@ int eval(int p,int q)
                                 }
 	                        //  printf("sum1=  %d\n",sum1);
 	                       printf("sum= %x\n",sum1);
-	                        sum=swaddr_read(sum1,1);
+	                        sum=swaddr_read(sum1,1,DS);
                
 	                }
 		   else if(tokens[p].type==VAR)
@@ -384,7 +384,7 @@ int eval(int p,int q)
 	           */
 		  sum7=eval(p+1,q);
 	          //printf("*  %x\n",sum7);
-		  return (swaddr_read(sum7,4));
+		  return (swaddr_read(sum7,4,DS));
 
 	 } 
 

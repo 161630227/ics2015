@@ -3,9 +3,9 @@
 
 #define instr movs
 make_helper(concat(movb_, SUFFIX)) {
-	DATA_TYPE index=MEM_R(cpu.esi);
+	DATA_TYPE index=MEM_R(cpu.esi,DS);
 	int incdec;
-	MEM_W(cpu.edi,index);
+	MEM_W(cpu.edi,index,ES);
 	if(cpu.eflags.DF==0)incdec=DATA_BYTE;
 	else incdec=-DATA_BYTE;	
 	cpu.esi+=incdec;
@@ -16,8 +16,8 @@ make_helper(concat(movb_, SUFFIX)) {
 
 make_helper(concat(movv_, SUFFIX)) {
 //	swaddr_t addr = instr_fetch(eip + 1, 4);
-	DATA_TYPE index=MEM_R(cpu.esi);
-	MEM_W(cpu.edi,index);
+	DATA_TYPE index=MEM_R(cpu.esi,DS);
+	MEM_W(cpu.edi,index,ES);
 	int incdec;
 /*	if (cpu.eflags.DF==0&&DATA_BYTE==1) incdec=2;
 	else if(cpu.eflags.DF==0&&DATA_BYTE==2)incdec=4;

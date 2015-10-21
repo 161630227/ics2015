@@ -8,7 +8,7 @@ make_helper(concat(stos_, SUFFIX)) {
 	if(DATA_BYTE==1){
 	DATA_TYPE index=cpu.eax&0xFF;
         
-	MEM_W(cpu.edi,index);
+	MEM_W(cpu.edi,index,ES);
 	if(cpu.eflags.DF==0) cpu.edi+=DATA_BYTE;
 	else cpu.edi-=DATA_BYTE;
 	//  print_asm_template2();
@@ -17,14 +17,14 @@ make_helper(concat(stos_, SUFFIX)) {
 	else if (DATA_BYTE==2)
 	{
 	   DATA_TYPE index=cpu.eax&0xFFFF;
-           MEM_W(cpu.edi,index);
+           MEM_W(cpu.edi,index,ES);
 	   if(cpu.eflags.DF==0) cpu.edi+=DATA_BYTE;
 	   else cpu.edi-=DATA_BYTE;
 	 }
 	  else
 	{	
 	   DATA_TYPE index =cpu.eax;
-	   MEM_W(cpu.edi,index);
+	   MEM_W(cpu.edi,index,ES);
 	   if(cpu.eflags.DF==0) cpu.edi+=DATA_BYTE;
 	   else cpu.edi-=DATA_BYTE;
 	 }

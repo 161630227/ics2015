@@ -1,12 +1,8 @@
 #include "common.h"
 #include"../../lib-common/x86-inc/mmu.h"
 #include "cpu/reg.h"
-/*uint32_t dram_read(hwaddr_t,size_t);
-void dram_write(hwaddr_t, size_t,uint32_t);
-uint32_t cache_read(hwaddr_t,size_t);
-void cache_write(hwaddr_t,size_t, uint32_t);
 //void L2_cache_write_L(hwaddr_t,size_t,uint32_t);
- Memory accessing interfaces */
+// Memory accessing interfaces */
 uint32_t cache_read_l1(bool *hit,uint32_t addr,uint32_t len);
 bool cache_write_l1(uint32_t *data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2);
 uint32_t cache_read_l2(bool *hit,uint32_t addr,uint32_t len);

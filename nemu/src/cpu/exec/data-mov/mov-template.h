@@ -1,5 +1,5 @@
 #include "cpu/exec/template-start.h"
-
+#include "cpu/decode/modrm.h"
 #define instr mov
 
 static void do_execute() {
@@ -19,11 +19,42 @@ make_helper(concat(mov_a2moffs_, SUFFIX)) {
 	print_asm("mov" str(SUFFIX) " %%%s,0x%x", REG_NAME(R_EAX), addr);
 	return 5;
 }
+make_helper(concat(mov_rm2sreg_,SUFFIX)){
+	uint8_t m;
+	m=instr_fetch(eip+1,1);
+	switch(m&0x3)
+	{
+		case 0:
+			{
+				cpu.es.selector=REG(m&0x3);
+				break;
+			}
+		case 1:
+			{
+				cpu.ds.selector=REG(m&0x3);
+				break;
+			}
+		case 2:
+			{
+				cpu.ss.selector=REG(m&0x3);
+			        break;
+			}
+		case 3:
+			{
+				cpu.cs.selector=REG(m&0x3);
+				break;
+			}
+		default :assert(0);
 
+			
+//print_asm("mov" str(SUFFIX) " %%%s,0x%x", REG_NAME(m&0x3), m&0x3);
+//	print_asm("mov" str(SUFFIX) " %%%s,%%d", REG_NAME(m & 0x7), ((m >> 3) & 0x7));
+	}
+        return 2;
+}
 make_helper(concat(mov_moffs2a_, SUFFIX)) {
 	swaddr_t addr = instr_fetch(eip + 1, 4);
 	REG(R_EAX) = MEM_R(addr,DS);
-
 	print_asm("mov" str(SUFFIX) " 0x%x,%%%s", addr, REG_NAME(R_EAX));
 	return 5;
 }

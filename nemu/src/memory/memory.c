@@ -115,13 +115,13 @@ uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 //#ifdef DEBUG
 	assert(len == 1 || len == 2 || len == 4);
 //#endif
-/*	if(cpu.cr0.protect_enable)
+	if(cpu.cr0.protect_enable)
 	{
 		lnaddr_t lnaddr= seg_translate(addr, len, sreg);      
-		return lnaddr_read(lnaddr, len);
+		return lnaddr_read(lnaddr, len)& (~0u >> ((4 - len) << 3));
 
-	}*/
-//	else
+	}
+	else
 	      	return dram_read(addr,len) & (~0u >> ((4 - len) << 3));
 }
 
@@ -131,13 +131,13 @@ void swaddr_write(swaddr_t addr, size_t len, uint32_t data,uint8_t sreg) {
 	assert(len == 1 || len == 2 || len == 4);
 
 //#endif
-/*       if(cpu.cr0.protect_enable)
+      if(cpu.cr0.protect_enable)
        {
 	       lnaddr_t lnaddr = seg_translate(addr, len, sreg);
 
         	lnaddr_write(lnaddr, len, data);
      }
-       else*/
+       else
        	dram_write(addr,len,data);
 }
 

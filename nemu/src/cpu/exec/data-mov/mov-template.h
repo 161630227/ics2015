@@ -26,23 +26,23 @@ make_helper(concat(mov_rm2sreg_,SUFFIX)){
 	{
 		case 0:
 			{
-				cpu.es.selector=REG(m&0x3);
+				cpu.es.selector=REG(m&0x7);
 		         //	cpu.es.limit=
 				break;
 			}
 		case 1:
 			{
-				cpu.ds.selector=REG(m&0x3);
+				cpu.ds.selector=REG(m&0x7);
 				break;
 			}
 		case 2:
 			{
-				cpu.ss.selector=REG(m&0x3);
+				cpu.ss.selector=REG(m&0x7);
 			        break;
 			}
 		case 3:
 			{
-				cpu.cs.selector=REG(m&0x3);
+				cpu.cs.selector=REG(m&0x7);
 				break;
 			}
 		default :assert(0);

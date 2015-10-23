@@ -78,6 +78,8 @@ void restart() {
       
         cpu.eflags.value=0x00000002;
 	cpu.cr0.val=0;
+	cpu.cs.limit=0xfffff;
+	cpu.cs.base_addr=0;
 	/* Perform some initialization to restart a program */
 #ifdef USE_RAMDISK
 	/* Read the file with name `argv[1]' into ramdisk. */

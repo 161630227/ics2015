@@ -27,6 +27,7 @@ make_helper(concat(mov_rm2sreg_,SUFFIX)){
 		case 0:
 			{
 				cpu.es.selector=REG(m&0x3);
+		         //	cpu.es.limit=
 				break;
 			}
 		case 1:

@@ -51,6 +51,7 @@ struct sreg
 {
 	uint32_t base_addr;
 	uint16_t selector;
+	uint32_t limit :20;
 } es,ds,ss,cs;
  struct
 {

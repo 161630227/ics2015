@@ -16,6 +16,15 @@ make_helper(jmp_rel_v)
 	    return ((instr_fetch(eip,1))==0xe9 ? jmp_rel_l(eip) : jmp_rel_b(eip));
 }
 make_helper_v(jmp_rm);
+make_helper(ljmp)
+{
+	uint32_t addr=instr_fetch(eip+1,4);
+	uint16_t sreg=instr_fetch(eip+5,2);
+	cpu.eip=addr-7;
+	cpu.cs.selector=sreg;
+	print_asm("ljmp  $0x%x,$0x%x",sreg,addr);
+	return 7;
+}
 
 /*make_helper(jmp_rm32)
 {

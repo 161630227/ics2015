@@ -17,7 +17,7 @@ make_helper(jns_b);
 make_helper(jo_b);
 make_helper(jp_b);
 make_helper(js_b);
-
+ make_helper(ljmp);
 make_helper(ja_v);
 make_helper(jae_v);
 make_helper(jb_v);

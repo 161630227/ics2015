@@ -27,7 +27,6 @@ static void do_execute() {
 }
 
 make_instr_helper(rm);
-
 make_helper(concat(jmp_rel_,SUFFIX))
 {
      	DATA_TYPE_S addr=instr_fetch(eip+1,DATA_BYTE); 

@@ -106,6 +106,11 @@ static int cmd_info(char * args){
           printf("eflags.if=  %d\n",cpu.eflags.IF);	  
           printf("eflags.of=  %d\n",cpu.eflags.OF);
 	  printf("eflags.zf=  %d\n",cpu.eflags.ZF);
+	  printf("gdtr=  %x\n",cpu.gdtr.base_addr);
+	  printf("cpu.es= %x\n", cpu.es.selector);
+	  printf("cpu.ds= %x\n", cpu.ds.selector);
+	  printf("cpu.ss= %x\n", cpu.ss.selector);
+	  printf("cpu.cs= %x\n", cpu.cs.selector);
       }
       else if(!strcmp(args,"w"))
        {

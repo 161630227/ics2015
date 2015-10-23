@@ -102,6 +102,7 @@ lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 		default :assert(0);
 	}
 //	rpl=selector &0x3;
+	printf("cpu.cs= %x\n",selector);
 	reg_index=selector&0xfff8;
 //	uint8_t ti=selector &0x4;
 	uint8_t tmp[8]; 

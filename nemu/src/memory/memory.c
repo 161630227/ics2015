@@ -5,6 +5,7 @@
 // Memory accessing interfaces */
 uint32_t cache_read_l1(bool *hit,uint32_t addr,uint32_t len);
 bool cache_write_l1(uint32_t *data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2);
+ uint32_t page_translate(lnaddr_t addr);
 uint32_t cache_read_l2(bool *hit,uint32_t addr,uint32_t len);
 bool cache_write_l2(uint32_t *data,uint32_t byte,uint32_t addr,uint32_t size,bool not_read,bool l2);
 uint32_t dram_read(hwaddr_t addr, size_t len);
@@ -73,11 +74,34 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 }
 
 uint32_t lnaddr_read(lnaddr_t addr, size_t len) {
+        if(cpu.cr0.paging==1&&cpu.cr0.protect_enable==1)
+	{
+		uint32_t addr_index=page_translate(addr);
+		return hwaddr_read(addr_index,len);
+	}
+	else
 	return hwaddr_read(addr, len);
 }
-
+uint32_t page_translate(lnaddr_t addr)
+{
+	uint32_t page_dir=addr>>22;
+	uint32_t page_directory_addr=(cpu.cr3.page_directory_base)+(page_dir<<2);
+        
+     	uint32_t page_directory=hwaddr_read(page_directory_addr,4);
+        assert((page_directory & 0x1)!=0);
+	uint32_t page_addr=((addr>>12)&0x3ff)*4+(page_directory&0xfffff000);
+	uint32_t page=hwaddr_read(page_addr,4);
+	assert((page & 0x1)!=0);
+	uint32_t physical_addr=(page&0xfffff000)+(addr&0xfff);
+       return physical_addr;
+}
 void lnaddr_write(lnaddr_t addr, size_t len, uint32_t data) {
-	hwaddr_write(addr, len, data);
+	if(cpu.cr0.paging==1&&cpu.cr0.protect_enable==1) 
+	{
+                uint32_t addr_index=page_translate(addr);
+                hwaddr_write(addr_index,len,data);
+	}
+	else hwaddr_write(addr, len, data);
 }
 lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 

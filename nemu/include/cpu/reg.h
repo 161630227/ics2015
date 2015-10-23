@@ -59,6 +59,7 @@ struct sreg
 	uint32_t limit;
 } gdtr;
 CR0 cr0;
+CR3 cr3;
 } CPU_state;
 
 extern CPU_state cpu;

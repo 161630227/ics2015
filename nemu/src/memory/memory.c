@@ -109,10 +109,11 @@ lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 	uint8_t tmp[8]; 
 	int i;
 	for(i = 0; i < 8; ++ i) 
-	tmp[i] = lnaddr_read(cpu.gdtr.base_addr + reg_index * 8 + i, 1);
+	tmp[i] = lnaddr_read(cpu.gdtr.base_addr + reg_index  + i, 1);
 	SegDesc *segdesc = (SegDesc*)tmp;
 	uint32_t dd1=(uint32_t)&tmp[0];
 	printf("addr %x\n",dd1);
+
 	printf("SEGDESC= %x\n",(segdesc->base_23_16 << 16));
 	
 	return (segdesc->base_31_24 << 24) + (segdesc->base_23_16 << 16) + 	segdesc->base_15_0 + addr;

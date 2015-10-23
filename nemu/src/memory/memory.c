@@ -122,13 +122,14 @@ uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 
 	}*/
 //	else
-	      	return dram_read(addr,len);
+	      	return dram_read(addr,len) & (~0u >> ((4 - len) << 3));
 }
 
 
 void swaddr_write(swaddr_t addr, size_t len, uint32_t data,uint8_t sreg) {
 //#ifdef DEBUG
 	assert(len == 1 || len == 2 || len == 4);
+
 //#endif
 /*       if(cpu.cr0.protect_enable)
        {

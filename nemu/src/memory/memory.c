@@ -134,7 +134,7 @@ void swaddr_write(swaddr_t addr, size_t len, uint32_t data,uint8_t sreg) {
      if(cpu.cr0.protect_enable)
        {
 	       lnaddr_t lnaddr = seg_translate(addr, len, sreg);
-                printf("%x\n",lnaddr);
+                printf("%x    %x\n",addr,lnaddr);
         	lnaddr_write(lnaddr, len, data);
      }
        else

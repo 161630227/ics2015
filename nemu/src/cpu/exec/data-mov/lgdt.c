@@ -13,5 +13,5 @@
 #undef DATA_BYTE
 
 /* for instruction encoding overloading */
-
+//printf("##\n");
 make_helper_v(lgdt);

@@ -115,13 +115,13 @@ uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 //#ifdef DEBUG
 	assert(len == 1 || len == 2 || len == 4);
 //#endif
-	if(cpu.cr0.protect_enable)
+/*	if(cpu.cr0.protect_enable)
 	{
 		lnaddr_t lnaddr= seg_translate(addr, len, sreg);      
 		return lnaddr_read(lnaddr, len)& (~0u >> ((4 - len) << 3));
 
 	}
-	else
+	else*/
 	      	return dram_read(addr,len) & (~0u >> ((4 - len) << 3));
 }
 

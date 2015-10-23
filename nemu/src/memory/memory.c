@@ -101,34 +101,26 @@ lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 			}
 		default :assert(0);
 	}
-//	rpl=selector &0x3;
-	printf("selector%x\n",selector);
 	reg_index=(selector>>3)*8;
 //	uint8_t ti=selector &0x4;
-	printf("cpu.cs= %x\n",reg_index);
 	uint8_t tmp[8]; 
 	int i;
 	for(i = 0; i < 8; ++ i) 
 	tmp[i] = lnaddr_read(cpu.gdtr.base_addr + reg_index  + i, 1);
 	SegDesc *segdesc = (SegDesc*)tmp;
-	uint32_t dd1=(uint32_t)&tmp[0];
-	printf("addr %x\n",dd1);
-
-	printf("SEGDESC= %x\n",(segdesc->base_23_16 << 16));
-	
 	return (segdesc->base_31_24 << 24) + (segdesc->base_23_16 << 16) + 	segdesc->base_15_0 + addr;
 }
 uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 //#ifdef DEBUG
 	assert(len == 1 || len == 2 || len == 4);
 //#endif
-/*	if(cpu.cr0.protect_enable)
+	if(cpu.cr0.protect_enable)
 	{
 		lnaddr_t lnaddr= seg_translate(addr, len, sreg);      
 		return lnaddr_read(lnaddr, len)& (~0u >> ((4 - len) << 3));
 
 	}
-	else*/
+	else
 	      	return dram_read(addr,len) & (~0u >> ((4 - len) << 3));
 }
 
@@ -141,7 +133,6 @@ void swaddr_write(swaddr_t addr, size_t len, uint32_t data,uint8_t sreg) {
      if(cpu.cr0.protect_enable)
        {
 	       lnaddr_t lnaddr = seg_translate(addr, len, sreg);
-                printf("%x    %x\n",addr,lnaddr);
         	lnaddr_write(lnaddr, len, data);
      }
        else

@@ -141,7 +141,7 @@ uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 	assert(len == 1 || len == 2 || len == 4);
 //#endif
 //	printf("addr=%x\n",addr);
-	addr&=0xffffff;
+	
 	if(cpu.cr0.protect_enable)
 	{
 		lnaddr_t lnaddr= seg_translate(addr, len, sreg);      
@@ -159,6 +159,7 @@ void swaddr_write(swaddr_t addr, size_t len, uint32_t data,uint8_t sreg) {
 	assert(len == 1 || len == 2 || len == 4);
 
 //#endif
+	printf("%x\n",cpu.cr0.protect_enable);
      if(cpu.cr0.protect_enable)
        {
 	       lnaddr_t lnaddr = seg_translate(addr, len, sreg);

@@ -75,7 +75,7 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 }
 
 uint32_t lnaddr_read(lnaddr_t addr, size_t len) {
-      // printf("%x\n",cpu.cr0.paging);
+       printf("lesr%x\n",addr);
 	if(cpu.cr0.paging==1)
 	{     
 

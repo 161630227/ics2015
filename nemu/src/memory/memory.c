@@ -86,7 +86,7 @@ uint32_t page_translate(lnaddr_t addr)
 {
 	uint32_t page_dir=addr>>22;
 	uint32_t page_directory_addr=(cpu.cr3.page_directory_base)+(page_dir<<2);
-        
+       printf("%x\n",addr); 
      	uint32_t page_directory=hwaddr_read(page_directory_addr,4);
         assert((page_directory & 0x1)!=0);
 	uint32_t page_addr=((addr>>12)&0x3ff)*4+(page_directory&0xfffff000);

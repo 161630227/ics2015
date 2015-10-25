@@ -53,7 +53,8 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/add
+USERPROG := obj/testcase/max
+
 #ENTRY := $(USERPROG)
 ENTRY = $(kernel_BIN)
 entry: $(ENTRY)

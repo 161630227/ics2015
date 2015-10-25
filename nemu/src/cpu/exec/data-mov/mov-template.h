@@ -80,6 +80,7 @@ make_helper(concat(mov_rm2cr_,SUFFIX)){
 	if(index==0)cpu.cr0.val=REG(r&0x7);
 	else cpu.cr3.val=REG(r&0x7);
 	print_asm("mov" str(SUFFIX) " %%%s,cr%x", REG_NAME(r & 0x7), index);
+	if(index == 3) printf("%x\n", cpu.cr3.val);
         return 2;
 }
 

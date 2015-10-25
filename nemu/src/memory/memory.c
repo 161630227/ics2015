@@ -85,6 +85,7 @@ uint32_t lnaddr_read(lnaddr_t addr, size_t len) {
 }
 uint32_t page_translate(lnaddr_t addr)
 {
+        addr&=0xffffff;
 	uint32_t page_dir=addr>>22;
 	uint32_t page_directory_addr=(cpu.cr3.page_directory_base)+(page_dir<<2);
        printf("%x\n",addr); 
@@ -103,7 +104,7 @@ void lnaddr_write(lnaddr_t addr, size_t len, uint32_t data) {
                 hwaddr_write(addr_index,len,data);
 	}
 	else hwaddr_write(addr, len, data);
-}
+} 
 lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 
 {

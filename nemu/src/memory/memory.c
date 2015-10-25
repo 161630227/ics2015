@@ -95,7 +95,7 @@ uint32_t page_translate(lnaddr_t addr)
         Assert((page_directory & 0x1)!=0, "%x", addr);
 	uint32_t page_addr=((addr>>12)&0x3ff)*4+(page_directory&0xfffff000);
 	uint32_t page=hwaddr_read(page_addr,4);
-//	Assert((page & 0x1)!=0, "page %x %x %x %x %x", 
+	assert((page & 0x1)!=0);//, "page %x %x %x %x %x" 
 //			addr, page, page_directory_addr, page_addr, page_directory);
 	if(page == 0) printf("%x %x %X %X %x", 
 			

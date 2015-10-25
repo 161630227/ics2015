@@ -147,7 +147,8 @@ uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 
 	}
 	else
-	      	return dram_read(addr,len) & (~0u >> ((4 - len) << 3));
+		return lnaddr_read(addr,len)& (~0u >> ((4 - len) << 3));
+//	      	return dram_read(addr,len) & (~0u >> ((4 - len) << 3));
 }
 
 

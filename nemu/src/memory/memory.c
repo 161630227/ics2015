@@ -12,7 +12,7 @@ uint32_t dram_read(hwaddr_t addr, size_t len);
 void dram_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
     
-    if(addr>0x100600)printf("%x\n",addr);
+ //   if(addr>0x100600)printf("%x\n",addr);
 	assert(len==1||len==2||len==4);
 //       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
 	bool data_hit=false;
@@ -75,7 +75,7 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 }
 
 uint32_t lnaddr_read(lnaddr_t addr, size_t len) {
-       printf("lesr%x\n",addr);
+//       printf("lesr%x\n",addr);
 	if(cpu.cr0.paging==1)
 	{     
 
@@ -90,7 +90,7 @@ uint32_t page_translate(lnaddr_t addr)
      //   addr&=0xffffff;
 	uint32_t page_dir=addr>>22;
 	uint32_t page_directory_addr=(cpu.cr3.page_directory_base<<12)+(page_dir<<2);
-       printf("%x\n",addr); 
+ //      printf("%x\n",addr); 
      	uint32_t page_directory=hwaddr_read(page_directory_addr,4);
         assert((page_directory & 0x1)!=0);
 	uint32_t page_addr=((addr>>12)&0x3ff)*4+(page_directory&0xfffff000);
@@ -110,7 +110,7 @@ void lnaddr_write(lnaddr_t addr, size_t len, uint32_t data) {
 lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 
 {
-       printf("seg%x\n",addr);
+ //      printf("seg%x\n",addr);
 	// uint8_t rpl;权限管理还有offset问题暂时未考虑
 	uint16_t selector;
 	uint16_t reg_index;//段索引

@@ -140,7 +140,8 @@ uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 //#ifdef DEBUG
 	assert(len == 1 || len == 2 || len == 4);
 //#endif
-	printf("addr=%x\n",addr);
+//	printf("addr=%x\n",addr);
+	addr&=0xffffff;
 	if(cpu.cr0.protect_enable)
 	{
 		lnaddr_t lnaddr= seg_translate(addr, len, sreg);      

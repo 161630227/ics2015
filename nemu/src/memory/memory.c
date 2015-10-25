@@ -110,6 +110,7 @@ void lnaddr_write(lnaddr_t addr, size_t len, uint32_t data) {
 lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 
 {
+       printf("seg%x\n",addr);
 	// uint8_t rpl;权限管理还有offset问题暂时未考虑
 	uint16_t selector;
 	uint16_t reg_index;//段索引

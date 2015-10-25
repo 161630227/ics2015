@@ -74,7 +74,6 @@ uint32_t loader() {
 
 	volatile uint32_t entry = elf->e_entry;
 
-			HIT_GOOD_TRAP;
 #ifdef IA32_PAGE
 	mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
 
@@ -85,5 +84,6 @@ uint32_t loader() {
 	write_cr3(get_ucr3());
 #endif
 
+			HIT_GOOD_TRAP;
 	return entry;
 }

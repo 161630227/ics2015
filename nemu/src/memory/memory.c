@@ -92,7 +92,7 @@ uint32_t page_translate(lnaddr_t addr)
 	uint32_t page_directory_addr=(cpu.cr3.page_directory_base<<12)+(page_dir<<2);
  //      printf("%x\n",addr); 
      	uint32_t page_directory=hwaddr_read(page_directory_addr,4);
-        assert((page_directory & 0x1)!=0);
+        Assert((page_directory & 0x1)!=0, "%x", addr);
 	uint32_t page_addr=((addr>>12)&0x3ff)*4+(page_directory&0xfffff000);
 	uint32_t page=hwaddr_read(page_addr,4);
 	assert((page & 0x1)!=0);

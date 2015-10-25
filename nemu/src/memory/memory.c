@@ -75,8 +75,9 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 }
 
 uint32_t lnaddr_read(lnaddr_t addr, size_t len) {
-        if(cpu.cr0.paging==1&&cpu.cr0.protect_enable==1)
-	{
+	if(cpu.cr0.paging==1&&cpu.cr0.protect_enable==1)
+	{     
+
 		uint32_t addr_index=page_translate(addr);
 		return hwaddr_read(addr_index,len);
 	}
@@ -142,7 +143,7 @@ uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 //#endif
 //	printf("addr=%x\n",addr);
 	
-	printf("%x\n",cpu.cr0.protect_enable);
+//	printf("%x\n",cpu.cr0.protect_enable);
 	if(cpu.cr0.protect_enable)
 	{
 		lnaddr_t lnaddr= seg_translate(addr, len, sreg);      

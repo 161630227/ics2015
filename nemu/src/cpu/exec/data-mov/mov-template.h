@@ -61,6 +61,7 @@ make_helper(concat(mov_moffs2a_, SUFFIX)) {
 }
 make_helper(concat(mov_rm2cr_,SUFFIX)){
 	uint32_t r=instr_fetch(eip+1,1);
+	printf("**\n");
 	cpu.cr0.val=REG(r&0x7);
 	print_asm("mov" str(SUFFIX) " %%%s,%%%s", REG_NAME(r & 0x7), "cr0");
         return 2;

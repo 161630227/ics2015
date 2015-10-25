@@ -54,7 +54,6 @@ uint32_t loader() {
 	          //      for(i = ph->p_filesz; i < ph->p_memsz; i ++) 
 		//	memcpy((void *)ph->p_vaddr + i, (void *)0, 1);
 			memset((void*) hwaddr + ph->p_filesz, 0, ph->p_memsz - ph->p_filesz);
-			HIT_GOOD_TRAP;
 		// uint8_t zero=0;
 //	                for(j=ph->p_filesz;j<ph->p_memsz;++j)
 //				ramdisk_write(&zero, ph->p_vaddr + j, 1);
@@ -75,6 +74,7 @@ uint32_t loader() {
 
 	volatile uint32_t entry = elf->e_entry;
 
+			HIT_GOOD_TRAP;
 #ifdef IA32_PAGE
 	mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
 

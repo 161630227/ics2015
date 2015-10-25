@@ -79,7 +79,7 @@ make_helper(concat(mov_rm2cr_,SUFFIX)){
 	uint8_t index=(r&0x3f)>>3;
 	if(index==0)cpu.cr0.val=REG(r&0x7);
 	else cpu.cr3.val=REG(r&0x7);
-	print_asm("mov" str(SUFFIX) " %%%s,%%%s", REG_NAME(r & 0x7), "cr0");
+	print_asm("mov" str(SUFFIX) " %%%s,cr%x", REG_NAME(r & 0x7), index);
         return 2;
 }
 
@@ -89,7 +89,7 @@ make_helper(concat(mov_cr2rm_,SUFFIX)){
 
 	if(index==0)REG(r&0x7)= cpu.cr0.val;
 	else REG(r&0x7)=cpu.cr3.val;
-	print_asm("mov" str(SUFFIX) " %%%s,%%%s","cr0", REG_NAME(r & 0x7));
+	print_asm("mov" str(SUFFIX) " cr%x,%%%s",index , REG_NAME(r & 0x7));
         return 2;
 }
 #include "cpu/exec/template-end.h"

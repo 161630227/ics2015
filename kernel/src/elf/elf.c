@@ -49,6 +49,7 @@ uint32_t loader() {
 			//int j;
 			uint32_t hwaddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
 			memcpy((void*) hwaddr,(void*)(buf+ph->p_offset),ph->p_filesz);
+			HIT_GOOD_TRAP;
 		//	memcpy((void *)ph->p_vaddr, (void *)(buf + ph->p_offset), ph->p_filesz);
 			 
 	          //      for(i = ph->p_filesz; i < ph->p_memsz; i ++) 

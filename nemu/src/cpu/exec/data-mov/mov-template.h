@@ -1,5 +1,6 @@
 #include "cpu/exec/template-start.h"
 #include "cpu/decode/modrm.h"
+#include "../../../../../lib-common/x86-inc/mmu.h"
 #define instr mov
 
 static void do_execute() {
@@ -22,35 +23,49 @@ make_helper(concat(mov_a2moffs_, SUFFIX)) {
 make_helper(concat(mov_rm2sreg_,SUFFIX)){
 	uint8_t m;
 	m=instr_fetch(eip+1,1);
-	switch(m&0x3)
-	{
+	uint8_t m_index;
+	m_index=(m&0x38)>>3;
+	uint16_t selector=REG(m&0x7);
+	uint16_t reg_index;
+	reg_index=(selector>>3)*8;
+	uint8_t tmp[8]; 
+	int i;
+	for(i = 0; i < 8; ++ i)  
+	tmp[i] = lnaddr_read(cpu.gdtr.base_addr + reg_index  + i, 1);
+	SegDesc *segdesc = (SegDesc*)tmp;
+	uint32_t base_addr;	
+	base_addr=(segdesc->base_31_24 << 24) + (segdesc->base_23_16 << 16) +segdesc->base_15_0 ;
+	switch(m_index){	
 		case 0:
 			{
 				cpu.es.selector=REG(m&0x7);
-		         //	cpu.es.limit=
+		         	cpu.es.base_addr=base_addr;
 				break;
 			}
 		case 1:
 			{
 				cpu.ds.selector=REG(m&0x7);
+			        cpu.ds.base_addr=base_addr;
 				break;
 			}
 		case 2:
 			{
 				cpu.ss.selector=REG(m&0x7);
-			        break;
+			        cpu.ss.base_addr=base_addr;
+				break;
 			}
 		case 3:
 			{
 				cpu.cs.selector=REG(m&0x7);
+			        cpu.cs.base_addr=base_addr;
 				break;
 			}
 		default :assert(0);
-
+	}
 			
 print_asm("mov" str(SUFFIX) " %%%s,0x%x", REG_NAME(m&0x3), m&0x3);
 //	print_asm("mov" str(SUFFIX) " %%%s,%%d", REG_NAME(m & 0x7), ((m >> 3) & 0x7));
-	}
+	
         return 2;
 }
 make_helper(concat(mov_moffs2a_, SUFFIX)) {

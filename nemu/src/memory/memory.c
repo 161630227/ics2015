@@ -112,32 +112,31 @@ lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 {
  //      printf("seg%x\n",addr);
 	// uint8_t rpl;权限管理还有offset问题暂时未考虑
-	uint16_t selector;
-	uint16_t reg_index;//段索引
+//	uint16_t selector;
+//	uint16_t reg_index;//段索引
 	switch(sreg)
 	{
 		case 0 :{
-				selector=cpu.es.selector;break;
+				return addr+cpu.es.base_addr;break;
 			}
 		case 1: {
-				 selector=cpu.cs.selector;break;
+				return addr+cpu.cs.base_addr;break;
 			}
                 case 2: {
-				 selector=cpu.ss.selector;break;
+				return addr+cpu.ss.base_addr;break;
 		        }
 		case 3: {
-			          selector=cpu.ds.selector;break;
+			        return addr+cpu.ds.base_addr;break;
 			}
 		default :assert(0);
 	}
-	reg_index=(selector>>3)*8;
-//	uint8_t ti=selector &0x4;
+	/*reg_index=(selector>>3)*8;
 	uint8_t tmp[8]; 
 	int i;
 	for(i = 0; i < 8; ++ i) 
 	tmp[i] = lnaddr_read(cpu.gdtr.base_addr + reg_index  + i, 1);
 	SegDesc *segdesc = (SegDesc*)tmp;
-	return (segdesc->base_31_24 << 24) + (segdesc->base_23_16 << 16) + 	segdesc->base_15_0 + addr;
+	return (segdesc->base_31_24 << 24) + (segdesc->base_23_16 << 16) + 	segdesc->base_15_0 + addr;*/
 }
 uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 //#ifdef DEBUG

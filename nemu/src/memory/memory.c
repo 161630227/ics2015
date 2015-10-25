@@ -12,7 +12,7 @@ uint32_t dram_read(hwaddr_t addr, size_t len);
 void dram_write(hwaddr_t addr, size_t len, uint32_t data);
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
     
-	printf("内存%x\n",addr);
+//	printf("内存%x\n",addr);
 	assert(len==1||len==2||len==4);
 //       if(addr==0x7fffffc)printf("jeremy= %x\n",addr);	
 	bool data_hit=false;
@@ -139,6 +139,7 @@ uint32_t swaddr_read(swaddr_t addr, size_t len,uint8_t sreg) {
 //#ifdef DEBUG
 	assert(len == 1 || len == 2 || len == 4);
 //#endif
+	printf("addr=%x\n",addr);
 	if(cpu.cr0.protect_enable)
 	{
 		lnaddr_t lnaddr= seg_translate(addr, len, sreg);      

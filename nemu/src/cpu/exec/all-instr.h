@@ -7,6 +7,7 @@
 #include "data-mov/movsx.h"
 #include "data-mov/cld.h"
 #include "data-mov/pop.h"
+#include "data-mov/std.h"
 #include "arith/leave.h"
 #include "data-mov/cmovcc.h"
 #include "data-mov/cwd.h"

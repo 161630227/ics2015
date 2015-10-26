@@ -14,4 +14,4 @@
 
 /* for instruction encoding overloading */
 //printf("##\n");
-make_helper_v(lgdt);
+make_helper_v(lgdt_rm);

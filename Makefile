@@ -53,8 +53,7 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/sum
-
+USERPROG := obj/testcase/hello
 ENTRY := $(USERPROG)
 //ENTRY = $(kernel_BIN)
 entry: $(ENTRY)

@@ -5,7 +5,7 @@
 
 static void do_execute() {
        	int len = instr_len();
-        printf("%x\n",len);
+//        printf("%x\n",len);
         cpu.esp -= 4;
 	 swaddr_write(cpu.esp, 4, cpu.eip + len,SS);
      if(op_src->type == OP_TYPE_IMM) {

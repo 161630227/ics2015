@@ -121,12 +121,16 @@ lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 				return addr+cpu.es.base_addr;break;
 			}
 		case 1: {
+		if(cpu.cs.base_addr!=0)printf("%x\n",cpu.cs.base_addr);
+
 				return addr+cpu.cs.base_addr;break;
 			}
                 case 2: {
+			if(cpu.ss.base_addr!=0)printf("%x\n",cpu.ss.base_addr);
 				return addr+cpu.ss.base_addr;break;
 		        }
 		case 3: {
+				if(cpu.ds.base_addr!=0)printf("%x\n",cpu.ds.base_addr);
 			        return addr+cpu.ds.base_addr;break;
 			}
 		default :assert(0);

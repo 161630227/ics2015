@@ -53,10 +53,10 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/mul-longlong
+USERPROG := obj/testcase/matrix-mul
 
-#ENTRY := $(USERPROG)
-ENTRY = $(kernel_BIN)
+ENTRY := $(USERPROG)
+#ENTRY = $(kernel_BIN)
 entry: $(ENTRY)
 	objcopy -S -O binary $(ENTRY) entry
 

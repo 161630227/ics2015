@@ -50,9 +50,9 @@ uint32_t loader() {
 //	uint32_t hwaddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
 //	memcpy((void*) hwaddr,(void*)(buf+ph->p_offset),ph->p_filesz);
 	memcpy((void *)ph->p_vaddr, (void *)(buf + ph->p_offset), ph->p_filesz);
-			 
-	              for(i = ph->p_filesz; i < ph->p_memsz; i ++) 
-		memcpy((void *)ph->p_vaddr + i, (void *)0, 1);
+		int cent;	 
+	              for(cent = ph->p_filesz; cent< ph->p_memsz; cent++) 
+		memcpy((void *)ph->p_vaddr + cent, (void *)0, 1);
 //	memset((void*) hwaddr + ph->p_filesz, 0, ph->p_memsz - ph->p_filesz);
 		// uint8_t zero=0;
 //	                for(j=ph->p_filesz;j<ph->p_memsz;++j)

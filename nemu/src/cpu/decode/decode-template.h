@@ -35,8 +35,10 @@ make_helper(concat(decode_si_, SUFFIX)) {
 	op_src->simm = ???
 	 */
 	//panic("please implement me");
-        op_src->simm=(DATA_TYPE_S) (instr_fetch(eip, DATA_BYTE));
-	op_src->val = op_src->simm;
+         unsigned int i = instr_fetch(eip, DATA_BYTE);
+	if(i >> (DATA_BYTE * 8 - 1) == 1)
+	op_src->simm = -((1ll << 8 * DATA_BYTE) -i); else op_src->simm = i;
+         op_src->val = op_src->simm;
 
 #ifdef DEBUG
 	snprintf(op_src->str, OP_STR_SIZE, "$0x%x", op_src->val);

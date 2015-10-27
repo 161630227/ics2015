@@ -51,13 +51,13 @@ uint32_t loader() {
 //	memcpy((void*) hwaddr,(void*)(buf+ph->p_offset),ph->p_filesz);
 	memcpy((void *)ph->p_vaddr, (void *)(buf + ph->p_offset), ph->p_filesz);
 			 
-	          //      for(i = ph->p_filesz; i < ph->p_memsz; i ++) 
-		//	memcpy((void *)ph->p_vaddr + i, (void *)0, 1);
-	memset((void*) hwaddr + ph->p_filesz, 0, ph->p_memsz - ph->p_filesz);
+	              for(i = ph->p_filesz; i < ph->p_memsz; i ++) 
+		memcpy((void *)ph->p_vaddr + i, (void *)0, 1);
+//	memset((void*) hwaddr + ph->p_filesz, 0, ph->p_memsz - ph->p_filesz);
 		// uint8_t zero=0;
 //	                for(j=ph->p_filesz;j<ph->p_memsz;++j)
 //				ramdisk_write(&zero, ph->p_vaddr + j, 1);
-			//memcpy(ph->p_filesz,&zero,ph->p_memsz-ph->filesz);
+		//	memcpy(ph->p_filesz,&zero,ph->p_memsz-ph->filesz);
 			/* TODO: zero the memory region 
 			 * [VirtAddr + FileSiz, VirtAddr + MemSiz)
 			 */

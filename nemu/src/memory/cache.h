@@ -19,9 +19,9 @@ typedef struct
 TLB tlb[64];
 typedef struct
 {
-	cacheline cache_line[N];
+	cacheline cache_line[8];
 
 }cache_NAME;
 #endif
-cache_NAME cache_LEVEL[SET_SIZE];
+cache_NAME cache_LEVEL[128];
 

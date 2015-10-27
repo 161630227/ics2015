@@ -1,5 +1,6 @@
 #include "cpu/exec/template-start.h"
 #include "cpu/decode/modrm.h"
+#include "../../../memory/cache.h"
 #include "../../../../../lib-common/x86-inc/mmu.h"
 #define instr mov
 
@@ -79,7 +80,13 @@ make_helper(concat(mov_rm2cr_,SUFFIX)){
 	uint32_t r=instr_fetch(eip+1,1);
 	uint8_t index=(r&0x3f)>>3;
 	if(index==0)cpu.cr0.val=REG(r&0x7);
-	else cpu.cr3.val=REG(r&0x7);
+	else 
+	{
+		cpu.cr3.val=REG(r&0x7);
+		int i;
+		for (i=0;i<64;++i)
+			tlb[i].valid=false;
+	}
 	print_asm("mov" str(SUFFIX) " %%%s,cr%x", REG_NAME(r & 0x7), index);
 	if(index == 3) printf("%x\n", cpu.cr3.val);
         return 2;

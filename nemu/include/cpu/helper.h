@@ -10,7 +10,7 @@ static inline  uint32_t instr_fetch(swaddr_t addr, size_t len) {
 	return swaddr_read(addr, len,3);
 }
 
-int len;
+static int len;
 
 /* Instruction Decode and EXecute */
 static inline int idex(swaddr_t eip, int (*decode)(swaddr_t), void (*execute) (void)) {
@@ -18,6 +18,9 @@ static inline int idex(swaddr_t eip, int (*decode)(swaddr_t), void (*execute) (v
 	len = decode(eip + 1);
 	execute();
 	return len + 1;	// "1" for opcode
+}
+static inline int instr_len() {
+    return len;
 }
 
 /* shared by all helper function */

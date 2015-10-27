@@ -23,6 +23,8 @@ make_helper(concat(call_rel32_, SUFFIX))
 }
 static void do_execute() {
                DATA_TYPE_S addr=op_src->val;
+	int len=instr_len();
+	printf("%x\n",len);
 //	       DATA_TYPE index=addr;
 	       cpu.esp-=DATA_BYTE;
 	       MEM_W(cpu.esp,cpu.eip+len,CS);

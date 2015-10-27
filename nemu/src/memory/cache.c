@@ -64,6 +64,9 @@ void cache_init()
        }*/
 memset(cache_l1,0, sizeof(cache_l1));
 memset(cache_l2,0, sizeof(cache_l2));
+int i;
+for (i=0;i<64;++i)
+	tlb[i].valid=false;
 /*	for (i=0;i<128;i++)
 	{
 		for(j=0;j<8;++j)
@@ -71,4 +74,37 @@ memset(cache_l2,0, sizeof(cache_l2));
 			cache_l1[i].cache_line[j].valid=false;
 		}
 	}*/
+}
+uint32_t tlb_read(bool *hit,lnaddr_t addr)
+{
+	uint32_t vpage_num=(addr&0xfffff000)>>12;
+	int i;
+	for (i=0;i<64;++i)
+	{
+		if(vpage_num==tlb[i].tag&&tlb[i].valid==true)
+		{
+			*hit=true;
+			return tlb[i].pa_head;
+		}
+	}
+	*hit=false;
+	return -1;
+}
+void tlb_write(uint32_t pa_head,uint32_t vpage_num)
+{
+	int i;
+	for (i=0;i<64;++i)
+	{
+		if(tlb[i].valid==false)
+		{
+			tlb[i].tag=vpage_num;
+			tlb[i].pa_head=pa_head;
+			tlb[i].valid=true;
+			return;
+		}
+	}
+	uint32_t ran=random()%64;
+	tlb[ran].tag=vpage_num;
+	tlb[ran].pa_head=pa_head;
+
 }

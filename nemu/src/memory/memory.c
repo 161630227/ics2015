@@ -1,6 +1,8 @@
 #include "common.h"
 #include"../../lib-common/x86-inc/mmu.h"
 #include "cpu/reg.h"
+ void tlb_write(uint32_t pa_head,uint32_t vpage_num);
+  uint32_t tlb_read(bool *hit,lnaddr_t addr);
 //void L2_cache_write_L(hwaddr_t,size_t,uint32_t);
 // Memory accessing interfaces */
 uint32_t cache_read_l1(bool *hit,uint32_t addr,uint32_t len);
@@ -87,7 +89,10 @@ uint32_t lnaddr_read(lnaddr_t addr, size_t len) {
 }
 uint32_t page_translate(lnaddr_t addr)
 {
-     //   addr&=0xffffff;
+        bool hit;
+	uint32_t pa_head=tlb_read(&hit,addr);
+	if(hit)
+		return(pa_head<<12)+(addr&0x00000fff);
 	uint32_t page_dir=addr>>22;
 	uint32_t page_directory_addr=(cpu.cr3.page_directory_base<<12)+(page_dir<<2);
  //      printf("%x\n",addr); 
@@ -97,11 +102,11 @@ uint32_t page_translate(lnaddr_t addr)
 	uint32_t page=hwaddr_read(page_addr,4);
 	Assert((page & 0x1)!=0, "page %x %x %x %x %x", 
 			addr, page, page_directory_addr, page_addr, page_directory);
-	if(page == 0) printf("%x %x %X %X %x", 
-			
-			addr, page, page_directory_addr, page_addr, page_directory);
+	pa_head=page&0xfffff000;
+	tlb_write(pa_head>>12,(addr&0xfffff000)>>12);
 	uint32_t physical_addr=(page&0xfffff000)+(addr&0xfff);
-       return physical_addr;
+       
+	return physical_addr;
 }
 void lnaddr_write(lnaddr_t addr, size_t len, uint32_t data) {
 	if(cpu.cr0.paging==1&&cpu.cr0.protect_enable==1) 

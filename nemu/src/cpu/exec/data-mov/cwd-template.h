@@ -3,23 +3,10 @@
 #define instr cwd
 
 make_helper(concat(cwd_, SUFFIX)) {
-   //	swaddr_t addr = instr_fetch(eip + 1, 4);
-    //	MEM_W(addr, REG(R_EAX));
-	if(DATA_BYTE==2) 
-	{
-		if(reg_w(R_AX)<0)
-			reg_w(R_DX)=0xffff;
-		else reg_w(R_DX)=0;
-	}
-	else
-	if(DATA_BYTE==4)
-	{
-		if(cpu.eax<0)
-			cpu.edx=0xffffffff;
-		else cpu.edx=0;
-	}
-	//OPERAND_W(op_dest,index);
-        print_asm_template2();
+     if((cpu.eax >> (DATA_BYTE * 8 - 1)) != 0)  
+     cpu.edx = (1ll << (DATA_BYTE * 8)) - 1; else cpu.edx = 0x0;
+     print_asm(DATA_BYTE == 4 ? "cwdd" : "cwdl");
+
 	return 1;
 }
 #include "cpu/exec/template-end.h"

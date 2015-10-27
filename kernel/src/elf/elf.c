@@ -47,9 +47,9 @@ uint32_t loader() {
 			 * to the memory region [VirtAddr, VirtAddr + FileSiz)
 			 */
 			//int j;
-	uint32_t hwaddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
-	memcpy((void*) hwaddr,(void*)(buf+ph->p_offset),ph->p_filesz);
-//	memcpy((void *)ph->p_vaddr, (void *)(buf + ph->p_offset), ph->p_filesz);
+//	uint32_t hwaddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
+//	memcpy((void*) hwaddr,(void*)(buf+ph->p_offset),ph->p_filesz);
+	memcpy((void *)ph->p_vaddr, (void *)(buf + ph->p_offset), ph->p_filesz);
 		int cent;	 
 	              for(cent = ph->p_filesz; cent< ph->p_memsz; cent++) 
 		memcpy((void *)ph->p_vaddr + cent, (void *)0, 1);

@@ -56,7 +56,8 @@ make_helper(concat(mov_rm2sreg_,SUFFIX)){
 			}
 		case 3:
 			{
-				cpu.cs.selector=REG(m&0x7);
+				printf("wrong\n");
+           			cpu.cs.selector=REG(m&0x7);
 			        cpu.cs.base_addr=base_addr;
 				break;
 			}

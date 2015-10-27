@@ -1,5 +1,5 @@
 #include "cpu/exec/helper.h"
-
+#include "../../../../../lib-common/x86-inc/mmu.h"
 #define DATA_BYTE 1
 #include "jmp-template.h"
 #undef DATA_BYTE
@@ -22,6 +22,16 @@ make_helper(ljmp)
 	uint16_t sreg=instr_fetch(eip+5,2);
 	cpu.eip=addr-7;
 	cpu.cs.selector=sreg;
+	uint16_t reg_index;
+	reg_index=(sreg>>3)*8;
+	uint8_t tmp[8]; 
+	int i;
+	for(i = 0; i < 8; ++ i)  
+	tmp[i] = lnaddr_read(cpu.gdtr.base_addr + reg_index  + i, 1); 
+        SegDesc *segdesc = (SegDesc*)tmp;
+        uint32_t base_addr;    
+        base_addr=(segdesc->base_31_24 << 24) + (segdesc->base_23_16 << 16) +segdesc->base_15_0 ;
+       cpu.cs.base_addr=base_addr;
 	print_asm("ljmp  $0x%x,$0x%x",sreg,addr);
 	return 7;
 }

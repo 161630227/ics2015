@@ -117,7 +117,7 @@ lnaddr_t  seg_translate(uint32_t addr,size_t len,uint8_t sreg)
 	switch(sreg)
 	{
 		case 0 :{
-				printf("%x\n",addr+cpu.es.base_addr);
+			if(cpu.es.base_addr!=0)	printf("%x\n",cpu.es.base_addr);
 				return addr+cpu.es.base_addr;break;
 			}
 		case 1: {

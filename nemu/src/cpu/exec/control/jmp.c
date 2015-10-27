@@ -31,7 +31,8 @@ make_helper(ljmp)
         SegDesc *segdesc = (SegDesc*)tmp;
         uint32_t base_addr;    
         base_addr=(segdesc->base_31_24 << 24) + (segdesc->base_23_16 << 16) +segdesc->base_15_0 ;
-       cpu.cs.base_addr=base_addr;
+       printf("base_addr %x\n",base_addr);
+	cpu.cs.base_addr=base_addr;
 	print_asm("ljmp  $0x%x,$0x%x",sreg,addr);
 	return 7;
 }

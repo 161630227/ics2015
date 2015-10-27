@@ -12,7 +12,8 @@ static void do_execute() {
 		if (DATA_BYTE==2)
 		{
 			cpu.esp-=2;
-			MEM_W(cpu.esp,op_src->val,SS);
+			 swaddr_write(cpu.esp,2, op_src->val,SS);
+		//	MEM_W(cpu.esp,op_src->val,SS);
 		}
 		else
 		{

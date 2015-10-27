@@ -4,10 +4,11 @@
 #define instr movzx
 static void do_execute(){
 //       printf("****");
-	DATA_TYPE index=op_src->val;
+	DATA_TYPE index=op_src->val & ((1ll << (op_src->size * 8)) - 1);
      //  if(DATA_BYTE==2)index&=0x00ff;
       // if(DATA_BYTE==4)index&=0x0000ffff;       
 	OPERAND_W(op_dest,index);
+	 print_asm_template2();
 }
 make_helper(concat(movzx_rmb2r_,SUFFIX)){
      //  printf("***\n");

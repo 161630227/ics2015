@@ -56,7 +56,7 @@ make_helper(concat(mov_rm2sreg_,SUFFIX)){
 			}
 		case 3:
 			{
-				printf("wrong\n");
+				printf("wrong   %x\n",cpu.eip);
            			cpu.cs.selector=REG(m&0x7);
 			        cpu.cs.base_addr=base_addr;
 				break;

@@ -55,8 +55,8 @@ clean: clean-cpp
 
 USERPROG := obj/testcase/hello-str
 
-ENTRY := $(USERPROG)
-#ENTRY = $(kernel_BIN)
+#ENTRY := $(USERPROG)
+ENTRY = $(kernel_BIN)
 entry: $(ENTRY)
 	objcopy -S -O binary $(ENTRY) entry
 

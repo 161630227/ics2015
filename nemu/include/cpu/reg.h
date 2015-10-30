@@ -58,6 +58,11 @@ struct sreg
 	uint32_t base_addr;
 	uint32_t limit;
 } gdtr;
+struct
+{
+	uint32_t base_addr;
+	uint32_t limit;
+}idtr;
 CR0 cr0;
 CR3 cr3;
 } CPU_state;
